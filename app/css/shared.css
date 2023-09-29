@@ -1,0 +1,13 @@
+nav {
+    background-color: #3B634E;
+}
+
+footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    background-color:#697A6D;
+    ;
+}
+

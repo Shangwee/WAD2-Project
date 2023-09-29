@@ -7,4 +7,5 @@ One of the biggest sustainability challenges we face today is the problem of foo
 
 **Solution:**
 
-I propose to develop a web application that helps users to reduce their food waste.
+A web application that helps users to reduce their food waste.
+

@@ -1,0 +1,1 @@
+Component folder that stores common file such as navbars
