@@ -7,12 +7,12 @@ const app = Vue.createApp({
         lists: "./views/ShoppingList.html",
         inventory: "./views/Inventory.html",
         recipe: "./views/RecipeList.html",
-        planner: "./views/MealPlanner.html",
         profile: "./views/Profile.html",
       },
     };
   },
   methods: {
+    
   },
 });
 
