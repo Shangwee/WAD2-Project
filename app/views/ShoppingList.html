@@ -1,4 +1,3 @@
-<!-- FILEPATH: /c:/wamp64/www/WAD2-Project/app/views/ShoppingList.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +10,7 @@
         <!-- Js scripts -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../css/ShoppingList.css" />
         <link rel="stylesheet" href="../css/shared.css" />   
@@ -50,24 +50,32 @@
             </header>
             <main>
                 <!-- Shopping list -->
-                <div class="shopping-list container-fluid m-3">
+                <div class="shopping-list m-3">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <div class="row g-3 my-3 ">
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="foodSearch" placeholder="enter the item to add" name="foodItem">
+                        <div class="col-md-10 col-sm-10 my-2">
+                            <div class="row">  
+                                <div class=" col-md-8 col-sm-8 mx-1 my-2">
+                                    <input type="text" class="form-control" id="foodName" placeholder="Add item here" name="foodName"> 
                                 </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-primary px-5" >Add</button>
+                                <div class="col-md-1 col-sm-1 mx-1 my-2">
+                                    <input type="number" min="1" max="999" class="form-control" id="foodQuanity" placeholder="Quanity" name="foodQuanity"> 
                                 </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-danger px-5" >Clear</button>
-                                </div>    
+                                <div class="col-md-1 col-sm-1 mx-1 my-2">
+                                    <button type="button" class="btn btn-primary px-5" v-on:click="addItem()">Add</button>
+                                </div>
+                                <div class="col-md-1 col-sm-1 my-2">
+                                    <button type="button" class="btn btn-danger px-5">Clear</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="MainList">
+                                    <h2 class="text-center my-5"> List is empty... <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon></h2>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 my-3 me-0">
+                        <div class="col-md-2 col-sm-10 my-2">
                             <!-- recommanded card -->
-                            <div class="card" style="width: 18rem;">
+                            <div class="card mx-auto" id="RecommandCard">
                                 <div class="card-header">
                                   Recommandations <button type="button" class="btn btn-primary btn-sm float-end" >Add all</button>
                                 </div>
@@ -85,16 +93,16 @@
                 </div>
             </main>
             <!-- Footer-->
-            <footer class="py-5" style="background-color: #3b634e;">
+            <footer class="py-5 mb-0" style="background-color: #3b634e;">
                 <div class="container px-5">
                     <p class="m-0 text-center text-white">Copyright &copy; FoodWise 2023</p>
                     <p class="m-0 text-center text-white"></a> icons by <a href="https://icons8.com" style="color: white;">Icons8</a></p>
                 </div>
             </footer>
-            <!-- Bootstrap core JS-->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-            <!-- Core theme JS-->
         </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="../js/ShoppingList.js"></script>
     </body>
 </html>
 
