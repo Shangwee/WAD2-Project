@@ -12,22 +12,24 @@ const app = Vue.createApp({
 
       // shopping list
       sList: [],
+
+      // autocomplete
+      autocomlist: [],
     };
   },
   methods: {
     addItem() {
       // add item to shopping list
       // if both inputs are filled
-      if (document.getElementById("foodName").value != "" && document.getElementById("foodQuanity").value != ""){
+      let foodName = document.getElementById("foodName").value;
+      if (foodName != ""){
         this.sList.push({
-          name: document.getElementById("foodName").value,
-          quantity: document.getElementById("foodQuanity").value,
+          id: foodName.replaceAll(" ", "").trim() + this.sList.length,
+          name: foodName.trim(),
+          quantity: 1,
         });
-
         // clear inputs
         document.getElementById("foodName").value = "";
-        document.getElementById("foodQuanity").value = "";
-        this.displayList();
       }
       else
       {
@@ -35,21 +37,31 @@ const app = Vue.createApp({
       }
       console.log(this.sList);
     },
+    autocompleteSearch() {
+      let url = "https://api.edamam.com/auto-complete";
+      const appID = "ebe9a73f";
+      const appKey = "d07cd861a3539204a41d150e9170389b";
+      let search = document.getElementById("foodName").value;
+      para = {
+        q: search,
+        app_id: appID,
+        app_key: appKey,
+      };
+  
+      // make request to api
+      axios.get(url, { params: para }).then((response) => {
+        this.autocomlist = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
 
-    displayList(){
-      var listing_page = document.getElementById("MainList");
-      // clear everything in div
-      listing_page.innerHTML = "";
-      // add ul 
-      listing_page.innerHTML += "<ul id='list'>";
-      // create lisf of items
-      for (var i = 0; i < this.sList.length; i++){
-        listing_page.innerHTML += "<li>" + this.sList[i].name + " - " + this.sList[i].quantity + "</li>";
-      }
-      // close ul
-      listing_page.innerHTML += "</ul>";
-    }, 
+    fillsearchbar(item) {
+      document.getElementById("foodName").value = item;
+      this.autocomlist = [];
+    },
   },
 });
 
-const vm = app.mount("#shoppingList");
+const vm = app.mount("#shoppingList"); 
