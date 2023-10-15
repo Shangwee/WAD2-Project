@@ -5,10 +5,10 @@
 </title>
 </head>
 <body>
-    <table><tr>
+    <!-- <table><tr>
             <td align='top'><img src='mnetplus.jpeg' width='120'/></td>
             <td align='center'><br><i><h1>Mnet PLUS</h1><i></td>
-</table>
+</table> -->
 <?php
     $un='';
     if (isset($_GET['username'])){
@@ -27,7 +27,7 @@
 </table>
 </form>
 <?php
-require_once "/WAD2-Project/model/ConnectionManager.php";
+require_once "../ConnectionManager.php";
     printr();
 ?>
 </body>

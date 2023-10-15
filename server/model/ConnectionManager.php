@@ -21,7 +21,7 @@ class ConnectionManager {
 
   public function getConnection() {
     $servername = 'localhost';
-    $dbname = 'boysplanet';
+    $dbname = 'wad2-proj';
     $username = 'root';
     $password = 'root';
     $port = 3306;

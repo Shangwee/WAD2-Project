@@ -1,7 +1,7 @@
 <?php
 
 Class Account{
-    private $userid
+    private $userid;
     private $username;
     private $hashed;
 

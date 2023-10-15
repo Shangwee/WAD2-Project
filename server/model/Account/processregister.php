@@ -1,5 +1,5 @@
 <?php
-require_once "/WAD2-Project/server/model/ConnectionManager.php";
+require_once "../ConnectionManager.php";
 $errors = [];
 $accdao = new AccountDAO();
 if (isset($_POST['submit'])){
@@ -7,7 +7,6 @@ if (isset($_POST['submit'])){
     $un = $_POST['username'];
     $pw = $_POST['password'];
     $cfmpw = $_POST['cfmpassword'];
-    $sk = $_POST['sk'];
 
     if(empty($un)){
         $errors[] = 'Username must be filled';
@@ -25,10 +24,6 @@ if (isset($_POST['submit'])){
 
     if($cfmpw !== $pw){
         $errors[] = 'Passwords do not match';
-    }
-
-    if(empty($sk)){
-        $errors[]='Security keyword must be filled';
     }
 
     if(!empty($errors)){

@@ -4,7 +4,7 @@
     <form method='post'>
         <table>
             <tr><td>Username:</td><td><input type='text'name='username'></td></tr>
-            <tr><td>Security Keyword:</td><td><input type='text' name='sk'></td></tr>
+            <!-- <tr><td>Security Keyword:</td><td><input type='text' name='sk'></td></tr> -->
             <tr><td colspan='2'><input type='submit' name='submit' value='Verify'></td></tr>
 </table>
 </form>
@@ -13,7 +13,7 @@
 
 
 <?php
-require_once "/WAD2-Project/server/model/ConnectionManager.php";
+require_once "../ConnectionManager.php";
 $accdao = new AccountDAO();
 $errors = [];
 $showpw=false;
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])){
 
     if(!empty($un)){
         $user= $accdao->getAccByUsername($un);
-        if($user !== null){
+        if($user == null){
             $errors[]='Username invalid';
         }
 

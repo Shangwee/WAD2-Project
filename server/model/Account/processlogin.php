@@ -1,5 +1,5 @@
 <?php
-require_once "/WAD2-Project/server/model/ConnectionManager.php";
+require_once "../ConnectionManager.php";
 if(!isset($_POST['submit'])){
     header ('location:login.php');
     exit;
@@ -13,7 +13,7 @@ if (!empty($name)){
     if($user !==null){
         if(password_verify($pw,$user->getHashed())){
             $_SESSION['login'] =$user;
-            header ('location:/WAD2-Project/server/model/Homepage.php');
+            header ('location:../Homepage.php');
             exit;
         }else{
             $errors[]='Password invalid';

@@ -1,5 +1,5 @@
 <?php
-require_once "/WAD2-Project/model/ConnectionManager.php";
+require_once "../ConnectionManager.php";
 
 Class AccountDAO{
 
@@ -39,7 +39,7 @@ Class AccountDAO{
     public function updatePassword($un,$hashed){
         $connmgr = new ConnectionManager();
         $pdo = $connmgr->getConnection();
-        $sql='update account set hashed=:hashed where username=:un';
+        $sql='update account set hashedpw=:hashed where username=:un';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hashed', $hashed, PDO::PARAM_STR);
         $stmt->bindParam(':un', $un, PDO::PARAM_STR);
