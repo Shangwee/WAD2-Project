@@ -57,14 +57,14 @@
                                 <div class=" col-xxl-9 mx-1 my-2">
                                     <input type="text" class="form-control" id="foodName" placeholder="Add item here" name="foodName" v-on:keyup="autocompleteSearch()"> 
                                 </div>
-                                <div class="col-xxl-1 mx-1 my-2">
+                                <div class="col-xxl-1  mx-1 my-2">
                                     <button type="button" class="btn btn-primary px-5" v-on:click="addItem()">Add</button>
                                 </div>
-                                <div class="col-xxl-1 my-2">
+                                <div class="col-xxl-1 mx-1 my-2" v-if="sList.length != 0">
                                     <button type="button" class="btn btn-danger px-5" v-on:click="clearList()">Clear</button>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="col-xxl-12">
                                 <div id="autocom" v-if="autocomlist.length != 0">
                                     <strong>Suggested: </strong>
                                     <button v-for="(item, index) in autocomlist" type="button" class="btn btn-secondary btn-sm mx-1 mb-1" v-bind:value="item" v-on:click="fillsearchbar(item)">
@@ -72,24 +72,31 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div>
                                 <h2 v-if="sList.length == 0" class="text-center my-5"> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
                                 <div v-else id="MainList">
-                                    <div class="card">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"  v-for="(item, index) in sList">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" v-bind:id="item.id">
-                                                    <label class="form-check-label" v-bind:for="item.id">
-                                                      {{item.name}}
-                                                    </label>
-                                                    <span class="text-end"> Qty: {{item.quantity}}</span>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" v-for="(item, index) in sList">
+                                            <div class="row g-3">
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="checkbox" v-bind:id="item.id">{{item.name}}
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                <div class="col-auto">
+                                                    <input v-if="editlist.includes(item.id)" type="number" class="form-control" min="1" max="100" placeholder="Quantity" name="foodName" v-model="item.quantity">
+                                                    <div v-else>Qty: {{item.quantity}}</div>
+                                                </div>
+                                                <div class="col-xxl-12">
+                                                    <button v-if="editlist.includes(item.id)" type="button" class="btn btn-primary btn-sm mx-1"v-on:click="saveItemQuanity(item)">Save</button>
+                                                    <button v-else type="button" class="btn btn-primary btn-sm mx-1"v-on:click="editItemQuanity(item)">Edit</button>
+                                                    <button type="button" class="btn btn-danger btn-sm mx-1" v-on:click="deleteItem(item)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                            <button v-if="sList.length != 0" type="button" class="btn btn-primary my-1" v-on:click="saveList()">Save List</button>
+                            <p id='saveStatus'></p>
                         </div>
                         <div class="col-xl-2 my-2">
                             <!-- recommanded card -->

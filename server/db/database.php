@@ -1,32 +1,18 @@
 <?php
 
 class Database {
-
-    // specify your own database credentials
-    private $host = "localhost";
-    private $db_name = "foodwise";
-    private $username = "root";
-    private $password = ""; // MAMP "root", WAMP empty string
-    private $port = 3306;   // Check in PHPMyAdmin for port number
-    public $conn;
-
     // get the database connection
     public function getConnection() {
+        $servername = 'localhost';
+        $dbname = 'foodwise';
+        $username = 'root';
+        $password = 'root';  // MAMP "root", WAMP empty string
+        $port = 3306;  // Check in PHPMyAdmin for port number
 
-        $this->conn = null;
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);     
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // if fail, exception will be thrown
 
-        try {
-            $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";port=" . $this->port, 
-                $this->username, 
-                $this->password
-            );            
-        }
-        catch(PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
-        }
-
-        return $this->conn;
+        return $conn;
     }
 }
 
