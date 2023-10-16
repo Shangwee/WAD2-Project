@@ -4,10 +4,10 @@ const app = Vue.createApp({
       // name:value pairs here
       links: {
         home: "./ ",
-        lists: "./ShoppingList.html",
-        inventory: "./Inventory.html",
-        recipe: "./RecipeList.html",
-        profile: "./Profile.html",
+        lists: "./ShoppingList.php",
+        inventory: "./Inventory.php",
+        recipe: "./RecipeList.php",
+        profile: "./Profile.php",
       },
 
       // shopping list
@@ -104,7 +104,7 @@ const app = Vue.createApp({
 
     saveList() {
       // iterate sLIst
-      let PHPurl = "../../server/controller/shoppingListController.php";
+      let PHPurl = "../../server/controller/shoppingList/processInsertShoppingItem.php";
       for(let i = 0; i < this.sList.length; i++){
         let item = this.sList[i];
         let name = item.name

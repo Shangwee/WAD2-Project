@@ -20,19 +20,9 @@
     <body>
         <!-- Responsive navbar-->
         <div id="main">
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" v-bind:href="links.lists" >Lists</a></li>
-                            <li class="nav-item"><a class="nav-link" v-bind:href="links.inventory">Inventories</a></li>
-                            <li class="nav-item"><a class="nav-link" v-bind:href="links.recipe">Recipes</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <?php
+                require_once './views/common/navbar.php';
+            ?>
             <!-- Header-->
             <header class="bg-white py-5">
                 
@@ -41,12 +31,9 @@
             
         </div>
         <!-- Footer-->
-        <footer class="py-5" style="background-color: #3b634e;">
-            <div class="container px-5">
-                <p class="m-0 text-center text-white">Copyright &copy; FoodWise 2023</p>
-                <p class="m-0 text-center text-white"></a> icons by <a href="https://icons8.com" style="color: white;">Icons8</a></p>
-            </div>
-        </footer>
+        <?php
+            require_once './views/common/footer.php';
+        ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- Core theme JS-->

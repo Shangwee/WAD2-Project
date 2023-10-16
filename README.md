@@ -9,6 +9,6 @@ One of the biggest sustainability challenges we face today is the problem of foo
 
 A web application that helps users to reduce their food waste.
 
-testing
-change here 
-testing123
+**Instruction**
+
+change the password in the ConnectionManager.php depending on mac or windows

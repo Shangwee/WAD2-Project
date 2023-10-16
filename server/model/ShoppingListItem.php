@@ -5,12 +5,14 @@ class ShoppingListItem{
     private $quantity;
     private $status;
     private $shoppingID;
-    public function __construct($id, $item, $quantity, $status, $shoppingID){
+    private $userID;
+    public function __construct($id, $item, $quantity, $status, $shoppingID, $userID){
         $this->id = $id;
         $this->item = $item;
         $this->quantity = $quantity;
         $this->status = $status;
         $this->shoppingID = $shoppingID;
+        $this->userID = $userID;
     }
     public function getId(){
         return $this->id;
@@ -27,6 +29,9 @@ class ShoppingListItem{
     public function getShoppingID(){
         return $this->shoppingID;
     }
+    public function getUserID(){
+        return $this->userID;
+    }
     public function setItem($item){
         $this->item = $item;
     }
@@ -41,6 +46,10 @@ class ShoppingListItem{
     }
     public function setShoppingID($shoppingID){
         $this->shoppingID = $shoppingID;
+    }
+
+    public function setUserID($userID){
+        $this->userID = $userID;
     }
 }
 ?>
