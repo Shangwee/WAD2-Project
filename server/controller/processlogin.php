@@ -10,9 +10,10 @@ $pw=$_POST['password'];
 $errors = [];
 if (!empty($name)){
     $user = $accdao->getAccByUsername($name);
+    // var_dump($user);
     if($user !==null){
         if(password_verify($pw,$user->getHashed())){
-            $_SESSION['login'] =$user;
+            $_SESSION['uid'] =$user->getUserId();
             header ('location:../Homepage.php');
             exit;
         }else{
