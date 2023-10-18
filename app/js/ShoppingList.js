@@ -104,7 +104,7 @@ const app = Vue.createApp({
 
     saveList() {
       // iterate sLIst
-      let PHPurl = "../../server/controller/shoppingList/processInsertShoppingItem.php";
+      let PHPurl = "../../server/controller/shoppingList/InsertShoppingItem.php";
       for(let i = 0; i < this.sList.length; i++){
         let item = this.sList[i];
         let name = item.name
@@ -117,9 +117,9 @@ const app = Vue.createApp({
         };
 
         // make post request to php
-        axios.post(PHPurl, {params: {params}})
+        axios.get(PHPurl, {params: params})
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           document.getElementById('saveStatus').innerText = response.data.status;
         })
         .catch((error) => {
@@ -128,8 +128,25 @@ const app = Vue.createApp({
         });
       }      
       // clear list
-      // this.sList = [];
+      this.sList = [];
     },
+
+    displaylist() {
+      // display list
+      let PHPurl = "../../server/controller/shoppingList/DisplayEveryItemByUser.php";
+      let userid = 1;
+      let params = {
+        userid: userid,
+      };
+
+      axios.get(PHPurl , {params: params}) 
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   },
 });
 

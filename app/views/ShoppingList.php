@@ -91,7 +91,7 @@
                             <!-- recommanded card -->
                             <div class="card mx-auto" id="RecommandCard">
                                 <div class="card-header">
-                                  Recommandations <button type="button" class="btn btn-primary btn-sm float-end" >Add all</button>
+                                  Recommandations <button type="button" class="btn btn-primary btn-sm float-end" v-on:click="displaylist()">Add all</button>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                   <li class="list-group-item">An item <button type="button" class="btn btn-primary btn-sm float-end" >Add</button></li>

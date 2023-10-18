@@ -1,16 +1,19 @@
 <?php
-require_once "../model/ShoppingListItem.php";
-require_once "../DAO/shoppingListDAO.php";
-session_start();
+require_once("../../model/ShoppingListItem.php");
+require_once ("../../DAO/shoppingListDAO.php");
 $status = false;
 $result = [];
 
-if (isset($_POST['name']) && isset($_POST['quantity']) && isset($_POST["checkStatus"]))
+if (isset($_GET['name']) && isset($_GET['quantity']) && isset($_GET["checkStatus"]))
 {
-    $name = $_POST['name'];
-    $quantity = $_POST['quantity'];
-    $checkStatus = $_POST["checkStatus"];
+    $name = $_GET['name'];
+    $quantity = intval($_GET['quantity']);
+    $checkStatus = $_GET["checkStatus"];
     $shoppingID = uniqid();
+
+    var_dump($name);
+    var_dump($quantity);
+    var_dump($checkStatus);
 
     $shoppingListDAO = new shoppingListDAO();
     $status = $shoppingListDAO->insertShoppingListItem($name, $quantity, $checkStatus, $shoppingID, 1);

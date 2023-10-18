@@ -1,12 +1,13 @@
 <?php
-    require_once "../db/ConnectionManager.php";
-
+    require_once "/wamp64/www/WAD2-Project/server/db/ConnectionManager.php";
+    require_once "/wamp64/www/WAD2-Project/server/model/ShoppingListItem.php";
+    
     class shoppingListDAO{
         public function insertShoppingListItem($item, $quantity, $status, $shoppingID, $userID){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->getConnection();
 
-            $sql = "INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID) VALUES (:item, :quantity, :status, :shoppingID, :userID)";
+            $sql = "INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES (:item, :quantity, :checkStatus, :shoppingID, :userID)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':item', $item, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
@@ -22,20 +23,19 @@
             return $isAddOK;
         }
 
-        public function selectAllShoppingListItemsbyUser($userID){
+        public function getShoppingListItemsbyUser($userid){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->getConnection();
     
-            $sql = "SELECT * FROM shoppinglistitem WHERE userID = :userID";
+            $sql = "SELECT * FROM shoppinglistitem WHERE userid = :userid";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
+            $stmt->bindParam(':userid', $userid, PDO::PARAM_INT);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
-    
-            $result = array();
+            $result = null;
     
             while($row = $stmt->fetch()){
-                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['quantity'], $row['checkStatus'], $row['shoppingID'], $row['userID']);
+                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['quantity'], $row['checkStatus'], $row['shoppingID'], $row['userid']);
             }
     
             $stmt = null;
