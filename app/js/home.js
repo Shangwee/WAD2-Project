@@ -4,10 +4,10 @@ const app = Vue.createApp({
       // name:value pairs here
       links: {
         home: "./ ",
-        lists: "./views/ShoppingList.html",
-        inventory: "./views/Inventory.html",
-        recipe: "./views/RecipeList.html",
-        profile: "./views/Profile.html",
+        lists: "./views/ShoppingList.php",
+        inventory: "./views/Inventory.php",
+        recipe: "./views/RecipeList.php",
+        profile: "./views/Profile.php",
       },
     };
   },

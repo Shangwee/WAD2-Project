@@ -9,14 +9,13 @@ if (isset($_GET['name']) && isset($_GET['quantity']) && isset($_GET["checkStatus
     $name = $_GET['name'];
     $quantity = intval($_GET['quantity']);
     $checkStatus = $_GET["checkStatus"];
-    $shoppingID = uniqid();
 
     var_dump($name);
     var_dump($quantity);
     var_dump($checkStatus);
 
     $shoppingListDAO = new shoppingListDAO();
-    $status = $shoppingListDAO->insertShoppingListItem($name, $quantity, $checkStatus, $shoppingID, 1);
+    $status = $shoppingListDAO->insertShoppingListItem($name, $quantity, $checkStatus, 1);
 }
 if ($status)
 {
