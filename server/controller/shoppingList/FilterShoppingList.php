@@ -4,7 +4,7 @@ require_once("../../DAO/shoppingListDAO.php");
 $result = [];
 
 if (isset($_GET)) {
-    $userid = 1; //will change to session id
+    $userid = $_GET["userId"];
     $data  = array();
     $datas = null;
     $selectedFilter = $_GET['selectedFilter'];

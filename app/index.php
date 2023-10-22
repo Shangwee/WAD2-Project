@@ -21,6 +21,7 @@
     <div id="main">
     <!-- Navbar -->
     <?php
+        session_start();
         require_once './views/common/navbar.php';
     ?>
     <!-- Hero Section -->
@@ -65,7 +66,7 @@
         <div class="container">
             <h2>Get Started Today</h2>
             <p>Join us in the mission to reduce food waste and make a positive impact on the environment.</p>
-            <a class="btn btn-primary" href="#signup">Sign Up Now</a>
+            <a class="btn btn-primary" href="./views/login.php">Sign Up Now</a>
         </div>
     </section>
     </div>

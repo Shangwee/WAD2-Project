@@ -4,11 +4,11 @@ require_once ("../../DAO/shoppingListDAO.php");
 $result = [];
 
 if(isset($_GET)){
-$userid = 1; //will change to session id
+$userId = $_GET["userId"];
 $data  = array();
 
 $shoppingListDAO = new ShoppingListDAO();
-$datas = $shoppingListDAO->getShoppingListItemsbyUser($userid);
+$datas = $shoppingListDAO->getShoppingListItemsbyUser($userId);
 
 if ($datas != null) {
     foreach($datas as $data_object){

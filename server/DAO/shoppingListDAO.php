@@ -1,6 +1,5 @@
 <?php
-    require_once "/wamp64/www/WAD2-Project/server/db/ConnectionManager.php";
-    require_once "/wamp64/www/WAD2-Project/server/model/ShoppingListItem.php";
+    require_once __DIR__."\..\db\ConnectionManager.php";
     
     class shoppingListDAO{
         public function insertShoppingListItem($item, $quantity, $status, $userID){
@@ -12,7 +11,7 @@
             $stmt->bindParam(':item', $item, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt->bindParam(':checkStatus', $status, PDO::PARAM_BOOL);
-            $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
 
             $isAddOK = $stmt->execute();
 

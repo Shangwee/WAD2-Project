@@ -22,8 +22,8 @@ CREATE TABLE shoppinglistitem (
 
 
 -- add user accounts
-INSERT INTO Account (username, hashedpw) VALUES ('admin', 'admin');
-INSERT INTO Account (username, hashedpw) VALUES ('user', 'user');
+INSERT INTO Account (username, hashedpw) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni');
+INSERT INTO Account (username, hashedpw) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni');
 
 -- add shopping list items
 INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Milk', 1, true, 1);

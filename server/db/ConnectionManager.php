@@ -5,8 +5,6 @@ spl_autoload_register(
   }
 );
 
-session_start();
-
 function printr(){
   if (isset($_SESSION['errors'])){
     echo"<ul>";
@@ -17,6 +15,7 @@ function printr(){
     unset($_SESSION['errors']);
   }
 }
+
 class ConnectionManager {
 
   public function getConnection() {
