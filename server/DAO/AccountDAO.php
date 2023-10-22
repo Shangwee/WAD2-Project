@@ -1,5 +1,5 @@
 <?php
-require_once "../ConnectionManager.php";
+require_once "../../server/db/ConnectionManager.php";
 
 Class AccountDAO{
 

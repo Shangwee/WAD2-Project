@@ -1,34 +1,102 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <!-- <title>
-            Mnet PLUS Login
-</title> -->
-</head>
-<body>
-    <!-- <table><tr>
-            <td align='top'><img src='mnetplus.jpeg' width='120'/></td>
-            <td align='center'><br><i><h1>Mnet PLUS</h1><i></td>
-</table> -->
-<?php
-    $un='';
-    if (isset($_GET['username'])){
-        $un = 'value='.$_GET['username'];
-    }
-?>
-<br>
-<p>
-    <h2>Login</h2>
-    <form action='processlogin.php' method='post'>
-        <table>
-            <tr><td>Username:</td><td><input type='text' name='username' <?=$un?>></td></tr>
-            <tr><td>Password:</td><td><input type='password' name='password'></td></tr>
-            <tr><td colspan='2'><input type='submit' name='submit' value='Login'><input type='reset'></td></tr>
-            <tr><td><a href='register.php'>Create account</a></td><td>&nbsp;&nbsp;<a href='passwordupdate.php'>Forgot Password</a></td></tr>
-</table>
-</form>
-<?php
-require_once "../ConnectionManager.php";
-    printr();
-?>
-</body>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FoodWise</title>
+        <!-- Js scripts -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/shared.css" />   
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <div id="main">
+            <?php
+                require_once './common/navbar.php';
+                require_once "../../server/db/ConnectionManager.php";
+            ?>
+            <!-- Header-->
+            <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center my-5">
+                                <h1 class="fw-bolder text-white mb-2">Login</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Features section-->
+            <main>
+
+            <?php
+                
+                $un='';
+                $unerr ='';
+                $pwerr='';
+                if (isset($_GET['username'])){
+                    $un = $_GET['username'];
+                }
+                if (isset($_GET['unerr'])){
+                    $unerr = $_GET['unerr'];
+                }
+
+                if (isset($_GET['pwerr'])){
+                    $pwerr=$_GET['pwerr'];
+                }
+            ?>
+
+            <div class='container justify-content-center my-5'>
+                <!-- <div class='row'>
+                    <h2>Login</h2>
+                </div>  -->
+                <form action='processlogin.php' method='post' class='form group'>
+                    <div class='col-4 mx-auto'>
+                        <div class='row justify-content-center mb-3'>
+                            <div class='fw-bold'>Username: <input class='form-control' type='text' name='username' value='<?=$un?>'></div>
+                        </div>
+                        <p style='color:red'><?=$unerr?></p>
+                        <div class='row justify-content-center mb-3'>
+                            <div class=' fw-bold'>Password: <input class='form-control' type='password' name='password'></div>
+                        </div>
+                        <p style='color:red'><?=$pwerr?></p>
+                        <div class='row mb-4'>
+                            <div class=''></div>
+                            <div class='col-auto'><input class='form-control bg-primary text-white' type='submit' name='submit' value='Login'></div><div class='col-auto'><input class='form-control' type='reset'></div>
+                        </div>
+                        <div class='row mb-3'>
+                            <div class=''></div><div class='col-auto'><a href='register.php'>Create account</a></div><div class='col-auto'><a href='passwordupdate.php'>Forgot Password</a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <?php
+            
+                printr();
+            ?>
+
+            </main>
+            
+        </div>
+        <!-- Footer-->
+        <?php
+            require_once './common/footer.php';
+        ?>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+        <script src="../app/js/home.js"></script>
+    </body>
 </html>

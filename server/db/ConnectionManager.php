@@ -1,7 +1,7 @@
 <?php
 spl_autoload_register(
   function($class){
-    require_once "$class.php";
+    require_once "../../server/model/$class.php";
   }
 );
 
@@ -23,7 +23,7 @@ class ConnectionManager {
     $servername = 'localhost';
     $dbname = 'wad2project';
     $username = 'root';
-    $password = ''; // change this depending on mac or windows
+    $password = 'root'; // change this depending on mac or windows
     $port = 3306;
     $url  = "mysql:host=$servername;dbname=$dbname;port=$port";
 
