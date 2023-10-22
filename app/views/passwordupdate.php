@@ -1,97 +1,155 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FoodWise</title>
+        <!-- Js scripts -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/shared.css" />   
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
     <body>
-    <h2>Password Update</h2>
-    <form method='post'>
-        <table>
-            <tr><td>Username:</td><td><input type='text'name='username'></td></tr>
-            <!-- <tr><td>Security Keyword:</td><td><input type='text' name='sk'></td></tr> -->
-            <tr><td colspan='2'><input type='submit' name='submit' value='Verify'></td></tr>
-</table>
-</form>
+        <!-- Responsive navbar-->
+        <div id="main">
+            <?php
+                require_once 'common/navbar.php';
+            ?>
+            <!-- Header-->
+            <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center my-5">
+                                <h1 class="fw-bolder text-white mb-2">Password update</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+                
+            <!-- Features section-->
+            <?php
+
+                require_once "../../server/DAO/AccountDAO.php";
+                $accdao = new AccountDAO();
+                $errors = [];
+                $unerr = '';
+                $pwtext='';
+                $un = '';
+                $title = 'Verify Username';
+                $subtitle='';
+                $pwerr ='';
+                $cfmpwerr='';
+                $btnname ='submit';
+                $btnvalue ='Verify';
+                $cfmpwtext='';
+                $readonly='';
+
+                if (isset($_POST['submit'])){
+                    $un = $_POST['username'];
+
+                    if(empty($un)){
+                        $unerr = "Field cannot be empty";
+                    }
+                    else{
+                        $user = $accdao->getAccByUsername($un);
+
+                        if($user == NULL){
+                           $unerr ='Invalid username';
+                        }
+                        else{
+                            $pwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='newpw'>Password: <input class='form-control' type='password' name='newpw'></div></div>";
+                            $title = 'Verification Successful';
+                            $subtitle='Please enter new password';
+                            $btnname ='chgpw';
+                            $btnvalue='Change Password';
+                            $readonly='readonly';
+                            $cfmpwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='cfmpw'>Confirm Password: <input type='password' name='cfmpw' class='form-control'></div></div>";
+                            
+                        }
+                    }
+                }
+
+                if (isset($_POST['chgpw'])){
+                    $un = $_POST['username'];
+                    $pw=$_POST['newpw'];
+                    $cfmpw =$_POST['cfmpw'];
+                    
+                    $readonly='readonly';
+                    $pwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='newpw'>Password: <input class='form-control' type='password' name='newpw' value=".$pw."></div></div>";
+                    $title = 'Verification Successful';
+                    $subtitle='Please enter new password';
+                    $btnname ='chgpw';
+                    $btnvalue='Change Password';
+                    $cfmpwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='cfmpw'>Confirm Password: <input type='password' name='cfmpw' class='form-control' value=".$cfmpw."></div></div>";
+                            
+
+                    if(empty($pw)){
+                        $pwerr='Field must be filled';
+                    }
+                    if(empty($cfmpw)){
+                        $cfmpwerr = 'Field must be filled';
+                    }
+                    elseif($pw!==$cfmpw){
+                        $cfmpwerr='Passwords do not match';
+
+                    }
+
+                    if(!empty($pw) && !empty($cfmpw ) && $pw==$cfmpw){
+                        $accdao->updatePassword($un,password_hash($pw,PASSWORD_DEFAULT));
+                        $title='Password successfully updated';
+                        $subtitle="<a href='login.php'>Go to login page</a>";
+                        $un='';
+                        $pwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='newpw'>Password: <input class='form-control' type='password' name='newpw' value=''></div></div>";
+                        $cfmpwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='cfmpw'>Confirm Password: <input type='password' name='cfmpw' class='form-control' value=''></div></div>";
+
+                    }
+                }
 
 
+            ?>
 
 
-<?php
-require_once "../ConnectionManager.php";
-$accdao = new AccountDAO();
-$errors = [];
-$showpw=false;
-if (isset($_POST['submit'])){
-    $un = $_POST['username'];
-    // $sk = $_POST['sk'];
+            <div class='container justify-content-center my-5'>
+                <h2 class='row justify-content-center text-center' id='title' ><?=$title?>
+                        <p class='row justify-content-center text-center mt-3' style='font-size:0.8em;display:inline-block;' ><?=$subtitle?></p>
+                </h2>
 
-    if(!empty($un)){
-        $user= $accdao->getAccByUsername($un);
-        if($user == null){
-            $errors[]='Username invalid';
-        }
-
-    }else{
-        $errors[]='Username must be filled';
-    }
-    $_SESSION['errors'] =$errors;
-    printr();
-    if(empty($errors)){
-       $showpw =true;
-       $_SESSION['passwordun'] = $un;
-    }
-}
-if($showpw){
-    echo"<h2>Verification Successful. Please enter your new password.</h2>";
-    echo"<form method='post'><table>
-    <tr>
-    <td>New Password:</td><td><input type='password' name='newpw'>
-    <input type='hidden' name='username' value={$_SESSION['passwordun']}>
-    </td>
-    </tr>
-    <tr>
-    <td>Confirm Password:</td><td><input type='password' name='cfmpw'></td>
-    </tr>
-    <tr>
-    <td colspan='2'><input type='submit' name='chgpw' value='Change Password'></td>
-    </tr>
-    </table>
-    </form>";
-}
-
-if (isset($_POST['chgpw'])){
-    $pw=$_POST['newpw'];
-    $cfmpw =$_POST['cfmpw'];
-    if(empty($pw) or empty($pw)){
-        $errors[] ='Fields must be filled';
-
-    }
-    elseif($pw!==$cfmpw){
-        $errors[]='Passwords do not match';
-
-    }
-    $_SESSION['errors'] =$errors;
-    
-    if(empty($errors)){
-        $accdao->updatePassword($_POST['username'],password_hash($pw,PASSWORD_DEFAULT));
-        header('location:login.php');
-        exit;
-    }else{
-        echo"<h2>Verification Successful. Please enter your new password.</h2>";
-    echo"<form method='post'><table>
-    <tr>
-    <td>New Password:</td><td><input type='password' name='newpw'>
-    <input type='hidden' name='username' value={$_SESSION['passwordun']}>
-    </td>
-    </tr>
-    <tr>
-    <td>Confirm Password:</td><td><input type='password' name='cfmpw'></td>
-    </tr>
-    <tr>
-    <td colspan='2'><input type='submit' name='chgpw' value='Change Password'></td>
-    </tr>
-    </table>
-    </form>";
-    printr();
-    }
-}
-
-
-
-?>
+                <div class='col-4 mx-auto justify-content-center'>
+                    <form  method='post' class='form group'>
+                        <div class='row justify-content-center mb-3' id='username'>
+                            <div class='fw-bold'>Username: <input class='form-control' type='text' name='username' value='<?=$un?>' <?=$readonly?>></div>
+                        </div>
+                        <p style='color:red' id='usernameerr'><?=$unerr?></p>
+                        
+                        <!-- add code if username verified --><?=$pwtext?>
+                        <p style='color:red' id='pwerr'><?=$pwerr?></p>
+                         <?=$cfmpwtext?>
+                        <p style='color:red' id='cfmpwerr'><?=$cfmpwerr?></p>
+                       
+                        <div class='row mb-3' id='submitbtn'>
+                            <div class='col'><input class='form-control bg-primary text-white' type='submit' name='<?=$btnname?>' value='<?=$btnvalue?>'></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        <!-- Footer-->
+        <?php
+            require_once 'common/footer.php';
+        ?>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+        <script src="../js/home.js"></script>
+    </body>
+</html>
