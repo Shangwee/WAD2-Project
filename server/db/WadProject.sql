@@ -14,8 +14,7 @@ CREATE TABLE shoppinglistitem (
     id int auto_increment primary key,
     item varchar(255) not null,
     quantity int not null,
-    checkStatus boolean not null default false,
-    shoppingID varchar(255) not null,
+	checkStatus boolean not null default false,
     userid int not null,
     -- FK FROM Account userid
     FOREIGN KEY (userid) REFERENCES Account(userid)
@@ -27,15 +26,10 @@ INSERT INTO Account (username, hashedpw) VALUES ('admin', 'admin');
 INSERT INTO Account (username, hashedpw) VALUES ('user', 'user');
 
 -- add shopping list items
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Milk', 1, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Eggs', 12, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Bread', 2, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Butter', 1, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Cheese', 1, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Bacon', 1, false, '1', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Sausages', 1, false, '1', 1);
-
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Corn', 1, false, '2', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Fish', 12, false, '2', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Chicken', 2, false, '2', 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, shoppingID, userid) VALUES ('Pork Belly', 1, false, '2', 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Milk', 1, true, 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Eggs', 12, true, 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Bread', 2, true, 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Butter', 1, false , 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Cheese', 1, false, 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Bacon', 1, false, 1);
+INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Sausages', 1, false, 1);
