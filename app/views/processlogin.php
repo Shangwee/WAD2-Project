@@ -1,5 +1,6 @@
 <?php
 require_once "../../server/DAO/AccountDAO.php";
+require_once "../../server/model/Account.php";
 if(!isset($_POST['submit'])){
     header ('location:login.php');
     exit;
@@ -12,8 +13,8 @@ if (!empty($name)){
     $user = $accdao->getAccByUsername($name);
     if($user !==null){
         if(password_verify($pw,$user->getHashed())){
-            $_SESSION['login'] =$user;
-            header ('location:home.php');
+            $_SESSION['uid'] =$user->getUserId();
+            header ('location:Profile.php');
             exit;
         }else{
             $errors[]=1;
