@@ -5,7 +5,7 @@ require_once ("../../DAO/shoppingListDAO.php");
 $status = false;
 $result = [];
 
-$userid = 1; //hardcoded for now will change to session variable later
+$userid = $_GET["userId"];
 
 $shoppingListDAO = new shoppingListDAO();
 $status = $shoppingListDAO->clearShoppingList($userid);

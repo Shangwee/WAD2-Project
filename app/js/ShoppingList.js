@@ -3,11 +3,14 @@ const app = Vue.createApp({
     return {
       // name:value pairs here
       links: {
-        home: "./ ",
+        home: "../index.php ",
         lists: "./ShoppingList.php",
         inventory: "./Inventory.php",
         recipe: "./RecipeList.php",
         profile: "./Profile.php",
+        login: "./login.php",
+        logout: "../../server/controller/Logout.php",
+        register: "./register.php",
       },
       // shopping list
       sList: [],
@@ -30,38 +33,50 @@ const app = Vue.createApp({
   mounted() {
     // get list from database
     this.displaylist();
+
   },
   methods: {
     addItem() {
       // add item to shopping list
       let foodName = this.inputitem;
+      let userId = parseInt(document.getElementById("userId").value);
       if (foodName != "") {
         let name = foodName.trim();
         let quantity = 1;
         let status = false;
-        let PHPurl = "../../server/controller/shoppingList/InsertShoppingItem.php";
+        let PHPurl =
+          "../../server/controller/shoppingList/InsertShoppingItem.php";
         let params = {
           name: name,
           quantity: quantity,
           checkStatus: status,
+          userId: userId,
         };
         // make get request to php
         axios.get(PHPurl, { params: params }).then((response) => {
           console.log(response);
           this.statusMessage = response.status;
         });
+        // add item to list
+        this.sList.push({
+          name: name,
+          quantity: quantity,
+          status: status,
+        });
         // clear inputs
         this.inputitem = "";
       } else {
         alert("Please fill out both fields");
       }
-      this.displaylist();
     },
 
     deleteItem(itemID) {
       console.log(itemID);
-      let PHPurl = "../../server/controller/shoppingList/DeleteShoppingItem.php";
-      let deleteConfirmation = confirm("Are you sure you want to delete this item?");
+      let PHPurl =
+        "../../server/controller/shoppingList/DeleteShoppingItem.php";
+      let deleteConfirmation = confirm(
+        "Are you sure you want to delete this item?"
+      );
       let params = {
         id: itemID,
       };
@@ -79,14 +94,16 @@ const app = Vue.createApp({
       this.sList.splice(this.sList.indexOf(itemID), 1);
     },
 
-
     clearList() {
       // clear shopping list
       let clear = confirm("Are you sure you want to clear your list?");
       if (clear == true) {
         // exit function
         let PHPurl = "../../server/controller/shoppingList/ClearShoppingList.php";
-        axios.get(PHPurl).then((response) => {
+        let params = {
+          userId: parseInt(document.getElementById("userId").value),
+        };
+        axios.get(PHPurl, { params: params }).then((response) => {
           console.log(response);
           this.statusMessage = response.status;
           this.sList = [];
@@ -143,11 +160,15 @@ const app = Vue.createApp({
     displaylist() {
       // display list
       this.sList = [];
+      let userId = parseInt(document.getElementById("userId").value);;
       let PHPurl =
         "../../server/controller/shoppingList/DisplayEveryItemByUser.php";
+      let params = {
+        userId: userId,
+      };
 
       axios
-        .get(PHPurl)
+        .get(PHPurl, { params: params })
         .then((response) => {
           console.log(response.data);
           // iterate through response
@@ -204,18 +225,19 @@ const app = Vue.createApp({
       this.autocomlist = [];
     },
 
-
     filterShoppingList() {
       // filter shopping list
       this.isFilter = true;
-      let PHPurl = "../../server/controller/shoppingList/FilterShoppingList.php";
+      let PHPurl =
+        "../../server/controller/shoppingList/FilterShoppingList.php";
       if (this.selectedFilter == "All") {
         this.isFilter = false;
         this.displaylist();
         return;
-      } else{
+      } else {
         let params = {
           selectedFilter: this.selectedFilter,
+          userId: parseInt(document.getElementById("userId").value),
         };
         // make get request to php
         axios.get(PHPurl, { params: params }).then((response) => {
@@ -244,10 +266,9 @@ const app = Vue.createApp({
               status: ischecked,
             });
           }
-          
         });
       }
-    }
+    },
   },
 });
 

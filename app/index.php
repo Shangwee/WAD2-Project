@@ -21,6 +21,7 @@
     <div id="main">
     <!-- Navbar -->
     <?php
+        session_start();
         require_once './views/common/navbar.php';
     ?>
     <!-- Hero Section -->
