@@ -16,6 +16,8 @@ const app = Vue.createApp({
       sList: [],
       // autocomplete
       autocomlist: [],
+      // recommendation
+      recommendation: [],
       // edit list
       editlist: [],
       // input from search bar
@@ -225,6 +227,34 @@ const app = Vue.createApp({
       this.autocomlist = [];
     },
 
+    recommendation () {
+      // get recommendation based on low quantity or expiry date close to today
+      this.recommendation = [];
+      let userId = parseInt(document.getElementById("userId").value);
+      let PHPurl = "../../server/controller/shoppingList/Recommendation.php";
+      let params = {
+        userId: userId,
+      };
+      // make get request to php
+      axios.get(PHPurl, { params: params }).then((response) => {
+        console.log(response.data);
+        // iterate through response
+        for (let i = 0; i < response.data.length; i++) {
+          let item = response.data[i];
+          let id = item.id;
+          let name = item.item;
+          let category = item.category;
+          let reason = item.reason;
+          this.recommendation.push({
+            id: id,
+            name: name,
+            category: category,
+            Reason: reason,
+          });
+        }
+      });
+    }, 
+    
     filterShoppingList() {
       // filter shopping list
       this.isFilter = true;
