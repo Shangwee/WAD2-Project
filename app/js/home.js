@@ -8,6 +8,9 @@ const app = Vue.createApp({
         inventory: "./views/Inventory.php",
         recipe: "./views/RecipeList.php",
         profile: "./views/Profile.php",
+        login: "./views/login.php",
+        logout: "../server/controller/Logout.php",
+        register: "./views/register.php",
       },
     };
   },

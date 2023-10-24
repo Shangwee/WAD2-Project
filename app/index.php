@@ -21,13 +21,14 @@
     <div id="main">
     <!-- Navbar -->
     <?php
+        session_start();
         require_once './views/common/navbar.php';
     ?>
     <!-- Hero Section -->
     <div class="jumbotron text-center py-5" style="background-image: url('./images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
         <h1 class="text-light">Welcome to FoodWise</h1>
         <p class="text-light">Your solution to reducing food waste and making eco-friendly choices.</p>
-        <a class="btn btn-primary text-light" href="#get-started">Get Started</a>
+        <a class="btn btn-primary text-light" href="views/register.php">Get Started</a>
     </div>
 
     <!-- Features Section -->
@@ -65,7 +66,7 @@
         <div class="container">
             <h2>Get Started Today</h2>
             <p>Join us in the mission to reduce food waste and make a positive impact on the environment.</p>
-            <a class="btn btn-primary" href="#signup">Sign Up Now</a>
+            <a class="btn btn-primary" href="views/register.php">Sign Up Now</a>
         </div>
     </section>
     </div>

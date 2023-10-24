@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shooping List</title>
+        <title>Shopping List</title>
         <!-- Js scripts -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -22,12 +22,16 @@
 <div id="shoppingList">
     <!-- navbar -->
     <?php
+        session_start();
         require_once './common/navbar.php';
+        require_once "./common/protect.php";
     ?>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
                 <h1 class="h1">My Shopping List</h1>
+                <!-- hidden input of user session ID-->
+                <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
             </div>
             <div class="col-md-6 text-end">
                 <button class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>

@@ -1,5 +1,5 @@
 <?php
-require_once "../../server/db/ConnectionManager.php";
+require_once __DIR__."\..\db\ConnectionManager.php";
 
 Class AccountDAO{
 
