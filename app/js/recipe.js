@@ -44,15 +44,15 @@ const app = Vue.createApp({
   },
 
     methods: {
-      toggleDropdown() {
-        this.isOpen = !this.isOpen;
-        console.log(isOpen);
-      },
+      // toggleDropdown() {
+      //   this.isOpen = !this.isOpen;
+      //   console.log(isOpen);
+      // },
 
       selectOption(item){
         this.selectedOption = item.text;
         console.log(item.text);
-        this.isOpen = false;
+        //this.isOpen = false;
       },
 
       SearchRecipe() {
