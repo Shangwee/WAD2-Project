@@ -13,13 +13,17 @@
     background-color: #f9f9f9;
 }
 
-.custom-dropdown {
+/* .custom-dropdown {
     position: relative;
     height: auto;
+} */
+
+.dropdown-menu{
+    max-height: 200px; /* Adjust this value to set the fixed height */
+    overflow-y: auto;  
 }
 
-.custom-dropdown .dropdown-menu {
-    position: absolute;
-    top: 100%; /* Position the dropdown menu below the button */
-    left: 0; /* Align the left edge of the menu with the button */
+.dropdown-menu li a:hover{
+    background-color: #3b634e;
+    color: #fff;
 }
