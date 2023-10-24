@@ -23,6 +23,7 @@ if (empty($_SESSION)) {
                     <li class='nav-item'><a class='nav-link' v-bind:href='links.lists' >Lists</a></li>
                     <li class='nav-item'><a class='nav-link' v-bind:href='links.inventory'>Inventories</a></li>
                     <li class='nav-item'><a class='nav-link' v-bind:href='links.recipe'>Recipes</a></li>
+                    <li class='nav-item'><a class='nav-link' v-bind:href='links.profile'>Profile</a></li>
                     <li class='nav-item'><a class='nav-link' v-bind:href='links.logout'>Logout</a></li>
                 </ul>
             </div>

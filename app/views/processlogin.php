@@ -15,7 +15,7 @@ if (!empty($name)){
     if($user !==null){
         if(password_verify($pw,$user->getHashed())){
             $_SESSION['login'] =$user->getUserId();
-            header ('location:Profile.php');
+            header ('location:../index.php');
             exit;
         }else{
             $errors[]=1;

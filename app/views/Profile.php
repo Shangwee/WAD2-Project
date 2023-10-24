@@ -21,9 +21,9 @@
     <div id="main">
     <!-- Navbar -->
     <?php
+        session_start();
         require_once '../../server/db/ConnectionManager.php';
         require_once 'common/navbar.php';
-
     ?>
     <div class="container my-5">
 

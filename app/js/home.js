@@ -3,7 +3,7 @@ const app = Vue.createApp({
     return {
       // name:value pairs here
       links: {
-        home: "./ ",
+        home: "./index.php",
         lists: "./views/ShoppingList.php",
         inventory: "./views/Inventory.php",
         recipe: "./views/RecipeList.php",
