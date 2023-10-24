@@ -17,34 +17,6 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <!-- <style>
-        .recipe-cards-container {
-            display: flex;
-            flex-wrap: wrap; /* Wrap to the next row when the screen is narrow */
-            justify-content: space-between; /* Space items evenly within the container */
-        }
-
-        .recipe-card {
-            width: calc(33.33% - 20px);
-            margin: 10px; /* Add margin between cards */
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            background-color: #f9f9f9;
-        }
-
-        .custom-dropdown {
-            position: relative;
-            height: auto;
-        }
-
-        .custom-dropdown .dropdown-menu {
-            position: absolute;
-            top: 100%; /* Position the dropdown menu below the button */
-            left: 0; /* Align the left edge of the menu with the button */
-        }
-
-    </style> -->
 </head>
 <body>
         <header>
