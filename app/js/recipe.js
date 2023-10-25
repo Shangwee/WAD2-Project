@@ -3,11 +3,14 @@ const app = Vue.createApp({
     return {
       // name:value pairs here
       links: {
-        home: "./ ",
+        home: "../index.php ",
         lists: "./ShoppingList.php",
         inventory: "./Inventory.php",
         recipe: "./RecipeList.php",
         profile: "./Profile.php",
+        login: "./login.php",
+        logout: "../../server/controller/Logout.php",
+        register: "./register.php",
       },
       search : "",
 

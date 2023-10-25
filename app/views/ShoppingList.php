@@ -46,7 +46,7 @@
         <div class="row mt-4">
             <div class="col-md-12">
             <p id="filterStatus" v-if="isFilter"><em>Filter Applied</em></p>
-                <h2 v-if="sList.length == 0" class="text-center my-5 "> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
+                <h2 v-if="sList.length == 0" class="text-center my-5 animate__animated animate__fadeInUp"> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
                 <div v-else id="MainList">    
                     <ul class="list-group animate__animated animate__fadeIn">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in sList">

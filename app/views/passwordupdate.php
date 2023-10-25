@@ -10,12 +10,12 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/index.css" />
         <link rel="stylesheet" href="../css/shared.css" />   
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -29,7 +29,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-6">
                             <div class="text-center my-5">
-                                <h1 class="fw-bolder text-white mb-2">Password update</h1>
+                                <h1 class="fw-bolder text-white mb-2 animate__animated animate__fadeInUp">Password update</h1>
                             </div>
                         </div>
                     </div>
@@ -120,13 +120,13 @@
 
 
             <div class='container justify-content-center my-5'>
-                <h2 class='row justify-content-center text-center' id='title' ><?=$title?>
+                <h2 class='row justify-content-center text-center animate__animated animate__fadeInUp' id='title' ><?=$title?>
                         <p class='row justify-content-center text-center mt-3' style='font-size:0.8em;display:inline-block;' ><?=$subtitle?></p>
                 </h2>
 
                 <div class='col-4 mx-auto justify-content-center'>
                     <form  method='post' class='form group'>
-                        <div class='row justify-content-center mb-3' id='username'>
+                        <div class='row justify-content-center mb-3 animate__animated animate__fadeInUp' id='username'>
                             <div class='fw-bold'>Username: <input class='form-control' type='text' name='username' value='<?=$un?>' <?=$readonly?>></div>
                         </div>
                         <p style='color:red' id='usernameerr'><?=$unerr?></p>
@@ -136,13 +136,13 @@
                          <?=$cfmpwtext?>
                         <p style='color:red' id='cfmpwerr'><?=$cfmpwerr?></p>
                        
-                        <div class='row mb-3' id='submitbtn'>
+                        <div class='row mb-3 animate__animated animate__fadeInUp' id='submitbtn'>
                             <div class='col'><input class='form-control bg-primary text-white' type='submit' name='<?=$btnname?>' value='<?=$btnvalue?>'></div>
                         </div>
                     </form>
                 </div>
             </div>
-            
+        </div>
         <!-- Footer-->
         <?php
             require_once 'common/footer.php';
@@ -150,6 +150,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
-        <script src="../js/home.js"></script>
+        <script src="../js/login.js"></script>
     </body>
 </html>

@@ -2,11 +2,13 @@ nav {
   background-color: #3b634e;
 }
 
+body {
+  min-height: 100vh;
+}
+
 footer{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
+  position: sticky;
+  top: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
