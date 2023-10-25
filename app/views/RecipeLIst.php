@@ -16,9 +16,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
-    <div id="RecipeMain">
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container px-5">
@@ -35,28 +35,64 @@
             </nav>
         </header>
         <main>
+        <div id="RecipeMain">
             <div class="container">
+                </p>
                 <h1 class="fw-bolder mb-4">Recipe</h1>
                 <!-- align buttom and input -->
                 <div class="mb-2">
                     <form>
-                        <div class="mb-3">
-                          <label for="RecipeSearchInput" class="form-label">Search</label>
-                          <input type="email" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter keywords">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <input type="text" v-model="ingredient" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter ingredient">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
+                                        {{ selectedOption || 'Select a Cuisine Type'}}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-for="item in items" :key="item.value">
+                                            <a class="dropdown-item" @click="selectOption(item)">{{ item.text }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-primary" v-on:click="SearchRecipe()">Submit</button>
+                        <button type="button" class="btn btn-primary" @click="SearchRecipe()">Search</button>
                     </form>
+                </div>
+                    <div v-if="recipes.length > 0">
+                        </p>
+                        <h2>Recipes</h2>
+                        <div class="recipe-cards-container">
+                            <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
+                                <img :src="recipe.recipe.image" alt="Recipe Image">
+                                <h2>{{ recipe.recipe.label }}</h2>
+                                <h5>Ingredients:</h5>
+                                <ul>
+                                    <li v-for="(ingredient, i) in recipe.recipe.ingredientLines" :key="i">{{ ingredient }}</li>
+                                </ul>
+                                <h5>Nutrients:</h5>
+                                <ul>
+                                    <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>
+                                    <li>{{ `Fat: ${Math.round(recipe.recipe.totalNutrients.FAT.quantity)} ${recipe.recipe.totalNutrients.FAT.unit}` }}</li>
+                                    <li>{{ `Carbs: ${Math.round(recipe.recipe.totalNutrients.CHOCDF.quantity)} ${recipe.recipe.totalNutrients.CHOCDF.unit}` }}</li>
+                                    <li>{{ `Protein: ${Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)} ${recipe.recipe.totalNutrients.PROCNT.unit}` }}</li>
+                                </ul>
+                                <a :href="recipe.recipe.url" target="_blank">Full Recipe</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
-    </div>
     <!-- Footer-->
-    <footer class="py-5" style="background-color: #3b634e;">
-        <div class="container px-5">
-            <p class="m-0 text-center text-white">Copyright &copy; FoodWise 2023</p>
-            <p class="m-0 text-center text-white"></a> icons by <a href="https://icons8.com" style="color: white;">Icons8</a></p>
-        </div>
-    </footer>
+    <?php
+        require_once './common/footer.php';
+    ?>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- Core theme JS-->
