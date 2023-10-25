@@ -24,6 +24,9 @@
             <?php
                 session_start();
                 require_once './common/navbar.php';
+                if (isset($_SESSION['login'])){
+                    header("Location: ../index.php");
+                }
             ?>
             <!-- Header-->
             <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">

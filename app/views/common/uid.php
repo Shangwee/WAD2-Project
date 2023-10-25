@@ -1,6 +1,6 @@
 <?php
 require_once '../../../server/db/ConnectionManager.php';
-if (isset($_SESSION['uid'])){
+if (isset($_SESSION['login'])){
     $myJSON = json_encode($_SESSION['login']);
 }
 else{

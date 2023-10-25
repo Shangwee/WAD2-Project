@@ -30,12 +30,15 @@ const app = Vue.createApp({
       filterOption: ["All", "Checked", "Unchecked"],
       // filter option selected
       selectedFilter: "All",
+      // sort option
+      sortOption: ["None", "Name (A-Z)", " Quantity (Low to High)"],
+      // sort option selected
+      selectedSort: "None",
     };
   },
   mounted() {
     // get list from database
     this.displaylist();
-
   },
   methods: {
     addItem() {
@@ -58,15 +61,11 @@ const app = Vue.createApp({
         axios.get(PHPurl, { params: params }).then((response) => {
           console.log(response);
           this.statusMessage = response.status;
+          // reload the list
+          this.displaylist();
+          // clear inputs
+          this.inputitem = "";
         });
-        // add item to list
-        this.sList.push({
-          name: name,
-          quantity: quantity,
-          status: status,
-        });
-        // clear inputs
-        this.inputitem = "";
       } else {
         alert("Please fill out both fields");
       }
@@ -101,7 +100,8 @@ const app = Vue.createApp({
       let clear = confirm("Are you sure you want to clear your list?");
       if (clear == true) {
         // exit function
-        let PHPurl = "../../server/controller/shoppingList/ClearShoppingList.php";
+        let PHPurl =
+          "../../server/controller/shoppingList/ClearShoppingList.php";
         let params = {
           userId: parseInt(document.getElementById("userId").value),
         };
@@ -118,6 +118,7 @@ const app = Vue.createApp({
 
     editItemQuanity(item) {
       // push item id into editlist
+      console.log("item loaded", item);
       console.log(item.id);
       this.editlist.push(item.id);
       console.log("betore editing");
@@ -162,7 +163,7 @@ const app = Vue.createApp({
     displaylist() {
       // display list
       this.sList = [];
-      let userId = parseInt(document.getElementById("userId").value);;
+      let userId = parseInt(document.getElementById("userId").value);
       let PHPurl =
         "../../server/controller/shoppingList/DisplayEveryItemByUser.php";
       let params = {
@@ -227,34 +228,21 @@ const app = Vue.createApp({
       this.autocomlist = [];
     },
 
-    recommendation () {
-      // get recommendation based on low quantity or expiry date close to today
-      this.recommendation = [];
-      let userId = parseInt(document.getElementById("userId").value);
-      let PHPurl = "../../server/controller/shoppingList/Recommendation.php";
-      let params = {
-        userId: userId,
-      };
-      // make get request to php
-      axios.get(PHPurl, { params: params }).then((response) => {
-        console.log(response.data);
-        // iterate through response
-        for (let i = 0; i < response.data.length; i++) {
-          let item = response.data[i];
-          let id = item.id;
-          let name = item.item;
-          let category = item.category;
-          let reason = item.reason;
-          this.recommendation.push({
-            id: id,
-            name: name,
-            category: category,
-            Reason: reason,
-          });
-        }
-      });
-    }, 
-    
+    sortShoppingList() {
+      if (this.selectedSort == "None") {
+        this.displaylist();
+        return;
+      } else if (this.selectedSort == "Name (A-Z)") {
+        this.sList.sort((a, b) => {
+          return a.name.localeCompare(b.name);
+        });
+      } else if (this.selectedSort == "Quantity (Low to High)") {
+        this.sList.sort((a, b) => {
+          return a.quantity - b.quantity;
+        });
+      }
+    },
+
     filterShoppingList() {
       // filter shopping list
       this.isFilter = true;

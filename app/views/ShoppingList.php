@@ -17,6 +17,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
 </head>
 <body>
 <div id="shoppingList">
@@ -29,11 +31,11 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="h1">My Shopping List</h1>
+                <h1 class="h1 animate__animated animate__fadeInUp">My Shopping List</h1>
                 <!-- hidden input of user session ID-->
                 <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
             </div>
-            <div class="col-md-6 text-end">
+            <div class="col-md-6 text-end animate__animated animate__fadeInUp">
                 <button class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
                 <!-- <button class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#loadShoppingListModal">Load Shopping List</button> -->
                 <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#filterModal">Filter</button>
@@ -44,9 +46,9 @@
         <div class="row mt-4">
             <div class="col-md-12">
             <p id="filterStatus" v-if="isFilter"><em>Filter Applied</em></p>
-                <h2 v-if="sList.length == 0" class="text-center my-5"> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
+                <h2 v-if="sList.length == 0" class="text-center my-5 "> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
                 <div v-else id="MainList">    
-                    <ul class="list-group">
+                    <ul class="list-group animate__animated animate__fadeIn">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in sList">
                             <div>
                                 <input class="form-check-input mx-1" type="checkbox" v-model="item.status" v-on:click="checkItem(item)">
@@ -62,7 +64,7 @@
                         </li>
                         <!-- Add more items here -->
                     </ul>
-                    <div class="my-2">
+                    <div class="my-2 animate__animated animate__fadeInUp">
                         <button class="btn btn-primary btn-sm me-2" v-on:click="clearList()">Clear List</button>
                     </div>
                 </div>
@@ -71,8 +73,8 @@
 
         <div class="row my-4">
             <div class="col-md-12">
-                <h2 class="h2">Recommendations</h2>
-                <ul class="list-group">
+                <h2 class="h2 animate__animated animate__fadeInUp">Recommendations</h2>
+                <ul class="list-group animate__animated animate__fadeInUp">
                     <li class="list-group-item">Recommended Item 1</li>
                     <li class="list-group-item">Recommended Item 2</li>
                     <li class="list-group-item">Recommended Item 3</li>
@@ -174,16 +176,15 @@
                     <form>
                         <div class="mb-3">
                             <label for="sortOptions" class="form-label">Sort by:</label>
-                            <select class="form-select" id="sortOptions">
-                                <option value="name">Name (A-Z)</option>
-                                <option value="quantity">Quantity (Low to High)</option>
+                            <select class="form-select" id="sortOptions" v-model="selectedSort">
+                                <option v-for="option in sortOption">{{option}}</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info">Apply Sort</button>
+                    <button type="button" class="btn btn-info" @click="sortShoppingList()">Apply Sort</button>
                 </div>
             </div>
         </div>
