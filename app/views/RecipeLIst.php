@@ -59,7 +59,7 @@
                         </p>
                         <h2>Recipes</h2>
                         <div class="recipe-cards-container animate__animated animate__fadeIn">
-                            <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
+                            <div v-for="(recipe, index) in limitedRecipes" :key="index" class="recipe-card">
                                 <img :src="recipe.recipe.image" alt="Recipe Image">
                                 <h2>{{ recipe.recipe.label }}</h2>
                                 <h5>Ingredients:</h5>

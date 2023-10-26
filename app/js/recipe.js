@@ -43,6 +43,7 @@ const app = Vue.createApp({
       ingredient: "",
       cuisineType: "",
       recipes: [],
+      limitedRecipes: []
     };
   },
 
@@ -72,6 +73,7 @@ const app = Vue.createApp({
           .then((response) => {
               console.log(response);
               this.recipes = response.data.hits; // the recipes are in the 'hits' property of the API response
+              this.limitedRecipes = this.recipes.slice(0, 18)
           })
           .catch((error) => {
             console.error('API request failed:', error);
