@@ -27,6 +27,8 @@
             require_once './common/navbar.php';
             require_once "./common/protect.php";
         ?>
+
+        
         </div>
     </main>
     <!-- Footer-->

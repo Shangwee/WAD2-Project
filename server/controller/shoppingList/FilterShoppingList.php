@@ -20,6 +20,7 @@ if (isset($_GET)) {
             $data = [];
             $data['id'] = $data_object->getId();
             $data['item'] = $data_object->getItem();
+            $data['category'] = $data_object->getCategory();
             $data['quantity'] = $data_object->getQuantity();
             $data['checkStatus'] = $data_object->getStatus();
             $data['userid'] = $data_object->getUserID();

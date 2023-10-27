@@ -28,16 +28,17 @@
         require_once './common/navbar.php';
         require_once "./common/protect.php";
     ?>
+    <div class="jumbotron text-center py-5" style="background-image: url('../images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+        <h1 class="text-light animate__animated animate__fadeIn">Shopping List</h1>
+    </div>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="h1 animate__animated animate__fadeInUp">My Shopping List</h1>
                 <!-- hidden input of user session ID-->
                 <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
             </div>
             <div class="col-md-6 text-end animate__animated animate__fadeInUp">
                 <button class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
-                <!-- <button class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#loadShoppingListModal">Load Shopping List</button> -->
                 <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#filterModal">Filter</button>
                 <button class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#sortModal">Sort</button>
             </div>
@@ -53,6 +54,7 @@
                             <div>
                                 <input class="form-check-input mx-1" type="checkbox" v-model="item.status" v-on:click="checkItem(item)">
                                 <span class="item-name" v-bind:id="item.id">{{item.name}}</span>
+                                <span class="badge bg-info rounded-pill ms-2">{{item.category}}</span>
                                 <input v-if="editlist.includes(item.id)" class="mx-1" type="number" min="1" max="100" placeholder="Quantity" name="foodName" v-model="item.quantity">
                                 <span class="badge bg-primary rounded-pill ms-2" v-else>Qty: {{item.quantity}}</span>
                             </div>
@@ -83,6 +85,8 @@
             </div>
         </div>
     </div>
+    <!-- toaster -->
+
     <!-- Add Item Modal -->
     <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -96,6 +100,12 @@
                         <div class="form-group">
                             <label for="itemInput">Item Name</label>
                             <input type="text" class="form-control" id="itemInput" v-model="inputitem" v-on:keyup="autocompleteSearch()">
+                            <label for="itemCategory" class="form-label">Category</label>
+                            <select class="form-select" id="itemCategory" v-model="selectedCategory">
+                                <option v-for="option in categoryOption">{{option}}</option>
+                            </select>
+                            <label for="itemQuantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="itemQuantity" min="1" max="100" v-model="quantity">
                             <div id="autocom" class="mt-3" v-if="autocomlist.length != 0">
                                 <strong>Suggested: </strong>
                                 <button v-for="(item, index) in autocomlist" type="button" class="btn btn-secondary btn-sm mx-1 mb-1" v-bind:value="item" v-on:click="fillsearchbar(item)">{{item}}</button>
@@ -106,31 +116,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addItem()">Add</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Load Shopping List Modal -->
-    <div class="modal fade" id="loadShoppingListModal" tabindex="-1" aria-labelledby="loadShoppingListModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loadShoppingListModalLabel">Load Shopping List</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Add a form or input field to allow users to input or select a shopping list to load -->
-                    <form>
-                        <div class="mb-3">
-                            <label for="shoppingListFile" class="form-label">Select a file to load</label>
-                            <input type="file" class="form-control" id="shoppingListFile">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Load</button>
                 </div>
             </div>
         </div>
@@ -190,6 +175,7 @@
         </div>
     </div>
 </div>
+
 <!-- Footer-->
 <?php
     require_once './common/footer.php';

@@ -24,6 +24,12 @@ const app = Vue.createApp({
       inputitem: "",
       // status message of saving or deleting
       statusMessage: "",
+      // category option
+      categoryOption: ["Produce", "Dairy and Protein", "Grains and Bakery", "Snacks and Pantry", "others"],
+      // category option selected
+      selectedCategory: "Produce",
+      // quantity
+      quantity: 1,
       // is filter
       isFilter: false,
       // filter option
@@ -39,6 +45,7 @@ const app = Vue.createApp({
   mounted() {
     // get list from database
     this.displaylist();
+    this.displayRecommendation();
   },
   methods: {
     addItem() {
@@ -47,12 +54,14 @@ const app = Vue.createApp({
       let userId = parseInt(document.getElementById("userId").value);
       if (foodName != "") {
         let name = foodName.trim();
-        let quantity = 1;
+        let quantity = this.quantity;
+        let category = this.selectedCategory;
         let status = false;
         let PHPurl =
           "../../server/controller/shoppingList/InsertShoppingItem.php";
         let params = {
           name: name,
+          category: category,
           quantity: quantity,
           checkStatus: status,
           userId: userId,
@@ -173,12 +182,14 @@ const app = Vue.createApp({
       axios
         .get(PHPurl, { params: params })
         .then((response) => {
+          console.log("here is the user's shopping list:")
           console.log(response.data);
           // iterate through response
           for (let i = 0; i < response.data.length; i++) {
             let item = response.data[i];
             let id = item.id;
             let name = item.item;
+            let category = item.category;
             let quantity = item.quantity;
             let checkStatus = item.checkStatus;
             let ischecked = false;
@@ -190,6 +201,7 @@ const app = Vue.createApp({
             this.sList.push({
               id: id,
               name: name,
+              category: category,
               quantity: quantity,
               status: ischecked,
             });
@@ -243,6 +255,20 @@ const app = Vue.createApp({
       }
     },
 
+    displayRecommendation(){
+      this.recommendation = [];
+      let PHPurl = "../../server/controller/recommendation.php";
+      axios
+        .get(PHPurl)
+        .then((response) => {
+          console.log('here is the recommandation: ')
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     filterShoppingList() {
       // filter shopping list
       this.isFilter = true;
@@ -266,9 +292,9 @@ const app = Vue.createApp({
           let length = datas.length;
           for (let i = 0; i < length; i++) {
             let item = datas[i];
-            console.log(item);
             let id = item.id;
             let name = item.item;
+            let category = item.category;
             let quantity = item.quantity;
             let checkStatus = item.checkStatus;
             let ischecked = false;
@@ -280,6 +306,7 @@ const app = Vue.createApp({
             this.sList.push({
               id: id,
               name: name,
+              category: category,
               quantity: quantity,
               status: ischecked,
             });

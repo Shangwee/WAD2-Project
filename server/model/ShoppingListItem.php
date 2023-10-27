@@ -2,12 +2,14 @@
 class ShoppingListItem{
     private $id;
     private $item;
+    private $category;
     private $quantity;
     private $status;
     private $userID;
-    public function __construct($id, $item, $quantity, $status, $userID){
+    public function __construct($id, $item, $category, $quantity, $status, $userID){
         $this->id = $id;
         $this->item = $item;
+        $this->category = $category;
         $this->quantity = $quantity;
         $this->status = $status;
         $this->userID = $userID;
@@ -17,6 +19,9 @@ class ShoppingListItem{
     }
     public function getItem(){
         return $this->item;
+    }
+    public function getCategory(){
+        return $this->category;
     }
     public function getQuantity(){
         return $this->quantity;
@@ -29,6 +34,9 @@ class ShoppingListItem{
     }
     public function setItem($item){
         $this->item = $item;
+    }
+    public function setCategory($category){
+        $this->category = $category;
     }
     public function setId($id){
         $this->id = $id;

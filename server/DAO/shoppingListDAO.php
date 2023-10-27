@@ -2,13 +2,14 @@
     require_once __DIR__."\..\db\ConnectionManager.php";
     
     class shoppingListDAO{
-        public function insertShoppingListItem($item, $quantity, $status, $userID){
+        public function insertShoppingListItem($item, $category, $quantity, $status, $userID){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->getConnection();
 
-            $sql = "INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES (:item, :quantity, :checkStatus, :userID)";
+            $sql = "INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES (:item, :category, :quantity, :checkStatus, :userID)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':item', $item, PDO::PARAM_STR);
+            $stmt->bindParam(':category', $category, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt->bindParam(':checkStatus', $status, PDO::PARAM_BOOL);
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
@@ -19,6 +20,27 @@
             $conn = null;
     
             return $isAddOK;
+        }
+
+        public function getShoppingItembyitemID($id){
+            $connMgr = new ConnectionManager();
+            $conn = $connMgr->getConnection();
+    
+            $sql = "SELECT * FROM shoppinglistitem WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $result = null;
+    
+            while($row = $stmt->fetch()){
+                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['category'] ,$row['quantity'], $row['checkStatus'], $row['userid']);
+            }
+    
+            $stmt = null;
+            $conn = null;
+    
+            return $result;
         }
 
         public function getShoppingListItemsbyUser($userid){
@@ -33,7 +55,7 @@
             $result = null;
     
             while($row = $stmt->fetch()){
-                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['quantity'], $row['checkStatus'], $row['userid']);
+                $result[] = new ShoppingListItem($row['id'], $row['item'], $row["category"], $row['quantity'], $row['checkStatus'], $row['userid']);
             }
     
             $stmt = null;
@@ -117,7 +139,7 @@
             $result = null;
     
             while($row = $stmt->fetch()){
-                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['quantity'], $row['checkStatus'], $row['userid']);
+                $result[] = new ShoppingListItem($row['id'], $row['item'], $row['category'] ,$row['quantity'], $row['checkStatus'], $row['userid']);
             }
     
             $stmt = null;

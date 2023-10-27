@@ -11,7 +11,7 @@ create table activeinv(
     quantity varchar(45) not null,
     expiry date not null,
     category varchar(45) not null,
-    constraint activeinvpk primary key (uid, serial)
+    constraint activeinvpk primary key (userid, serial)
 );
 
 DROP TABLE IF EXISTS Account;
@@ -25,8 +25,20 @@ DROP TABLE IF EXISTS shoppinglist;
 CREATE TABLE shoppinglistitem (
     id int auto_increment primary key,
     item varchar(255) not null,
+    category varchar(255) not null,
     quantity int not null,
 	checkStatus boolean not null default false,
+    userid int not null,
+    -- FK FROM Account userid
+    FOREIGN KEY (userid) REFERENCES Account(userid)
+);
+
+DROP TABLE IF EXISTS postShoppinglistitem;
+CREATE TABLE postShoppinglistitem (
+    id int auto_increment primary key,
+    item varchar(255) not null,
+    category varchar(255) not null,
+    quantity int not null,
     userid int not null,
     -- FK FROM Account userid
     FOREIGN KEY (userid) REFERENCES Account(userid)
@@ -38,19 +50,35 @@ INSERT INTO Account (username, hashedpw) VALUES ('admin', '$2y$10$spHJVK.ocDd0UH
 INSERT INTO Account (username, hashedpw) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni');
 
 -- add shopping list items
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Milk', 1, true, 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Eggs', 12, true, 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Bread', 2, true, 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Butter', 1, false , 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Cheese', 1, false, 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Bacon', 1, false, 1);
-INSERT INTO shoppinglistitem (item, quantity, checkStatus, userid) VALUES ('Sausages', 1, false, 1);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Milk', 'Dairy and Protein', 1, true, 1);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Eggs', 'Dairy and Protein', 12, true, 1);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Bread', 'Dairy and Protein', 2, true, 1);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Butter', 'Dairy and Protein', 1, false , 1);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Cheese', 'Dairy and Protein', 1, false, 2);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Bacon', 'Dairy and Protein', 1, false, 2);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Sausages', 'Dairy and Protein', 1, false, 2);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Carrot', 'Produce', 1, false, 2);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Onion', 'Produce', 1, false, 2);
+INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Salt', 'Snacks and Pantry', 1, false, 2);
+
+-- add post shopping list items
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Milk', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Milk', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Milk', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Milk', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Milk', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Bread', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Bread', 'Dairy and Protein', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Apple', 'Produce', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Apple', 'Produce', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Onion', 'Produce', 1, 1);
+INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Salt', 'Snacks and Pantry', 1, 1);
 
 
 -- add active inventory items
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 1, 'Cod Fish', 1, '2023-12-31', 'Meat');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Meat');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-10-31', 'Vegetable');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-10-31', 'Vegetable');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-10-31', 'Vegetable');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-10-31', 'Meat');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 1, 'Cod Fish', 1, '2023-12-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-10-31', 'Dairy and Protein');

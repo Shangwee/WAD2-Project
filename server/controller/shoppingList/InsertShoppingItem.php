@@ -4,14 +4,16 @@ require_once ("../../DAO/shoppingListDAO.php");
 $status = false;
 $result = [];
 
-if (isset($_GET['name']) && isset($_GET['quantity']) && isset($_GET["checkStatus"]) && isset($_GET["userId"]))
+if (isset($_GET['name']) && isset($_GET['category'])&&isset($_GET['quantity']) && isset($_GET["checkStatus"]) && isset($_GET["userId"]))
 {
     $name = $_GET['name'];
+    $category = $_GET['category'];
     $quantity = intval($_GET['quantity']);
     $cStatus = $_GET["checkStatus"];
     $checkStatus = 0;
     $userid = $_GET["userId"];
     var_dump($name);
+    var_dump($category);
     var_dump($quantity);
     var_dump($cStatus);
     var_dump($userid);
@@ -26,7 +28,7 @@ if (isset($_GET['name']) && isset($_GET['quantity']) && isset($_GET["checkStatus
     }
 
     $shoppingListDAO = new shoppingListDAO();
-    $status = $shoppingListDAO->insertShoppingListItem($name, $quantity, $checkStatus, $userid);
+    $status = $shoppingListDAO->insertShoppingListItem($name,$category,$quantity, $checkStatus, $userid);
 }
 if ($status)
 {

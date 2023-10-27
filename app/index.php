@@ -123,14 +123,6 @@
                 </div>
             </div>
         </section>
-        <!-- Contact Us Section -->
-        <section id="contact-us" class="py-5 ">
-            <div class="container">
-                <h2 class="animate__animated animate__fadeIn">Contact Us <span class="material-icons">contact_support</span></h2>
-                <p class="animate__animated animate__fadeInUp">If you have any questions or feedback, feel free to reach out to us. We'd love to hear from you!</p>
-                <a class="btn btn-primary animate__animated animate__fadeInUp" href="#contact">Contact Us</a>
-            </div>
-        </section>
         <!-- Footer -->
         <?php
             require_once './views/common/footer.php';
