@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."\..\..\..\server\model\Account.php";
+require_once "../../server/model/Account.php";
 
     // No session variable "user" => no login
     if (!isset($_SESSION["login"])) {

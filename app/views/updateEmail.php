@@ -25,9 +25,9 @@
             <?php
                 session_start();
                 require_once './common/navbar.php';
-                if (isset($_SESSION['login'])){
-                    header("Location: ../index.php");
-                }
+                require_once '../../server/DAO/AccountDAO.php';
+                $accdao = new AccountDAO();
+             
             ?>
             <!-- Header-->
             <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
@@ -35,7 +35,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-6">
                             <div class="text-center my-5">
-                                <h1 class="fw-bolder text-white mb-2 animate__animated animate__fadeInUp">Sign up</h1>
+                                <h1 class="fw-bolder text-white mb-2 animate__animated animate__fadeInUp">Update Email</h1>
                             </div>
                         </div>
                     </div>
@@ -56,6 +56,7 @@
                 $emailerr='';
                 $display='none';
 
+
                 if (isset($_GET['username'])){
                     $un = $_GET['username'];
                 }
@@ -68,22 +69,24 @@
                     $unerr=$_GET['unerr'];
                 }
 
-                if (isset($_GET['pwerr'])){
-                    $pwerr=$_GET['pwerr'];
-                }
-
-                if (isset($_GET['cfmpwerr'])){
-                    $cfmpwerr=$_GET['cfmpwerr'];
-                }
-
                 if (isset($_GET['emailerr'])){
                     $emailerr=$_GET['emailerr'];
                 }
 
                 if (isset($_GET['success'])){
                     $display='block';
-                    $title='Registration Successful';
-                    $subtitle="Return to<a href='login.php?username=$un'>login</a>";
+                    $title='Email updated successfully';
+                    $subtitle="Return to<a href='Profile.php'>Profile</a>";
+                }
+
+                if (isset($_POST['submit'])){
+                    $un = $_POST['username'];
+                    $email = $_POST['email'];
+
+                    $user = $accdao ->getAccByEmail($_SESSION['login'],$email);
+                    if ($user == null){
+                        $user ->setEmail($email);
+                    }
                 }
             ?>
 
@@ -104,16 +107,8 @@
                             <div class='fw-bold animate__animated animate__fadeInUp'>Email: <input class='form-control' type='email' name='email' value='<?=$email?>'></div>
                         </div>
                         <p style='color:red;'><?=$emailerr?></p>
-                        <div class='row justify-content-center mb-3'>
-                            <div class='fw-bold animate__animated animate__fadeInUp'>Password: <input class='form-control' type='password' name='password'></div>
-                        </div>
-                        <p style='color:red;'><?=$pwerr?></p>
-                        <div class='row justify-content-center mb-3'>
-                            <div class='fw-bold animate__animated animate__fadeInUp'>Confirm Password: <input type='password' name='cfmpassword' class='form-control'></div>
-                        </div>
-                        <p style='color:red;'><?=$cfmpwerr?></p>
                         <div class='row mb-3'>
-                            <div class='col animate__animated animate__fadeInUp'><input class='form-control bg-primary text-white' type='submit' name='submit' value='Sign up'></div>
+                            <div class='col animate__animated animate__fadeInUp'><input class='form-control bg-primary text-white' type='submit' name='submit' value='Update'></div>
                         </div>
                     </div>
                 </form>
@@ -134,6 +129,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
-        <script src="../js/login.js"></script>
+        <script src="../js/profile.js"></script>
     </body>
 </html>
