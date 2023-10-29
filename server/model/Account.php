@@ -4,11 +4,13 @@ Class Account{
     private $userid;
     private $username;
     private $hashed;
+    private $email;
 
-    public function __construct($uid,$un,$h){
+    public function __construct($uid,$un,$h,$e){
         $this -> userid=$uid;
         $this->username=$un;
         $this->hashed=$h;
+        $this->email=$e;
     }
 
     /**
@@ -69,6 +71,14 @@ Class Account{
         $this->userid = $userid;
 
         return $this;
+    }
+
+    /**
+     * Get the value of email
+     */ 
+    public function getEmail()
+    {
+        return $this->email;
     }
 }
 ?>

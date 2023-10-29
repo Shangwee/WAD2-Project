@@ -157,6 +157,18 @@ const app = Vue.createApp({
             this.recipeStates[recipeIndex] = true;
           }
         },
-    },
-  });
+
+        updateSearchHistory(){
+          axios
+          .post("../../server/coontroller/updateSearchHistory.php", {id:$_SESSION['login'],search:this.ingredient, cuisine: this.selectedOption})
+          .then(response =>{
+            console.log(response.data);
+            app.updateSearchHistory();
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+        }
+      },
+});
 const vm = app.mount("#RecipeMain");

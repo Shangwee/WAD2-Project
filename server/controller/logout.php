@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."\..\db\ConnectionManager.php";
+require_once "../db/ConnectionManager.php";
 session_start();
 if(!isset($_SESSION['login'])){
     header ('location:../../app/views/login.php');
