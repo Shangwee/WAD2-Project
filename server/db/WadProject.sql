@@ -16,13 +16,13 @@ create table activeinv(
 
 drop table if exists historicalinv;
 create table historicalinv(
-uid int not null,
+userid int not null,
 serial int not null,
 item varchar(45) not null,
 qty int not null,
 expired tinyint not null,
 category varchar(45) not null,
-constraint activeinvpk primary key (uid, serial)
+constraint historicalinvpk primary key (userid, serial)
 );
 
 DROP TABLE IF EXISTS Account;

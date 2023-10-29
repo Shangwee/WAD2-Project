@@ -19,7 +19,7 @@ class accessdom
     {
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM activeinv WHERE serial = :serial and uid = :uid;";
+        $sql = "SELECT * FROM activeinv WHERE serial = :serial and userid = :uid;";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $stmt->bindParam(":serial", $serial, PDO::PARAM_INT);
@@ -118,7 +118,7 @@ class accessdom
         $toMove = $this->getBySerial($uid, $serial);
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "DELETE FROM activeinv WHERE serial = :serial and uid = :uid;";
+        $sql = "DELETE FROM activeinv WHERE serial = :serial and userid = :uid;";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $stmt->bindParam(":serial", $serial, PDO::PARAM_INT);
@@ -133,7 +133,7 @@ class accessdom
         $toMove = $this->getBySerial($uid, $serial)[0];
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "DELETE FROM activeinv WHERE serial = :serial and uid = :uid;";
+        $sql = "DELETE FROM activeinv WHERE serial = :serial and userid = :uid;";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $stmt->bindParam(":serial", $serial, PDO::PARAM_INT);
@@ -147,7 +147,7 @@ class accessdom
     {
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "select serial, item, qty, expiry, category from activeinv where uid = :uid";
+        $sql = "select serial, item, qty, expiry, category from activeinv where userid = :uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
         $success = $stmt->execute();
@@ -177,7 +177,7 @@ class accessdom
         $serials = [];
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "select serial from activeinv where uid = :uid";
+        $sql = "select serial from activeinv where userid = :uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $success = $stmt->execute();
@@ -196,7 +196,7 @@ class accessdom
             return $errors;
         }
         $pdo = $conn->getConnection();
-        $sql = "select serial from historicalinv where uid = :uid";
+        $sql = "select serial from historicalinv where userid = :uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $success = $stmt->execute();
