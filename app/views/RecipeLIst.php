@@ -52,7 +52,19 @@
                                 </div>
                             </div>
                         </div>
+
                         <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
+                        </p>
+                        <div class="animate__animated animate__fadeInUp">
+                        Sort by:
+                            <select v-model="selectedSort" @click="sortRecipe()">
+                                <option value="Calories (Low to High)">Calories (Low to High)</option>
+                                <option value="Fat (Low to High)">Fat (Low to High)</option>
+                                <option value="Calcium (High to Low)">Calcium (High to Low)</option>
+                                <option value="Protein (High to Low)">Protein (High to Low)</option>
+                            </select>
+                        </div>
+
                     </form>
                 </div>
                     <div v-if="recipes.length > 0">

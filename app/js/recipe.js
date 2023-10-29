@@ -95,27 +95,6 @@ const app = Vue.createApp({
           });
         },
 
-      //   sortRecipesByCalories() {
-      //     if (this.sortByCaloriesAsc) {
-      //         // Sort recipes by calories in ascending order
-      //         this.recipes.sort((a, b) => {
-      //             const caloriesA = a.recipe.totalNutrients.ENERC_KCAL.quantity;
-      //             const caloriesB = b.recipe.totalNutrients.ENERC_KCAL.quantity;
-      //             return caloriesA - caloriesB;
-      //         });
-      //     } else {
-      //         // Sort recipes by calories in descending order
-      //         this.recipes.sort((a, b) => {
-      //             const caloriesA = a.recipe.totalNutrients.ENERC_KCAL.quantity;
-      //             const caloriesB = b.recipe.totalNutrients.ENERC_KCAL.quantity;
-      //             return caloriesB - caloriesA;
-      //         });
-      //     }
-  
-      //     // Toggle the sorting order
-      //     this.sortByCaloriesAsc = !this.sortByCaloriesAsc;
-      // },
-
       sortRecipe() {
         if (this.selectedSort == "Calories (Low to High)") {
           this.recipes.sort((a, b) => {
@@ -126,15 +105,15 @@ const app = Vue.createApp({
         } 
         else if (this.selectedSort == "Calcium (High to Low)") {
           this.recipes.sort((a, b) => {
-            const calciumA = a.recipe.recipe.totalNutrients.CA.quantity;
-            const calciumB = b.recipe.recipe.totalNutrients.CA.quantity;
+            const calciumA = a.recipe.totalNutrients.CA.quantity;
+            const calciumB = b.recipe.totalNutrients.CA.quantity;
             return calciumA - calciumB;
           });
         }
         else if (this.selectedSort == "Fat (Low to High)") {
           this.recipes.sort((a, b) => {
-            const fatA = a.recipe.recipe.totalNutrients.FAT.quantity;
-            const fatB = b.recipe.recipe.totalNutrients.FAT.quantity;
+            const fatA = a.recipe.totalNutrients.FAT.quantity;
+            const fatB = b.recipe.totalNutrients.FAT.quantity;
             return fatA - fatB;
           });
         }
