@@ -29,7 +29,18 @@ DROP TABLE IF EXISTS Account;
 CREATE TABLE Account (
     userid int auto_increment primary key,
     username varchar(50) not null,
-    hashedpw varchar(255) not null
+    hashedpw varchar(255) not null,
+    email varchar(255) not null
+);
+
+DROP TABLE IF EXISTS SearchHistory;
+CREATE TABLE SearchHistory (
+    userid int not null,
+    search varchar(255) not null,
+    cuisine varchar(255) not null,
+    timeCreated DATETIME NOT NULL,
+    primary key (userid, timeCreated),
+    foreign key (userid) REFERENCES Account(userid)
 );
 
 DROP TABLE IF EXISTS shoppinglist;
@@ -57,8 +68,8 @@ CREATE TABLE postShoppinglistitem (
 
 
 -- add user accounts
-INSERT INTO Account (username, hashedpw) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni');
-INSERT INTO Account (username, hashedpw) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni');
+INSERT INTO Account (username, hashedpw,email,timeCreated) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','admin@gmail.com',CURRENT_TIMESTAMP);
+INSERT INTO Account (username, hashedp,email,timeCreated) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','user@gmail.com',CURRENT_TIMESTAMP);
 
 -- add shopping list items
 INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Milk', 'Dairy and Protein', 1, true, 1);

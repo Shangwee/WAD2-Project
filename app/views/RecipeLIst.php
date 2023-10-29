@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
+                        <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()" @click="updateSearchHistory()">Search</button>
                     </form>
                 </div>
                     <div v-if="recipes.length > 0">
@@ -71,6 +71,7 @@
                                         {{ ingredient }}
                                     </li>
                                 </ul>
+                                <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
                                 <button class="btn btn-link" @click="toggleIngredientsVisibility(index)">
                                     {{ recipeStates[index] ? 'View Less' : 'View More' }}
                                 </button>

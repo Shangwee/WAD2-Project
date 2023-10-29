@@ -1,5 +1,5 @@
 <?php
-require_once "../ConnectionManager.php";
+require_once "../db/ConnectionManager.php";
 $errors = [];
 $accdao = new AccountDAO();
 if (isset($_POST['submit'])){

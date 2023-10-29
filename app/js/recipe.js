@@ -56,6 +56,20 @@ const app = Vue.createApp({
         console.log(item.text);
       },
 
+      getIngrdients(item){
+        let url = this.links.lists + "?";
+        for (var i = 0; i < item.length; i++) {
+          // redirect to shopping list page with ingredients as parameters 
+          // encode each ingredient to avoid errors
+          let ingredient = encodeURIComponent(item[i]);
+          url += "ingredients[]=" + ingredient + "&";
+        }
+        // remove last '&' character
+        url = url.slice(0, -1);
+        // redirect to shopping list page with ingredients as parameters
+        window.location.href = url;
+      },
+
       SearchRecipe() {
         axios
           .get(this.apiUrl, {
@@ -86,6 +100,18 @@ const app = Vue.createApp({
             this.recipeStates[recipeIndex] = true;
           }
         },
-    },
-  });
+
+        updateSearchHistory(){
+          axios
+          .post("../../server/coontroller/updateSearchHistory.php", {id:$_SESSION['login'],search:this.ingredient, cuisine: this.selectedOption})
+          .then(response =>{
+            console.log(response.data);
+            app.updateSearchHistory();
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+        }
+      },
+});
 const vm = app.mount("#RecipeMain");

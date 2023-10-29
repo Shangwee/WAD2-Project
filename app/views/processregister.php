@@ -7,13 +7,27 @@ if (isset($_POST['submit'])){
     $un = $_POST['username'];
     $pw = $_POST['password'];
     $cfmpw = $_POST['cfmpassword'];
+    $email = $_POST['email'];
 
     if(empty($un)){
         $unerr = 'Username must be filled';
-        $error[] = 'Username must be filled';
+        $errors[] = 'Username must be filled';
     }elseif($accdao->getAccByUsername($un) !== null){
         $unerr='Username taken';
         $errors[]='Username taken';
+    }
+
+    if(empty($email)){
+        $emailerr = 'Email must be filled';
+        $error[] = 'Email must be filled';
+    }
+    else if(!str_contains($email,'@')){
+        $emailerr = 'Enter a valid email';
+        $error[] = 'Enter a valid email';
+    }
+    elseif($accdao->getAccByEmail($email) !== null){
+        $unerr='Email taken';
+        $errors[]='Email taken';
     }
 
     if(empty($pw)){
@@ -33,10 +47,10 @@ if (isset($_POST['submit'])){
 
     if(!empty($errors)){
         // $_SESSION['errors'] = $errors;
-        header ("location:register.php?pwerr=$pwerr&cfmpwerr=$cfmpwerr&unerr=$unerr&username=$un");
+        header ("location:register.php?pwerr=$pwerr&cfmpwerr=$cfmpwerr&unerr=$unerr&username=$un&email=$email&emailerr=$emailerr");
         exit;
     }
-    $status = $accdao->createAcc($un,password_hash($pw,PASSWORD_DEFAULT),$sk);
+    $status = $accdao->createAcc($un,password_hash($pw,PASSWORD_DEFAULT),$email);
     if($status){
     // echo"<h1>Sign up successful!</h1>";
     // echo"<p><a href='login.php?username=$un'>Return to Login</a></p>";

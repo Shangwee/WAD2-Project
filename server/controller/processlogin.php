@@ -1,5 +1,5 @@
 <?php
-require_once "../ConnectionManager.php";
+require_once "../db/ConnectionManager.php";
 if(!isset($_POST['submit'])){
     header ('location:login.php');
     exit;

@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__."\..\..\..\server\model\Account.php";
+// require_once __DIR__."\..\..\..\server\model\Account.php";
 if (empty($_SESSION)) {
     echo"<nav class='navbar navbar-expand-lg navbar-dark'>
         <div class='container px-5'>
