@@ -59,13 +59,21 @@
                         </p>
                         <h2>Recipes</h2>
                         <div class="recipe-cards-container animate__animated animate__fadeIn">
-                            <div v-for="(recipe, index) in limitedRecipes" :key="index" class="recipe-card">
+                            <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
                                 <img :src="recipe.recipe.image" alt="Recipe Image">
                                 <h2>{{ recipe.recipe.label }}</h2>
                                 <h5>Ingredients:</h5>
                                 <ul>
-                                    <li v-for="(ingredient, i) in recipe.recipe.ingredientLines" :key="i">{{ ingredient }}</li>
+                                    <li v-if="!recipeStates[index]" v-for="(ingredient, index) in recipe.recipe.ingredientLines.slice(0,5)" :key="`ingredient-${index}`" >
+                                        {{ ingredient }}
+                                    </li>
+                                    <li v-else v-for="(ingredient, index) in recipe.recipe.ingredientLines" :key="`ingredient-full-${i}`">
+                                        {{ ingredient }}
+                                    </li>
                                 </ul>
+                                <button class="btn btn-link" @click="toggleIngredientsVisibility(index)">
+                                    {{ recipeStates[index] ? 'View Less' : 'View More' }}
+                                </button>
                                 <h5>Nutrients:</h5>
                                 <ul>
                                     <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>

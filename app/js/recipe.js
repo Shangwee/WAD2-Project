@@ -42,21 +42,18 @@ const app = Vue.createApp({
       appKey: '6aac0b6d7499cbc03c91fa0e81f57356',
       ingredient: "",
       cuisineType: "",
+
       recipes: [],
-      limitedRecipes: []
+
+      showAll: false,
+      recipeStates: {},
     };
   },
 
     methods: {
-      // toggleDropdown() {
-      //   this.isOpen = !this.isOpen;
-      //   console.log(isOpen);
-      // },
-
       selectOption(item){
         this.selectedOption = item.text;
         console.log(item.text);
-        //this.isOpen = false;
       },
 
       SearchRecipe() {
@@ -72,13 +69,23 @@ const app = Vue.createApp({
           })
           .then((response) => {
               console.log(response);
-              this.recipes = response.data.hits; // the recipes are in the 'hits' property of the API response
-              this.limitedRecipes = this.recipes.slice(0, 18)
+              this.recipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
           })
           .catch((error) => {
             console.error('API request failed:', error);
           });
         },
-      },
-});
+
+        toggleIngredientsVisibility(recipeIndex){
+          this.showAll = !this.showAll;
+
+          if(this.recipeStates[recipeIndex]){
+            this.recipeStates[recipeIndex] = false;
+          }
+          else{
+            this.recipeStates[recipeIndex] = true;
+          }
+        },
+    },
+  });
 const vm = app.mount("#RecipeMain");
