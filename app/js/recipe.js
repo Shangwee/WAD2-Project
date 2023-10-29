@@ -42,11 +42,16 @@ const app = Vue.createApp({
       appKey: '6aac0b6d7499cbc03c91fa0e81f57356',
       ingredient: "",
       cuisineType: "",
+      calories: "",
 
       recipes: [],
 
+      //for ingredient view more/less
       showAll: false,
       recipeStates: {},
+
+      // sort option selected
+      selectedSort: "",
     };
   },
 
@@ -90,13 +95,65 @@ const app = Vue.createApp({
           });
         },
 
-        toggleIngredientsVisibility(recipeIndex){
-          this.showAll = !this.showAll;
+      //   sortRecipesByCalories() {
+      //     if (this.sortByCaloriesAsc) {
+      //         // Sort recipes by calories in ascending order
+      //         this.recipes.sort((a, b) => {
+      //             const caloriesA = a.recipe.totalNutrients.ENERC_KCAL.quantity;
+      //             const caloriesB = b.recipe.totalNutrients.ENERC_KCAL.quantity;
+      //             return caloriesA - caloriesB;
+      //         });
+      //     } else {
+      //         // Sort recipes by calories in descending order
+      //         this.recipes.sort((a, b) => {
+      //             const caloriesA = a.recipe.totalNutrients.ENERC_KCAL.quantity;
+      //             const caloriesB = b.recipe.totalNutrients.ENERC_KCAL.quantity;
+      //             return caloriesB - caloriesA;
+      //         });
+      //     }
+  
+      //     // Toggle the sorting order
+      //     this.sortByCaloriesAsc = !this.sortByCaloriesAsc;
+      // },
 
-          if(this.recipeStates[recipeIndex]){
+      sortRecipe() {
+        if (this.selectedSort == "Calories (Low to High)") {
+          this.recipes.sort((a, b) => {
+            const caloriesA = a.recipe.totalNutrients.ENERC_KCAL.quantity;
+            const caloriesB = b.recipe.totalNutrients.ENERC_KCAL.quantity;
+            return caloriesA - caloriesB;
+          }); 
+        } 
+        else if (this.selectedSort == "Calcium (High to Low)") {
+          this.recipes.sort((a, b) => {
+            const calciumA = a.recipe.recipe.totalNutrients.CA.quantity;
+            const calciumB = b.recipe.recipe.totalNutrients.CA.quantity;
+            return calciumA - calciumB;
+          });
+        }
+        else if (this.selectedSort == "Fat (Low to High)") {
+          this.recipes.sort((a, b) => {
+            const fatA = a.recipe.recipe.totalNutrients.FAT.quantity;
+            const fatB = b.recipe.recipe.totalNutrients.FAT.quantity;
+            return fatA - fatB;
+          });
+        }
+        else if (this.selectedSort == "Protein (High to Low)") {
+          this.recipes.sort((a, b) => {
+            const proteinA = a.recipe.totalNutrients.PROCNT.quantity;
+            const proteinB = b.recipe.totalNutrients.PROCNT.quantity;
+            return proteinA - proteinB;
+          });
+        }
+      },
+    
+      toggleIngredientsVisibility(recipeIndex){
+        this.showAll = !this.showAll;
+
+        if(this.recipeStates[recipeIndex]){
             this.recipeStates[recipeIndex] = false;
-          }
-          else{
+        }
+        else{
             this.recipeStates[recipeIndex] = true;
           }
         },
