@@ -52,7 +52,19 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()" @click="updateSearchHistory()">Search</button>
+
+                        <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
+                        </p>
+                        <div class="animate__animated animate__fadeInUp">
+                        Sort by:
+                            <select v-model="selectedSort" @click="sortRecipe()">
+                                <option value="Calories (Low to High)">Calories (Low to High)</option>
+                                <option value="Fat (Low to High)">Fat (Low to High)</option>
+                                <option value="Calcium (High to Low)">Calcium (High to Low)</option>
+                                <option value="Protein (High to Low)">Protein (High to Low)</option>
+                            </select>
+                        </div>
+
                     </form>
                 </div>
                     <div v-if="recipes.length > 0">
@@ -71,18 +83,21 @@
                                         {{ ingredient }}
                                     </li>
                                 </ul>
-                                <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
                                 <button class="btn btn-link" @click="toggleIngredientsVisibility(index)">
                                     {{ recipeStates[index] ? 'View Less' : 'View More' }}
                                 </button>
+                                </p>
+                                <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
+                                </p>
+                                <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
+                                </p>
                                 <h5>Nutrients:</h5>
                                 <ul>
                                     <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>
                                     <li>{{ `Fat: ${Math.round(recipe.recipe.totalNutrients.FAT.quantity)} ${recipe.recipe.totalNutrients.FAT.unit}` }}</li>
-                                    <li>{{ `Carbs: ${Math.round(recipe.recipe.totalNutrients.CHOCDF.quantity)} ${recipe.recipe.totalNutrients.CHOCDF.unit}` }}</li>
                                     <li>{{ `Protein: ${Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)} ${recipe.recipe.totalNutrients.PROCNT.unit}` }}</li>
                                 </ul>
-                                <a :href="recipe.recipe.url" target="_blank">Full Recipe</a>
+                                <a :href="recipe.recipe.url" target="_blank">View Full Recipe Page</a>
                             </div>
                         </div>
                     </div>
