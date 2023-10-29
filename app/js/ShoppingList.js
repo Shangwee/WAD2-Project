@@ -25,7 +25,13 @@ const app = Vue.createApp({
       // status message of saving or deleting
       statusMessage: "",
       // category option
-      categoryOption: ["Produce", "Dairy and Protein", "Grains and Bakery", "Snacks and Pantry", "others"],
+      categoryOption: [
+        "Produce",
+        "Dairy and Protein",
+        "Grains and Bakery",
+        "Snacks and Pantry",
+        "others",
+      ],
       // category option selected
       selectedCategory: "Produce",
       // quantity
@@ -46,6 +52,7 @@ const app = Vue.createApp({
     // get list from database
     this.displaylist();
     this.displayRecommendation();
+    this.addIngredientFromRecipe();
   },
   methods: {
     addItem() {
@@ -182,7 +189,7 @@ const app = Vue.createApp({
       axios
         .get(PHPurl, { params: params })
         .then((response) => {
-          console.log("here is the user's shopping list:")
+          console.log("here is the user's shopping list:");
           console.log(response.data);
           // iterate through response
           for (let i = 0; i < response.data.length; i++) {
@@ -255,18 +262,80 @@ const app = Vue.createApp({
       }
     },
 
-    displayRecommendation(){
+    displayRecommendation() {
       this.recommendation = [];
       let PHPurl = "../../server/controller/recommendation.php";
       axios
         .get(PHPurl)
         .then((response) => {
-          console.log('here is the recommandation: ')
-          console.log(response.data);
+          let datas = response.data;
+          for (let i = 0; i < datas.length; i++) {
+            let item = datas[i];
+            let name = item.item;
+            let category = item.category;
+            this.recommendation.push({
+              name: name,
+              category: category,
+            });
+          }
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+
+    addRecommandedItem(item) {
+      this.inputitem = item.name;
+      this.selectedCategory = item.category;
+    },
+
+    addIngredientFromRecipe() {
+      // if there is no ingredient in url, exit function
+      if (window.location.search == "") {
+        return;
+      } else {
+        let url = "https://api.edamam.com/api/food-database/v2/parser";
+        const appID = "ebe9a73f";
+        const appKey = "d07cd861a3539204a41d150e9170389b";
+        const urlParams = new URLSearchParams(window.location.search);
+        const ingredients = urlParams.getAll("ingredients[]");
+        for (let i = 0; i < ingredients.length; i++) {
+          let ingredient = ingredients[i];
+          para = {
+            ingr: ingredient,
+            app_id: appID,
+            app_key: appKey,
+          };
+          // make request to api
+          let name = "";
+          let category = "";
+          let quantity = 1;
+          let userId = parseInt(document.getElementById("userId").value);
+          axios.get(url, { params: para }).then((response) => {
+            let datas = response.data.parsed[0];
+            name = datas.food.label;
+            category = "others";
+            // check if qunatity is null
+            if (datas.quantity != null) {
+              // round up to the nearest integer
+              quantity = Math.ceil(datas.quantity);
+            }
+            let PHPurl =
+              "../../server/controller/shoppingList/InsertShoppingItem.php";
+            let params = {
+              name: name,
+              category: category,
+              quantity: quantity,
+              checkStatus: false,
+              userId: userId,
+            };
+            // make get request to php
+            axios.get(PHPurl, { params: params }).then((response) => {
+              console.log(response);
+            });
+          });
+        }
+      }
     },
 
     filterShoppingList() {

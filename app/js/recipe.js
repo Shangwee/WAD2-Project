@@ -42,21 +42,32 @@ const app = Vue.createApp({
       appKey: '6aac0b6d7499cbc03c91fa0e81f57356',
       ingredient: "",
       cuisineType: "",
+
       recipes: [],
-      limitedRecipes: []
+
+      showAll: false,
+      recipeStates: {},
     };
   },
 
     methods: {
-      // toggleDropdown() {
-      //   this.isOpen = !this.isOpen;
-      //   console.log(isOpen);
-      // },
-
       selectOption(item){
         this.selectedOption = item.text;
         console.log(item.text);
-        //this.isOpen = false;
+      },
+
+      getIngrdients(item){
+        let url = this.links.lists + "?";
+        for (var i = 0; i < item.length; i++) {
+          // redirect to shopping list page with ingredients as parameters 
+          // encode each ingredient to avoid errors
+          let ingredient = encodeURIComponent(item[i]);
+          url += "ingredients[]=" + ingredient + "&";
+        }
+        // remove last '&' character
+        url = url.slice(0, -1);
+        // redirect to shopping list page with ingredients as parameters
+        window.location.href = url;
       },
 
       SearchRecipe() {
@@ -72,25 +83,35 @@ const app = Vue.createApp({
           })
           .then((response) => {
               console.log(response);
-              this.recipes = response.data.hits; // the recipes are in the 'hits' property of the API response
-              this.limitedRecipes = this.recipes.slice(0, 18)
+              this.recipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
           })
           .catch((error) => {
             console.error('API request failed:', error);
           });
         },
 
-      updateSearchHistory(){
-        axios
-        .post("../../server/coontroller/updateSearchHistory.php", {id:$_SESSION['login'],search:this.ingredient, cuisine: this.selectedOption})
-        .then(response =>{
-          console.log(response.data);
-          app.updateSearchHistory();
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-      }
+        toggleIngredientsVisibility(recipeIndex){
+          this.showAll = !this.showAll;
+
+          if(this.recipeStates[recipeIndex]){
+            this.recipeStates[recipeIndex] = false;
+          }
+          else{
+            this.recipeStates[recipeIndex] = true;
+          }
+        },
+
+        updateSearchHistory(){
+          axios
+          .post("../../server/coontroller/updateSearchHistory.php", {id:$_SESSION['login'],search:this.ingredient, cuisine: this.selectedOption})
+          .then(response =>{
+            console.log(response.data);
+            app.updateSearchHistory();
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+        }
       },
 });
 const vm = app.mount("#RecipeMain");

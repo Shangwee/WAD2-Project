@@ -11,4 +11,5 @@ A web application that helps users to reduce their food waste.
 
 **Instruction**
 
-change the password in the ConnectionManager.php depending on mac or windows
+Change the password in the ConnectionManager.php depending on mac or windows.
+Mac is "root" and Windows is "".
