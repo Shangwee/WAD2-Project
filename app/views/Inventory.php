@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -11,12 +12,13 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/recipe.css" />
-    <link rel="stylesheet" href="../css/shared.css" />   
+    <link rel="stylesheet" href="../css/shared.css" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="../js/inventory.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -31,8 +33,8 @@
             cursor: pointer;
             opacity: 0.8;
             position: fixed;
-            bottom: 23px;
-            right: 28px;
+            bottom: 16%;
+            right: 25px;
             width: 280px;
         }
 
@@ -94,19 +96,48 @@
         }
     </style>
 </head>
+
 <body>
     <main>
         <div id="main">
-        <!-- navbar -->
-        <?php
+            <!-- navbar -->
+            <?php
             session_start();
             require_once './common/navbar.php';
             // require_once "./common/protect.php";
-        ?>
-            
-        
+            ?>
+
+
+            <button class="open-button" onclick="openForm()">Add to Inventory</button>
+
+            <div class="form-popup" id="myForm">
+                <form action="/action_page.php" class="form-container">
+                    <h1>Add to Inventory</h1>
+
+                    <label for="Item"><b>Item</b></label>
+                    <input type="text" placeholder="Enter Item Name" v-model="item" required>
+
+                    <label for="qty"><b>Quantity</b></label>
+                    <input type="text" placeholder="Enter Qty" v-model="qty" required>
+
+                    <label for="expiry"><b>Expiry Date (YYYY-MM-DD)</b></label>
+                    <input type="text" placeholder="Enter Expiry" v-model="expiry" required>
+
+                    <label for="category"><b>Category</b></label>
+                    <input type="text" placeholder="Enter Category" v-model="category" required>
+
+                    <label for="scan"><b>Scan barcode</b></label>
+                    <input name="scan" type="file" accept="image/*" id="file-input" onchange="processImg(e)"
+                        capture="environment" style="margin-bottom:10px;" />
+                    <br />
+
+                    <button type="button" class="btn" @click="submit">Add</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div>
         </div>
     </main>
+
     <script>
         var user = 1
         window.addEventListener("load", myInit, true); function myInit() {
@@ -128,7 +159,7 @@
                     { title: '' }
                 ],
                 ajax: {
-                    url: '../server/controller/invcon.php',
+                    url: '../../server/controller/invcon.php',
                     type: 'GET',
                     data: {
                         "function": "getall",
@@ -138,61 +169,37 @@
 
                 }
             })
-        invTable.on('click', 'button', function (e) {
-        let data = invTable.row(e.target.closest('tr')).data()[0]
-        let success = removeFromInv(data)
-        $('#myTable').DataTable().ajax.reload(null, false)
-        invTable.ajax.reload(null, false)
-        }) 
+            invTable.on('click', 'button', function (e) {
+                let data = invTable.row(e.target.closest('tr')).data()[0]
+                let success = removeFromInv(data)
+                $('#myTable').DataTable().ajax.reload(null, false)
+                invTable.ajax.reload(null, false)
+            })
         }
-        
+
     </script>
-    
-    <h1>Inventory</h1>
-    <div id="app">
-        <table class="table" id="myTable">
-        </table>
-
-        <button class="open-button" onclick="openForm()">Add to Inventory</button>
-
-        <div class="form-popup" id="myForm">
-            <form action="/action_page.php" class="form-container">
-                <h1>Add to Inventory</h1>
-
-                <label for="Item"><b>Item</b></label>
-                <input type="text" placeholder="Enter Item Name" v-model="item" required>
-
-                <label for="qty"><b>Quantity (grams)</b></label>
-                <input type="text" placeholder="Enter Qty" v-model="qty" required>
-
-                <label for="expiry"><b>Expiry Date (YYYY-MM-DD)</b></label>
-                <input type="text" placeholder="Enter Expiry" v-model="expiry" required>
-
-                <label for="category"><b>Category</b></label>
-                <input type="text" placeholder="Enter Category" v-model="category" required>
-
-                <label for="scan"><b>Scan barcode</b></label>
-                <input name="scan" type="file" accept="image/*" id="file-input" onchange="processImg(e)"
-                    capture="environment" style="margin-bottom:10px;" />
-                <br />
-
-                <button type="button" class="btn" @click="submit">Add</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class=""></div>
+            <div class="col-sm-12">
+                <h1>Inventory</h1>
+                <table class="table" id="myTable">
+                </table>
+                <div class=""></div>
+            </div>
         </div>
     </div>
-    <script>
-
-    </script>
 
     <!-- Footer-->
     <?php
-        require_once './common/footer.php';
+    require_once './common/footer.php';
     ?>
     <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <!-- Core theme JS-->
     <script src="../../app/js/inventory.js"></script>
 </body>
-</html>
 
+</html>

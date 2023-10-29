@@ -8,7 +8,7 @@ create table activeinv(
     userid int not null,
     serial int not null,
     item varchar(45) not null,
-    quantity varchar(45) not null,
+    qty varchar(45) not null,
     expiry date not null,
     category varchar(45) not null,
     constraint activeinvpk primary key (userid, serial)  

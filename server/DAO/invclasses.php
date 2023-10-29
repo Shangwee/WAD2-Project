@@ -50,7 +50,7 @@ class accessdom
         $pdo = $conn->getConnection();
         $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expired, :category)";
         $stmt = $pdo->prepare($sql);
-        $uid = $itemobj["uid"];
+        $uid = $itemobj["userid"];
         $serial = $itemobj["serial"];
         $item = $itemobj["item"];
         $qty = $itemobj["qty"];
@@ -84,7 +84,7 @@ class accessdom
         $pdo = $conn->getConnection();
         $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expired, :category)";
         $stmt = $pdo->prepare($sql);
-        $uid = $itemobj["uid"];
+        $uid = $itemobj["userid"];
         $serial = $itemobj["serial"];
         $item = $itemobj["item"];
         $qty = $itemobj["qty"];
@@ -254,7 +254,7 @@ class accessdom
             return $errors;
         }
     }
-    // public function update($uid, $serial, $item, $currentqty, $initialqty, $expiry, $category){
+// public function update($uid, $serial, $item, $currentqty, $initialqty, $expiry, $category){
 //     $conn = new ConnectionManager;
 //     $pdo = $conn->getConnection();
 //     $sql = "update activeinv set item = :item, qty = :qty, sexpiry = :expiry, category = :category where uid = :uid and serial = :serial)";

@@ -1,26 +1,6 @@
-const invvue = Vue.createApp({
-    data() {
-      return {
-        // name:value pairs here
-        links: {
-          home: "../index.php ",
-          lists: "./ShoppingList.php",
-          inventory: "./Inventory.php",
-          recipe: "./RecipeList.php",
-          profile: "./Profile.php",
-          login: "./login.php",
-          logout: "../../server/controller/logout.php",
-          register: "./register.php",
-        },
-      };
-    },
-    methods: {
-      
-    },
-  });
+
   
-  const vm = invvue.mount("#main");
-  function openForm() {
+function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
 
@@ -37,7 +17,7 @@ function sendToAPI(file) {
 }
 function removeFromInv(serial){
     axios
-        .get("../server/controller/invcon.php", {
+        .get("../../server/controller/invcon.php", {
             params: {
                 "uid": user,
                 "function": "remove",
@@ -53,7 +33,7 @@ function removeFromInv(serial){
 }
 function addToInv(item, qty, expiry, category) {
     axios
-        .get("../server/controller/invcon.php", {
+        .get("../../server/controller/invcon.php", {
             params: {
                 "uid": user,
                 "function": "add",
@@ -77,9 +57,19 @@ function sendToApi(file) {
 
 }
 function renderForm(){
-const app = Vue.createApp({
+const inv = Vue.createApp({
     data() {
         return {
+          links: {
+            home: "../index.php ",
+            lists: "./ShoppingList.php",
+            inventory: "./Inventory.php",
+            recipe: "./RecipeList.php",
+            profile: "./Profile.php",
+            login: "./login.php",
+            logout: "../../server/controller/logout.php",
+            register: "./register.php",
+          },
             item: "",
             qty: "",
             expiry: "",
@@ -94,8 +84,10 @@ const app = Vue.createApp({
             this.expiry = ""
             this.category = ""
             $('#myTable').DataTable().ajax.reload(null, false)
+            invTable.ajax.reload(null, false)
         }
     }
-}).mount("#myForm")}
+}).mount("#main")}
+
 
   
