@@ -11,7 +11,18 @@ create table activeinv(
     quantity varchar(45) not null,
     expiry date not null,
     category varchar(45) not null,
-    constraint activeinvpk primary key (userid, serial)
+    constraint activeinvpk primary key (userid, serial)  
+);
+
+drop table if exists historicalinv;
+create table historicalinv(
+uid int not null,
+serial int not null,
+item varchar(45) not null,
+qty int not null,
+expired tinyint not null,
+category varchar(45) not null,
+constraint activeinvpk primary key (uid, serial)
 );
 
 DROP TABLE IF EXISTS Account;
