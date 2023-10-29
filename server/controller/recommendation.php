@@ -55,8 +55,9 @@ if(isset($_GET) && !empty($_SESSION)){
                     $finalResult[] = $result[$i];
                 }
             }
-            // remove duplicates in final result array
-            $finalResult = array_unique($finalResult, SORT_REGULAR);
+            // remove duplicates in final result array and make the index start from 0
+            $finalResult = array_values(array_unique($finalResult, SORT_REGULAR));
+
         } else {
             $finalResult = $result;
         }

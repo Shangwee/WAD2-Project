@@ -71,6 +71,7 @@
                                         {{ ingredient }}
                                     </li>
                                 </ul>
+                                <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
                                 <button class="btn btn-link" @click="toggleIngredientsVisibility(index)">
                                     {{ recipeStates[index] ? 'View Less' : 'View More' }}
                                 </button>
