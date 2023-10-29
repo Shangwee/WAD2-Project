@@ -56,6 +56,20 @@ const app = Vue.createApp({
         console.log(item.text);
       },
 
+      getIngrdients(item){
+        let url = this.links.lists + "?";
+        for (var i = 0; i < item.length; i++) {
+          // redirect to shopping list page with ingredients as parameters 
+          // encode each ingredient to avoid errors
+          let ingredient = encodeURIComponent(item[i]);
+          url += "ingredients[]=" + ingredient + "&";
+        }
+        // remove last '&' character
+        url = url.slice(0, -1);
+        // redirect to shopping list page with ingredients as parameters
+        window.location.href = url;
+      },
+
       SearchRecipe() {
         axios
           .get(this.apiUrl, {

@@ -10,7 +10,7 @@ if (isset($_POST['submit'])){
 
     if(empty($un)){
         $unerr = 'Username must be filled';
-        $error[] = 'Username must be filled';
+        $errors[] = 'Username must be filled';
     }elseif($accdao->getAccByUsername($un) !== null){
         $unerr='Username taken';
         $errors[]='Username taken';

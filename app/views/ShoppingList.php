@@ -77,9 +77,15 @@
             <div class="col-md-12">
                 <h2 class="h2 animate__animated animate__fadeInUp">Recommendations</h2>
                 <ul class="list-group animate__animated animate__fadeInUp">
-                    <li class="list-group-item">Recommended Item 1</li>
-                    <li class="list-group-item">Recommended Item 2</li>
-                    <li class="list-group-item">Recommended Item 3</li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center"  v-for="(item, index) in recommendation">
+                        <div>
+                            <span class="item-name" v-bind:id="item.id">{{item.name}}</span>
+                            <span class="badge bg-info rounded-pill ms-2">{{item.category}}</span>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-sm edit-item mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal" v-on:click="addRecommandedItem(item)">Add</button>
+                        </div>
+                    </li>
                     <!-- Add more recommendations here -->
                 </ul>
             </div>
