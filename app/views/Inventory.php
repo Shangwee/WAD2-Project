@@ -124,7 +124,7 @@ require_once './common/navbar.php';
                     { title: 'Category' },
                     { title: '',
                         "render": function ( data, type, row ) {
-                       if (document.getElementById("modeselect").value === 'current') {
+                       if (document.getElementById("modeselect").value === 'current' || document.getElementById("modeselect").value === 'historical') {
                          return '<button>Remove</button>';
                        }
                        return ''; }}

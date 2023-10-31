@@ -13,14 +13,21 @@ if ( isset($_GET['uid']) ) {
         $expiry = $_GET["expiry"];
         $category = $_GET["category"];
         $result = $access->insert($uid, $item, $qty, $expiry, $category);
+        $myJSON = json_encode($result);
+        echo $myJSON;
     }
     elseif($function === "remove"){
         $serial = $_GET["serial"];
         $result = $access->remove($uid, $serial);
+        $myJSON = json_encode($result);
+        echo $myJSON;
     }
     elseif ($function === "checkexpire"){
         $access->checkExpire($uid);
     }
-$myJSON = json_encode($result);
-echo $myJSON;
+    elseif($function === "delete"){
+        $serial = $_GET["serial"];
+        $access->delete($uid,$serial);
+    }
+
 }

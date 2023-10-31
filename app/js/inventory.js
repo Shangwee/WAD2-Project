@@ -19,6 +19,8 @@ function sendToAPI(file) {
 
 }
 function removeFromInv(serial){
+    if (document.getElementById("modeselect").value === "current"){
+        if (confirm("Remove the item from inventory and mark it as consumed?")){
     axios
         .get("../../server/controller/invcon.php", {
             params: {
@@ -27,15 +29,31 @@ function removeFromInv(serial){
                 "serial": serial
             }
         })
-        .then(response=>{
-            console.log(response.data)
-            return response.data
-        })
         $('#myTable').DataTable().ajax.reload()
-        invTable.ajax.reload(null, false)
+        invTable.ajax.reload(null, false)}
+        else{
+            return
+        }
 }
-function addToInv(item, qty, expiry, category) {
+else{
+    if (confirm("Delete the item from inventory history?")){
     axios
+    .get("../../server/controller/invcon.php", {
+        params: {
+            "uid": user,
+            "function": "delete",
+            "serial": serial
+        }
+    })
+    $('#myTable').DataTable().ajax.reload()
+    invTable.ajax.reload(null, false)}
+    else{
+        return
+    }
+}}
+function addToInv(item, qty, expiry, category) {
+    if (confirm("Add the item to the inventory?")){
+        axios
         .get("../../server/controller/invcon.php", {
             params: {
                 "uid": user,
@@ -52,6 +70,11 @@ function addToInv(item, qty, expiry, category) {
         })
         $('#myTable').DataTable().ajax.reload(null, false)
         invTable.ajax.reload(null, false)
+    }
+    else{
+        return
+    }
+    
 }
 
 function processImg(e) { sendToAPI(e.target.files) }

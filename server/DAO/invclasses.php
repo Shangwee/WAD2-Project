@@ -262,6 +262,15 @@ class accessdao
         }
         return "Done";
     }
+    public function delete($uid, $serial){
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = "DELETE FROM historicalinv WHERE serial = :serial and userid = :uid;";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
+        $stmt->bindParam(":serial", $serial, PDO::PARAM_INT);
+        $success = $stmt->execute();
+    }
 // public function update($uid, $serial, $item, $currentqty, $initialqty, $expiry, $category){
 //     $conn = new ConnectionManager;
 //     $pdo = $conn->getConnection();
