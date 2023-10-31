@@ -1,5 +1,6 @@
 <?php
 require_once "../DAO/invclasses.php";
+// commented out cuz the conn manager doesn't work for me due to there being a password when I do not have a password for sql on my side
 // require_once "../db/ConnectionManager.php";
 header("Access-Control-Allow-Origin: *");
 
