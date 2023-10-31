@@ -1,18 +1,6 @@
 <?php
-class ConnectionManager {
+require_once __DIR__ . "\..\db\ConnectionManager.php";
 
-    public function getConnection() {
-      $servername = 'localhost';
-      $dbname = 'wad2project';
-      $username = 'root';
-      $password = ''; // change this depending on mac or windows
-      $port = 3306;
-      $url  = "mysql:host=$servername;dbname=$dbname;port=$port";
-  
-      return new PDO($url, $username, $password);
-    }
-  
-  }
 class accessdao
 {
     public function getBySerial($uid, $serial)

@@ -19,11 +19,11 @@ if (isset($_POST['submit'])){
 
     if(empty($email)){
         $emailerr = 'Email must be filled';
-        $error[] = 'Email must be filled';
+        $errors[] = 'Email must be filled';
     }
     else if(!str_contains($email,'@')){
         $emailerr = 'Enter a valid email';
-        $error[] = 'Enter a valid email';
+        $errors[] = 'Enter a valid email';
     }
     elseif($accdao->getAccByEmail($email) !== null){
         $unerr='Email taken';

@@ -25,8 +25,8 @@
     <!-- navbar -->
     <?php
         session_start();
-        require_once './common/navbar.php';
         require_once "./common/protect.php";
+        require_once './common/navbar.php';
     ?>
     <div class="jumbotron text-center py-5" style="background-image: url('../images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
         <h1 class="text-light animate__animated animate__fadeIn">Shopping List</h1>
@@ -68,6 +68,9 @@
                     </ul>
                     <div class="my-2 animate__animated animate__fadeInUp">
                         <button class="btn btn-primary btn-sm me-2" v-on:click="clearList()">Clear List</button>
+                    </div>
+                    <div v-if="allChecked" class="my-2 animate__animated animate__fadeInUp">
+                        <button class="btn btn-success btn-sm me-2" v-on:click="saveList()">Save List</button>
                     </div>
                 </div>
             </div>

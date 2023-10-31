@@ -20,7 +20,7 @@ userid int not null,
 serial int not null,
 item varchar(45) not null,
 qty varchar(3) not null,
-expiry date not null
+expiry date not null,
 status varchar(8) not null,
 category varchar(45) not null,
 constraint historicalinvpk primary key (userid, serial)
@@ -69,8 +69,8 @@ CREATE TABLE postShoppinglistitem (
 
 
 -- add user accounts
-INSERT INTO Account (username, hashedpw,email,timeCreated) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','admin@gmail.com',CURRENT_TIMESTAMP);
-INSERT INTO Account (username, hashedp,email,timeCreated) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','user@gmail.com',CURRENT_TIMESTAMP);
+INSERT INTO Account (username, hashedpw,email) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','admin@gmail.com');
+INSERT INTO Account (username, hashedpw,email) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','user@gmail.com');
 
 -- add shopping list items
 INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Milk', 'Dairy and Protein', 1, true, 1);
@@ -99,9 +99,9 @@ INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Sal
 
 
 -- add active inventory items
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 1, 'Cod Fish', 1, '2023-12-31', 'Dairy and Protein');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Dairy and Protein');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, quantity, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-10-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 1, 'Cod Fish', 1, '2023-12-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-10-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-10-31', 'Dairy and Protein');

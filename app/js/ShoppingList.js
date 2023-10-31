@@ -50,9 +50,15 @@ const app = Vue.createApp({
   },
   mounted() {
     // get list from database
+    this.addIngredientFromRecipe();
     this.displaylist();
     this.displayRecommendation();
-    this.addIngredientFromRecipe();
+  },
+  computed: {
+    // check if all the items are checked
+    allChecked() {
+      return this.sList.every((item) => item.status);
+    },
   },
   methods: {
     addItem() {
@@ -130,6 +136,34 @@ const app = Vue.createApp({
         return;
       }
       // clear list in database
+    },
+
+    saveList() {
+      let PHPurl = "../../server/controller/shoppingList/SaveShoppingList.php";
+      // iterate through list
+      let userId = parseInt(document.getElementById("userId").value);
+      let isSave  = confirm("Are you sure you want to save your list?");
+      if (isSave == true) {
+        for (let i = 0; i < this.sList.length; i++) {
+          let item = this.sList[i];
+          let params = {
+            id: item.id,
+            item: item.name,
+            quantity: item.quantity,
+            category: item.category,
+            userId: userId,
+          };
+          // make get request to php
+          axios.get(PHPurl, { params: params }).then((response) => {
+            console.log(response);
+            this.statusMessage = response.status;
+            alert("Your list has been saved!");
+            this.displaylist();
+          });
+        }
+      } else {
+        return;
+      }
     },
 
     editItemQuanity(item) {
@@ -292,7 +326,7 @@ const app = Vue.createApp({
     addIngredientFromRecipe() {
       // if there is no ingredient in url, exit function
       if (window.location.search == "") {
-        return;
+          return;
       } else {
         let url = "https://api.edamam.com/api/food-database/v2/parser";
         const appID = "ebe9a73f";
@@ -335,6 +369,7 @@ const app = Vue.createApp({
             });
           });
         }
+        setTimeout(() => window.location.href = './ShoppingList.php', 1000)
       }
     },
 

@@ -99,59 +99,54 @@
         }
     </style>
 </head>
-<?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-require_once './common/navbar.php';
-require_once "./common/protect.php";
-
-// getting user variable from php to javascript
-$user = $_SESSION["uid"];
-echo "<input type = 'hidden' id = 'passuser' name = 'userid' value = {$user}>";
-?>
-
 <body>
-    <script>
-        var user = document.getElementById("passuser").value
-        window.addEventListener("load", myInit, true); function myInit() {
-            renderForm();
-            checkExpiry();
-            invTable = $("#myTable").DataTable({
-                columnDefs: [
-                ],
-                columns: [
-                    { title: 'S/N' },
-                    { title: 'Item' },
-                    { title: 'Qty' },
-                    { title: 'Expiry' },
-                    { title: 'Category' },
-                    { title: '',
-                        "render": function ( data, type, row ) {
-                       if (document.getElementById("modeselect").value === 'current' || document.getElementById("modeselect").value === 'historical') {
-                         return '<button>Remove</button>';
-                       }
-                       return ''; }}
-                ],
-                ajax: {
-                    url: `../../server/controller/invtabledisplay.php?mode=current&uid=${user}`,
-                    type: 'GET',
-                    dataSrc: "",
-                }
-            })
-            invTable.on('click', 'button', function (e) {
-                let data = invTable.row(e.target.closest('tr')).data()[0]
-                let success = removeFromInv(data)
-                $('#myTable').DataTable().ajax.reload(null, false)
-                invTable.ajax.reload(null, false)
-            })
-        }
-
-    </script>
     <main>
         <div id="main">
-            <!-- navbar -->
+        <!-- navbar -->
+        <?php
+        session_start();
+        require_once "./common/protect.php";
+        require_once './common/navbar.php';
+        // getting user variable from php to javascript
+        $user = $_SESSION["login"];
+        echo "<input type = 'hidden' id = 'passuser' name = 'userid' value = {$user}>";
+        ?>
+        <script>
+            var user = document.getElementById("passuser").value
+            window.addEventListener("load", myInit, true); function myInit() {
+                renderForm();
+                checkExpiry();
+                invTable = $("#myTable").DataTable({
+                    columnDefs: [
+                    ],
+                    columns: [
+                        { title: 'S/N' },
+                        { title: 'Item' },
+                        { title: 'Qty' },
+                        { title: 'Expiry' },
+                        { title: 'Category' },
+                        { title: '',
+                            "render": function ( data, type, row ) {
+                        if (document.getElementById("modeselect").value === 'current' || document.getElementById("modeselect").value === 'historical') {
+                            return '<button>Remove</button>';
+                        }
+                        return ''; }}
+                    ],
+                    ajax: {
+                        url: `../../server/controller/invtabledisplay.php?mode=current&uid=${user}`,
+                        type: 'GET',
+                        dataSrc: "",
+                    }
+                })
+                invTable.on('click', 'button', function (e) {
+                    let data = invTable.row(e.target.closest('tr')).data()[0]
+                    let success = removeFromInv(data)
+                    $('#myTable').DataTable().ajax.reload(null, false)
+                    invTable.ajax.reload(null, false)
+                })
+            }
 
+        </script>
             <div class="form-popup" id="myForm">
                 <form action="/action_page.php" class="form-container">
                     <h1>Add to Inventory</h1>
@@ -178,44 +173,41 @@ echo "<input type = 'hidden' id = 'passuser' name = 'userid' value = {$user}>";
                 </form>
             </div>
         </div>
-    </main>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <h1>Inventory</h1>
-                <div class="row justify-content-between mb-2">
-                    <div class="col-sm-9" style = "width:225px;">
-                        <select class="form-select float-start" onchange="changeMode()" id = "modeselect">
-                            <option value = "current">
-                                Current Inventory
-                            </option>
-                            <option value = "historical">
-                                Historical Inventory
-                            </option>
-                            <option value = "expiring">
-                                Expiring Soon
-                            </option>
-                            <option value = "expired">
-                                Expired Today
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                            <button class = "open-button float-end" onclick = "openForm()">Add To Inventory</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <h1>Inventory</h1>
+                    <div class="row justify-content-between mb-2">
+                        <div class="col-sm-9" style = "width:225px;">
+                            <select class="form-select float-start" onchange="changeMode()" id = "modeselect">
+                                <option value = "current">
+                                    Current Inventory
+                                </option>
+                                <option value = "historical">
+                                    Historical Inventory
+                                </option>
+                                <option value = "expiring">
+                                    Expiring Soon
+                                </option>
+                                <option value = "expired">
+                                    Expired Today
+                                </option>
+                            </select>
                         </div>
-                </div>
+                        <div class="col-sm-3">
+                                <button class = "open-button float-end" onclick = "openForm()">Add To Inventory</button>
+                            </div>
+                    </div>
 
-                <table class="table" id="myTable" class="display-compact order-column table">
-                </table>
-                <div class="col-sm-1">
+                    <table class="table" id="myTable" class="display-compact order-column table">
+                    </table>
+                    <div class="col-sm-1">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </main>
     <!-- Footer-->
     <?php
     require_once './common/footer.php';
