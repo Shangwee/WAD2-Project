@@ -20,22 +20,25 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="../js/inventory.js"></script>
+    <!-- Datatables-->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
     <style>
         /* Button used to open the contact form - fixed at the bottom of the page */
         .open-button {
             background-color: #555;
             color: white;
-            padding: 16px 20px;
+            padding-left:10px;
+            padding-right:10px;
+            padding-top:5px;
+            padding-bottom:5px;
             border: none;
             cursor: pointer;
             opacity: 0.8;
-            position: fixed;
-            bottom: 16%;
-            right: 25px;
-            width: 280px;
+            width: 150px;
+            right:0px;
         }
 
         /* The popup form - hidden by default */
@@ -96,19 +99,54 @@
         }
     </style>
 </head>
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+require_once './common/navbar.php';
+// require_once "./common/protect.php";
+?>
 
 <body>
+    <script>
+        var user = 1
+        window.addEventListener("load", myInit, true); function myInit() {
+            renderForm();
+            checkExpiry();
+            invTable = $("#myTable").DataTable({
+                columnDefs: [
+                ],
+                columns: [
+                    { title: 'S/N' },
+                    { title: 'Item' },
+                    { title: 'Qty' },
+                    { title: 'Expiry' },
+                    { title: 'Category' },
+                    { title: '',
+                        "render": function ( data, type, row ) {
+                       if (document.getElementById("modeselect").value === 'current') {
+                         return '<button>Remove</button>';
+                       }
+                       return ''; }}
+                ],
+                ajax: {
+                    url: `../../server/controller/invtabledisplay.php?mode=current&uid=${user}`,
+                    type: 'GET',
+                    dataSrc: "",
+                }
+            })
+            invTable.on('click', 'button', function (e) {
+                let data = invTable.row(e.target.closest('tr')).data()[0]
+                let success = removeFromInv(data)
+                $('#myTable').DataTable().ajax.reload(null, false)
+                invTable.ajax.reload(null, false)
+            })
+        }
+
+    </script>
     <main>
         <div id="main">
             <!-- navbar -->
-            <?php
-            session_start();
-            require_once './common/navbar.php';
-            // require_once "./common/protect.php";
-            ?>
-
-
-            <button class="open-button" onclick="openForm()">Add to Inventory</button>
 
             <div class="form-popup" id="myForm">
                 <form action="/action_page.php" class="form-container">
@@ -131,61 +169,45 @@
                         capture="environment" style="margin-bottom:10px;" />
                     <br />
 
-                    <button type="button" class="btn" @click="submit">Add</button>
+                    <button type="button" class="btn" @click="submit()">Add</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>
             </div>
         </div>
     </main>
 
-    <script>
-        var user = 1
-        window.addEventListener("load", myInit, true); function myInit() {
-            renderForm();
-            invTable = $("#myTable").DataTable({
-                columnDefs: [
-                    {
-                        data: null,
-                        defaultContent: '<button>Remove</button>',
-                        targets: -1
-                    }
-                ],
-                columns: [
-                    { title: 'S/N' },
-                    { title: 'Item' },
-                    { title: 'Qty' },
-                    { title: 'Expiry' },
-                    { title: 'Category' },
-                    { title: '' }
-                ],
-                ajax: {
-                    url: '../../server/controller/invcon.php',
-                    type: 'GET',
-                    data: {
-                        "function": "getall",
-                        "uid": user
-                    },
-                    dataSrc: ""
 
-                }
-            })
-            invTable.on('click', 'button', function (e) {
-                let data = invTable.row(e.target.closest('tr')).data()[0]
-                let success = removeFromInv(data)
-                $('#myTable').DataTable().ajax.reload(null, false)
-                invTable.ajax.reload(null, false)
-            })
-        }
-
-    </script>
     <div class="container">
         <div class="row">
-            <div class=""></div>
-            <div class="col-sm-12">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
                 <h1>Inventory</h1>
-                <table class="table" id="myTable">
+                <div class="row justify-content-between mb-2">
+                    <div class="col-sm-9" style = "width:225px;">
+                        <select class="form-select float-start" onchange="changeMode()" id = "modeselect">
+                            <option value = "current">
+                                Current Inventory
+                            </option>
+                            <option value = "historical">
+                                Historical Inventory
+                            </option>
+                            <option value = "expiring">
+                                Expiring Soon
+                            </option>
+                            <option value = "expired">
+                                Expired Today
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                            <button class = "open-button float-end" onclick = "openForm()">Add To Inventory</button>
+                        </div>
+                </div>
+
+                <table class="table" id="myTable" class="display-compact order-column table">
                 </table>
-                <div class=""></div>
+                <div class="col-sm-1">
+                </div>
             </div>
         </div>
     </div>

@@ -1,15 +1,13 @@
 <?php
 require_once "../DAO/invclasses.php";
+// require_once "../db/ConnectionManager.php";
 header("Access-Control-Allow-Origin: *");
 
 if ( isset($_GET['uid']) ) {
     $uid = $_GET['uid'];
     $function = $_GET['function'];
-    $access = new accessdom;
-    if ($function === "getall"){
-        $result = $access->getAll($uid);
-    }
-    elseif($function === "add"){
+    $access = new accessdao;
+    if($function === "add"){
         $item = $_GET["item"];
         $qty = $_GET["qty"];
         $expiry = $_GET["expiry"];
@@ -20,7 +18,8 @@ if ( isset($_GET['uid']) ) {
         $serial = $_GET["serial"];
         $result = $access->remove($uid, $serial);
     }
-    else{
+    elseif ($function === "checkexpire"){
+        $access->checkExpire($uid);
     }
 $myJSON = json_encode($result);
 echo $myJSON;

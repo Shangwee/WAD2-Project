@@ -1,19 +1,19 @@
 <?php
-class ConnectionManager
-{
+class ConnectionManager {
+
     public function getConnection() {
-        $servername = 'localhost';
-        $dbname = 'wad2project';
-        $username = 'root';
-        $password = ''; // change this depending on mac or windows
-        $port = 3306;
-        $url  = "mysql:host=$servername;dbname=$dbname;port=$port";
-    
-        return new PDO($url, $username, $password);
-      }
-    
-}
-class accessdom
+      $servername = 'localhost';
+      $dbname = 'wad2project';
+      $username = 'root';
+      $password = ''; // change this depending on mac or windows
+      $port = 3306;
+      $url  = "mysql:host=$servername;dbname=$dbname;port=$port";
+  
+      return new PDO($url, $username, $password);
+    }
+  
+  }
+class accessdao
 {
     public function getBySerial($uid, $serial)
     {
@@ -48,19 +48,21 @@ class accessdom
     public function consumed($itemobj){
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expired, :category)";
+        $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expiry, :status, :category)";
         $stmt = $pdo->prepare($sql);
         $uid = $itemobj["userid"];
         $serial = $itemobj["serial"];
         $item = $itemobj["item"];
         $qty = $itemobj["qty"];
-        $expired = 0;
+        $expiry = $itemobj["expiry"];
+        $status = "Consumed";
         $category = $itemobj["category"];
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $stmt->bindParam(":serial", $serial, PDO::PARAM_STR);
         $stmt->bindParam(":item", $item, PDO::PARAM_STR);
         $stmt->bindParam(":qty", $qty, PDO::PARAM_STR);
-        $stmt->bindParam(":expired", $expired, PDO::PARAM_INT);
+        $stmt->bindParam(":expiry", $expiry, PDO::PARAM_STR);
+        $stmt->bindParam(":status", $status, PDO::PARAM_STR);
         $stmt->bindParam(":category", $category, PDO::PARAM_STR);
         $success = $stmt->execute();
         if ($success) {
@@ -82,19 +84,21 @@ class accessdom
     public function expired($itemobj){
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
-        $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expired, :category)";
+        $sql = "insert into historicalinv values (:uid, :serial, :item, :qty, :expiry, :status, :category)";
         $stmt = $pdo->prepare($sql);
         $uid = $itemobj["userid"];
         $serial = $itemobj["serial"];
         $item = $itemobj["item"];
         $qty = $itemobj["qty"];
-        $expired = 1;
+        $expiry = $itemobj["expiry"];
+        $status = "Expired";
         $category = $itemobj["category"];
         $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
         $stmt->bindParam(":serial", $serial, PDO::PARAM_STR);
         $stmt->bindParam(":item", $item, PDO::PARAM_STR);
         $stmt->bindParam(":qty", $qty, PDO::PARAM_STR);
-        $stmt->bindParam(":expired", $expired, PDO::PARAM_INT);
+        $stmt->bindParam(":expiry", $expiry, PDO::PARAM_STR);
+        $stmt->bindParam(":status", $status, PDO::PARAM_STR);
         $stmt->bindParam(":category", $category, PDO::PARAM_STR);
         $success = $stmt->execute();
         if ($success) {
@@ -130,7 +134,7 @@ class accessdom
     }
     public function expire($uid, $serial)
     {
-        $toMove = $this->getBySerial($uid, $serial)[0];
+        $toMove = $this->getBySerial($uid, $serial);
         $conn = new ConnectionManager;
         $pdo = $conn->getConnection();
         $sql = "DELETE FROM activeinv WHERE serial = :serial and userid = :uid;";
@@ -143,35 +147,7 @@ class accessdom
             return $output;
         }
     }
-    public function getAll($uid)
-    {
-        $conn = new ConnectionManager;
-        $pdo = $conn->getConnection();
-        $sql = "select serial, item, qty, expiry, category from activeinv where userid = :uid";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
-        $success = $stmt->execute();
-        if ($success) {
-            $stmt->setFetchMode(PDO::FETCH_NUM);
-            $result = [];
-            while ($row = $stmt->fetch()) {
-                $result[] = $row;
-            }
-            ;
-            $pdo = null;
-            $stmt = null;
-            $sql = null;
-            $conn = null;
-            return $result;
-        } else {
-            $errors = $stmt->errorInfo();
-            $pdo = null;
-            $stmt = null;
-            $sql = null;
-            $conn = null;
-            return $errors;
-        }
-    }
+    
     public function getLastSerial($uid)
     {
         $serials = [];
@@ -254,6 +230,38 @@ class accessdom
             return $errors;
         }
     }
+    public function checkExpire($uid)
+    {
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = 'select serial from activeinv where userid = :uid and (expiry < CURDATE())';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
+        $success = $stmt->execute();
+        if ($success) {
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $toexpire = [];
+            while ($row = $stmt->fetch()) {
+                $toexpire[] = $row;
+            }
+            ;
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+        } else {
+            $errors = $stmt->errorInfo();
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $errors;
+        }
+        for ($i = 0; $i<count($toexpire); $i++){
+            $this->expire($uid, $toexpire[$i][0]);
+        }
+        return "Done";
+    }
 // public function update($uid, $serial, $item, $currentqty, $initialqty, $expiry, $category){
 //     $conn = new ConnectionManager;
 //     $pdo = $conn->getConnection();
@@ -276,4 +284,123 @@ class accessdom
 //     return $errors;
 // }
 // }
+}
+class tabledisplaydao {
+    public function getAll($uid)
+    {
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = "select serial, item, qty, expiry, category from activeinv where userid = :uid";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
+        $success = $stmt->execute();
+        if ($success) {
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $result = [];
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+            ;
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $result;
+        } else {
+            $errors = $stmt->errorInfo();
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $errors;
+        }
+    }
+    
+    public function getHistorical($uid)
+    {
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = "select serial, item, qty, status, category from historicalinv where userid = :uid";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
+        $success = $stmt->execute();
+        if ($success) {
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $result = [];
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+            ;
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $result;
+        } else {
+            $errors = $stmt->errorInfo();
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $errors;
+        }
+    }
+    public function getExpiring($uid)
+    {
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = "select serial, item, qty, expiry, category from activeinv where userid = :uid and (expiry  < DATE_ADD(CURDATE(), INTERVAL +4 DAY))";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
+        $success = $stmt->execute();
+        if ($success) {
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $result = [];
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+            ;
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $result;
+        } else {
+            $errors = $stmt->errorInfo();
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $errors;
+        }
+    }
+    public function getExpired($uid)
+    {
+        $conn = new ConnectionManager;
+        $pdo = $conn->getConnection();
+        $sql = 'select serial, item, qty, status, category from historicalinv where userid = :uid and status = "expired" and (expiry = DATE_ADD(CURDATE(), INTERVAL -1   DAY))';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":uid", $uid, PDO::PARAM_STR);
+        $success = $stmt->execute();
+        if ($success) {
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $result = [];
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+            ;
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $result;
+        } else {
+            $errors = $stmt->errorInfo();
+            $pdo = null;
+            $stmt = null;
+            $sql = null;
+            $conn = null;
+            return $errors;
+        }
+    }
 }

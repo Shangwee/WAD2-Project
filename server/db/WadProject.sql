@@ -19,8 +19,9 @@ create table historicalinv(
 userid int not null,
 serial int not null,
 item varchar(45) not null,
-qty int not null,
-expired tinyint not null,
+qty varchar(3) not null,
+expiry date not null
+status varchar(8) not null,
 category varchar(45) not null,
 constraint historicalinvpk primary key (userid, serial)
 );

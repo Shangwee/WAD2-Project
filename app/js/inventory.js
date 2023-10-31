@@ -1,7 +1,10 @@
 
   
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
+    if (document.getElementById("myForm").style.display === "none" || document.getElementById("myForm").style.display === ""){
+        document.getElementById("myForm").style.display = "block"
+    }
+    else{document.getElementById("myForm").style.display = "none"}
 }
 
 function closeForm() {
@@ -89,5 +92,23 @@ const inv = Vue.createApp({
     }
 }).mount("#main")}
 
+function changeMode(){
+    let selectedmode = document.getElementById("modeselect").value
+    invTable.ajax.url('../../server/controller/invtabledisplay.php?mode='+selectedmode+'&uid='+user).load()
+    $('#myTable').DataTable().ajax.reload()
+    invTable.ajax.reload(null, false)
+}
+function checkExpiry(){
+    axios
+        .get("../../server/controller/invcon.php", {
+            params: {
+                "uid": user,
+                "function": 'checkexpire'
+            }
+        })
+        .then(response=>{
+console.log(response.data)
+        })
 
+}
   
