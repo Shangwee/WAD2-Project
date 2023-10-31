@@ -15,26 +15,34 @@ const app = Vue.createApp({
       search : "",
 
       //for dropdown items
-      isOpen: false,
-      selectedOption: null,
-      items: [
-        {text: 'American', value: 'American'},
-        {text: 'Asian' , value: 'Asian'},
-        {text: 'British', value: 'British'},
-        {text: 'Caribbean', value: 'Caribbean'},
-        {text: 'Central Europe', value: 'Central Europe'},
-        {text: 'Chinese', value: 'Chinese'},
-        {text: 'Eastern Europe', value: 'Eastern Europe'},
-        {text: 'French', value: 'French'},
-        {text: 'Indian', value: 'Indian'},
-        {text: 'Italian', value: 'Italian'},
-        {text: 'Japanese', value: 'Japanese'},
-        {text: 'Kosher', value: 'Kosher'},
-        {text: 'Mediterranean', value: 'Mediterranean'},
-        {text: 'Middle Eastern', value: 'Middle Eastern'},
-        {text: 'Nordic', value: 'Nordic'},
-        {text: 'South American', value: 'South American'},
-        {text: 'South East Asian', value: 'South East Asian'},
+      selectedCuisine: null,
+      cuisines: [
+        {value: 'American'},
+        {value: 'Asian'},
+        {value: 'British'},
+        {value: 'Caribbean'},
+        {value: 'Central Europe'},
+        {value: 'Chinese'},
+        {value: 'Eastern Europe'},
+        {value: 'French'},
+        {value: 'Indian'},
+        {value: 'Italian'},
+        {value: 'Japanese'},
+        {value: 'Kosher'},
+        {value: 'Mediterranean'},
+        {value: 'Middle Eastern'},
+        {value: 'Nordic'},
+        {value: 'South American'},
+        {value: 'South East Asian'},
+      ],
+      
+      selectedMeal: null,
+      meals:[
+        {value: 'breakfast'},
+        {value: 'brunch'},
+        {value: 'lunch/dinner'},
+        {value: 'snack'},
+        {value: 'teatime'},
       ],
 
       apiUrl: 'https://api.edamam.com/api/recipes/v2',
@@ -42,6 +50,7 @@ const app = Vue.createApp({
       appKey: '6aac0b6d7499cbc03c91fa0e81f57356',
       ingredient: "",
       cuisineType: "",
+      mealType: "",
       calories: "",
 
       recipes: [],
@@ -56,9 +65,14 @@ const app = Vue.createApp({
   },
 
     methods: {
-      selectOption(item){
-        this.selectedOption = item.text;
-        console.log(item.text);
+      selectCuisine(cuisine){
+        this.selectedCuisine = cuisine.value;
+        console.log(cuisine.value);
+      },
+
+      selectMeal(meal){
+        this.selectedMeal = meal.value;
+        console.log(meal.value);
       },
 
       getIngrdients(item){
@@ -83,7 +97,8 @@ const app = Vue.createApp({
                 q: this.ingredient,
                 app_id: this.appId,
                 app_key: this.appKey,
-                cuisineType: this.selectedOption,
+                cuisineType: this.selectedCuisine,
+                mealType: this.selectedMeal,
             }
           })
           .then((response) => {
@@ -94,6 +109,11 @@ const app = Vue.createApp({
             console.error('API request failed:', error);
           });
         },
+
+      setSelectedSort(sortOption){
+        this.selectedSort = sortOption;
+        this.sortRecipe();
+      } ,
 
       sortRecipe() {
         if (this.selectedSort == "Calories (Low to High)") {

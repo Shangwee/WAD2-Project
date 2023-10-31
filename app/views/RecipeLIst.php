@@ -29,47 +29,75 @@
         ?>
             <div class="container">
                 </p>
-                <h1 class="fw-bolder mb-4 animate__animated animate__fadeInUp">Recipe</h1>
+                <h1 class="fw-bolder mb-4 animate__animated animate__fadeInUp">Recipe Search</h1>
                 <!-- align buttom and input -->
                 <div class="mb-2">
                     <form>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-9">
                                 <div class="mb-3 animate__animated animate__fadeInUp">
                                     <input type="text" v-model="ingredient" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter ingredient">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="dropdown animate__animated animate__fadeInUp">
-                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
-                                        {{ selectedOption || 'Select a Cuisine Type'}}
+                            <div class="col-3">
+                                <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
+                            </div>
+                        </div>
+                        
+                        <div class="row">    
+                            <div class="col-12 col-md-4 col-lg-1">
+                                Filter by:
+                            </div>
+                                               
+                            <div class="col-12 col-md-4 col-lg-2">
+                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 3;">
+                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ selectedCuisine || 'Cuisine Type'}}
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li v-for="item in items" :key="item.value">
-                                            <a class="dropdown-item" @click="selectOption(item)">{{ item.text }}</a>
+                                        <li v-for="cuisine in cuisines" :key="cuisine.value">
+                                            <a class="dropdown-item" @click="selectCuisine(cuisine)">{{ cuisine.value }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-2">
+                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 2;">
+                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
+                                        {{ selectedMeal || 'Meal Type'}}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-for="meal in meals" :key="meal.value">
+                                            <a class="dropdown-item" @click="selectMeal(meal)">{{ meal.value }}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-                        <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
-                        </p>
-                        <div class="animate__animated animate__fadeInUp">
-                        Sort by:
-                            <select v-model="selectedSort" @click="sortRecipe()">
-                                <option value="Calories (Low to High)">Calories (Low to High)</option>
-                                <option value="Fat (Low to High)">Fat (Low to High)</option>
-                                <option value="Calcium (High to Low)">Calcium (High to Low)</option>
-                                <option value="Protein (High to Low)">Protein (High to Low)</option>
-                            </select>
-                        </div>
-
                     </form>
                 </div>
                     <div v-if="recipes.length > 0">
                         </p>
-                        <h2>Recipes</h2>
+                        <div class="row">
+                            <div class="col-9">
+                                <h2>Recipe</h2>
+                            </div>
+                            <div class="col-3">
+                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">
+                                    Sort by: &nbsp;&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ selectedSort || 'None' }}
+                                        </button>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Calories (Low to High)')">Calories (Low to High)</a></li>
+                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Fat (Low to High)')">Fat (Low to High)</a></li>
+                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Calcium (High to Low)')">Calcium (High to Low)</a></li>
+                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Protein (High to Low)')">Protein (High to Low)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <div class="recipe-cards-container animate__animated animate__fadeIn">
                             <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
                                 <img :src="recipe.recipe.image" alt="Recipe Image">
