@@ -104,12 +104,16 @@ if (!isset($_SESSION)) {
     session_start();
 }
 require_once './common/navbar.php';
-// require_once "./common/protect.php";
+require_once "./common/protect.php";
+
+// getting user variable from php to javascript
+$user = $_SESSION["uid"];
+echo "<input type = 'hidden' id = 'passuser' name = 'userid' value = {$user}>";
 ?>
 
 <body>
     <script>
-        var user = 1
+        var user = document.getElementById("passuser").value
         window.addEventListener("load", myInit, true); function myInit() {
             renderForm();
             checkExpiry();
