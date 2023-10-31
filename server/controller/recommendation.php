@@ -1,8 +1,10 @@
 <?php
 require_once("../DAO/PostShoppingListDAO.php");
 require_once ("../model/PostShoppingListItem.php");
+require_once ("../DAO/invclasses.php");
 session_start();
 $PostShoppingListDAO = new PostShoppingListDAO;
+$invDAO = new tabledisplaydao;
 $result = [];
 $finalResult = [];
 $itemCount = [];
@@ -62,7 +64,34 @@ if(isset($_GET) && !empty($_SESSION)){
             $finalResult = $result;
         }
     }
-    $resultJSON = json_encode($finalResult);
-    echo $resultJSON;
+
+
+    // get all food from inventoy by user
+    $inventory = $invDAO->getAll($userId);
+    $inventoryResult = [];
+    for ($i = 0; $i < count($inventory); $i++){
+        $name = $inventory[$i][1];
+        $quantity = intval($inventory[$i][2]);
+        $expiryDate = $inventory[$i][3];
+        // get the current date compare to the expiry date
+        $days = countDays($expiryDate);
+        $category = $inventory[$i][4];
+        if ($quantity <= 1 || $days <= 3){
+            $inventoryResult[] = array("item" => $name, "category" => $category);
+        }
+    }
+    // merge the two arrays
+    $finalResult = array_merge($finalResult, $inventoryResult);
+    // remove duplicates in final result array and make the index start from 0
+    $finalResult = array_values(array_unique($finalResult, SORT_REGULAR));
+    $myJSON = json_encode($finalResult);
+    echo $myJSON;
+}   
+
+function countDays($expiryDate){
+    $currentDate = date("Y-m-d");
+    $diff = abs(strtotime($expiryDate) - strtotime($currentDate));
+    $days = floor($diff / (60*60*24));
+    return $days;
 }
 ?>

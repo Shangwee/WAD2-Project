@@ -157,10 +157,10 @@ const app = Vue.createApp({
           axios.get(PHPurl, { params: params }).then((response) => {
             console.log(response);
             this.statusMessage = response.status;
-            alert("Your list has been saved!");
-            this.displaylist();
           });
         }
+        alert("Your list has been saved!");
+        this.displaylist();
       } else {
         return;
       }
@@ -181,6 +181,7 @@ const app = Vue.createApp({
       let PHPurl = "../../server/controller/shoppingList/EditShoppingItem.php";
       let params = {
         id: item.id,
+        category: item.category,
         quantity: item.quantity,
       };
       // make get request to php

@@ -94,13 +94,14 @@
             return $isDeleteOK;
         }
 
-        public function editShoppingListItem($id, $quantity){
+        public function editShoppingListItem($id, $category, $quantity){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->getConnection();
     
-            $sql = "UPDATE shoppinglistitem SET quantity = :quantity WHERE id = :id";
+            $sql = "UPDATE shoppinglistitem SET category = :category, quantity = :quantity WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':category', $category, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $isEditOK = $stmt->execute();
     

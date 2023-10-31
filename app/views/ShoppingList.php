@@ -54,9 +54,16 @@
                             <div>
                                 <input class="form-check-input mx-1" type="checkbox" v-model="item.status" v-on:click="checkItem(item)">
                                 <span class="item-name" v-bind:id="item.id">{{item.name}}</span>
+                                <div v-if="editlist.includes(item.id)" class="animate__animated animate__fadeIn">
+                                    <select class="mx-1" id="editOptions" v-model="item.category">
+                                        <option v-for="option in categoryOption">{{option}}</option>
+                                    </select>
+                                    <input class="mx-1" type="number" min="1" max="100" placeholder="Quantity" name="foodName" v-model="item.quantity">
+                                </div>
+                                <div v-else class="animate__animated animate__fadeIn">
                                 <span class="badge bg-info rounded-pill ms-2">{{item.category}}</span>
-                                <input v-if="editlist.includes(item.id)" class="mx-1" type="number" min="1" max="100" placeholder="Quantity" name="foodName" v-model="item.quantity">
-                                <span class="badge bg-primary rounded-pill ms-2" v-else>Qty: {{item.quantity}}</span>
+                                    <span class="badge bg-primary rounded-pill ms-2">Qty: {{item.quantity}}</span>
+                                </div>
                             </div>
                             <div>
                                 <button v-if="editlist.includes(item.id)" class="btn btn-success btn-sm edit-item mx-1" v-on:click="saveItemQuanity(item)">Save</button>

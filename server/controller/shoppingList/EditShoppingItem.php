@@ -6,13 +6,14 @@ $status = false;
 $result = [];
 if(isset($_GET['id']) & isset($_GET['quantity'])){
     $id = $_GET['id'];
+    $category = $_GET['category'];
     $quantity = $_GET['quantity'];
 
     var_dump($id);
     var_dump($quantity);
 
     $shoppingListDAO = new shoppingListDAO();
-    $status = $shoppingListDAO->editShoppingListItem($id, $quantity);
+    $status = $shoppingListDAO->editShoppingListItem($id, $category, $quantity);
 }
 
 if ($status)
