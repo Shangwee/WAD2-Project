@@ -91,6 +91,8 @@
                         <div>
                             <span class="item-name" v-bind:id="item.id">{{item.name}}</span>
                             <span class="badge bg-info rounded-pill ms-2">{{item.category}}</span>
+                            <!-- reason for recommendation -->
+                            <span class="badge bg-primary rounded-pill ms-2">{{item.reason}}</span>
                         </div>
                         <div>
                             <button class="btn btn-primary btn-sm edit-item mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal" v-on:click="addRecommandedItem(item)">Add</button>

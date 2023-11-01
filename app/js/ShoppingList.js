@@ -87,6 +87,8 @@ const app = Vue.createApp({
           this.displaylist();
           // clear inputs
           this.inputitem = "";
+          this.quantity = 1;
+          this.selectedCategory = "Produce";
         });
       } else {
         alert("Please fill out both fields");
@@ -144,21 +146,15 @@ const app = Vue.createApp({
       let userId = parseInt(document.getElementById("userId").value);
       let isSave  = confirm("Are you sure you want to save your list?");
       if (isSave == true) {
-        for (let i = 0; i < this.sList.length; i++) {
-          let item = this.sList[i];
-          let params = {
-            id: item.id,
-            item: item.name,
-            quantity: item.quantity,
-            category: item.category,
-            userId: userId,
-          };
-          // make get request to php
-          axios.get(PHPurl, { params: params }).then((response) => {
-            console.log(response);
-            this.statusMessage = response.status;
-          });
-        }
+        let params = {
+          slist: this.sList,
+          userId: userId,
+        };
+        // make get request to php
+        axios.get(PHPurl, { params: params }).then((response) => {
+          console.log(response);
+          this.statusMessage = response.status;
+        });
         alert("Your list has been saved!");
         this.displaylist();
       } else {
@@ -224,8 +220,6 @@ const app = Vue.createApp({
       axios
         .get(PHPurl, { params: params })
         .then((response) => {
-          console.log("here is the user's shopping list:");
-          console.log(response.data);
           // iterate through response
           for (let i = 0; i < response.data.length; i++) {
             let item = response.data[i];
@@ -308,9 +302,11 @@ const app = Vue.createApp({
             let item = datas[i];
             let name = item.item;
             let category = item.category;
+            let reason = item.reason;
             this.recommendation.push({
               name: name,
               category: category,
+              reason: reason,
             });
           }
         })

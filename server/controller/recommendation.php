@@ -15,7 +15,6 @@ $itemCount = [];
 // if the quantity less than or equal to 1 
 // if the expiry date is less than or equal to 3 days
 
-
 // get past shopping list item by user
 // get the quantity
 // the top 3 most bought items
@@ -31,6 +30,7 @@ if(isset($_GET) && !empty($_SESSION)){
             // $data['id'] = $data_object->getId();
             $data['item'] = $data_object->getItem();
             $data['category'] = $data_object->getCategory();
+            $data['reason'] = "Item added frequently to shopping list";
             $result[] = $data;
         }
         // if result length is more than 1;
@@ -76,8 +76,10 @@ if(isset($_GET) && !empty($_SESSION)){
         // get the current date compare to the expiry date
         $days = countDays($expiryDate);
         $category = $inventory[$i][4];
-        if ($quantity <= 1 || $days <= 3){
-            $inventoryResult[] = array("item" => $name, "category" => $category);
+        if ($quantity <= 1){
+            $inventoryResult[] = array("item" => $name, "category" => $category, "reason" => "Item quantity is low");
+        } elseif ($expiryDate <=3) {
+            $inventoryResult[] = array("item" => $name, "category" => $category, "reason" => "Item is expiring soon");
         }
     }
     // merge the two arrays
