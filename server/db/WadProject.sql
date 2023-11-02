@@ -101,7 +101,7 @@ INSERT INTO postShoppinglistitem (item, category, quantity, userid) VALUES ('Sal
 -- add active inventory items
 INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 1, 'Cod Fish', 1, '2023-12-31', 'Dairy and Protein');
 INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Dairy and Protein');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-10-31', 'Produce');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-10-31', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-11-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-11-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-11-31', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-11-31', 'Dairy and Protein');

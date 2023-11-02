@@ -86,7 +86,12 @@ const app = Vue.createApp({
         // remove last '&' character
         url = url.slice(0, -1);
         // redirect to shopping list page with ingredients as parameters
-        window.location.href = url;
+        let confirm = window.confirm("Add ingredients to shopping list?");
+        if (confirm){
+          window.location.href = url;
+        } else {
+          return;
+        }
       },
 
       SearchRecipe() {

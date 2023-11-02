@@ -12,13 +12,32 @@ const app = Vue.createApp({
         logout: "../server/controller/Logout.php",
         register: "./views/register.php",
       },
+      Expire :0,
+      LowQuantity :0,
+      TotalInventory :0,
     };
   },
+  mounted() {
+    this.getStats();
+  },
+
   methods: {
-    
+    getStats() {
+      let PHPurl = "../server/controller/home/getUserStats.php";
+      let userId = parseInt(document.getElementById("userId").value);
+      let para = {
+        userId: userId,
+      };
+      
+      axios.get(PHPurl, {params:para}).then((response) => {
+        this.Expire = response.data.totelExpiring;
+        this.LowQuantity = response.data.LowQuantity;
+        this.TotalInventory = response.data.totalInventory;
+      });
+    }
   },
 });
 
-const vm = app.mount("#main");
+const vm = app.mount("#home");
 
 
