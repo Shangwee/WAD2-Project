@@ -36,6 +36,7 @@
                         <div class="row">
                             <div class="col-9">
                                 <div class="mb-3 animate__animated animate__fadeInUp">
+                                    <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
                                     <input type="text" v-model="ingredient" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter ingredient">
                                 </div>
                             </div>

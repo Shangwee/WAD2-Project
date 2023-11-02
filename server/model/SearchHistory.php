@@ -4,12 +4,14 @@ Class SearchHistory{
     private $userid;
     private $search;
     private $cuisine;
+    private $meal;
     private $timeCreated;
 
-    public function __construct($uid,$s,$c,$t){
+    public function __construct($uid,$s,$c,$m,$t){
         $this -> userid=$uid;
         $this->search=$s;
         $this->cuisine=$c;
+        $this->meal=$m;
         $this->timeCreated=$t;
     }
     
@@ -43,6 +45,14 @@ Class SearchHistory{
     public function getTimeCreated()
     {
         return $this->timeCreated;
+    }
+
+    /**
+     * Get the value of meal
+     */ 
+    public function getMeal()
+    {
+        return $this->meal;
     }
 }
 ?>

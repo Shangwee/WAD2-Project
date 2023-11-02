@@ -39,10 +39,12 @@ CREATE TABLE SearchHistory (
     userid int not null,
     search varchar(255) not null,
     cuisine varchar(255) not null,
+    meal varchar(255) not null,
     timeCreated DATETIME NOT NULL,
     primary key (userid, timeCreated),
     foreign key (userid) REFERENCES Account(userid)
 );
+
 
 DROP TABLE IF EXISTS shoppinglist;
 CREATE TABLE shoppinglistitem (
