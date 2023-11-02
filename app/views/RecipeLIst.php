@@ -19,7 +19,7 @@
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-        <main>
+    <main>
         <div id="RecipeMain">
         <!-- navbar -->
         <?php
@@ -40,98 +40,171 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="SearchRecipe()">Search</button>
+                                <button type="button" class="btn btn-primary animate__animated animate__fadeInUp" @click="getRecipesBasedOnSearch()">Search</button>
                             </div>
                         </div>
                         
-                        <div class="row">    
-                            <div class="col-12 col-md-4 col-lg-1">
-                                Filter by:
-                            </div>
-                                               
-                            <div class="col-12 col-md-4 col-lg-2">
-                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 3;">
-                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ selectedCuisine || 'Cuisine Type'}}
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li v-for="cuisine in cuisines" :key="cuisine.value">
-                                            <a class="dropdown-item" @click="selectCuisine(cuisine)">{{ cuisine.value }}</a>
-                                        </li>
-                                    </ul>
+                        <div v-if='ingredient.trim() !== ""'> 
+                            <div class="row"> 
+                                <div class="dropdown animate__animated animate__fadeInUp col-12 col-sm-6 col-md-4 col-lg-1">
+                                    Filter by:
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-4 col-lg-2">
-                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 2;">
-                                    <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
-                                        {{ selectedMeal || 'Meal Type'}}
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li v-for="meal in meals" :key="meal.value">
-                                            <a class="dropdown-item" @click="selectMeal(meal)">{{ meal.value }}</a>
-                                        </li>
-                                    </ul>
+                                                    
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                    <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 4;">
+                                        <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ selectedCuisine || 'Cuisine Type'}}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li v-for="cuisine in cuisines" :key="cuisine.value">
+                                                <a class="dropdown-item" @click="selectCuisine(cuisine)">{{ cuisine.value }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                    <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 3;">
+                                        <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
+                                            {{ selectedMeal || 'Meal Type'}}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li v-for="meal in meals" :key="meal.value">
+                                                <a class="dropdown-item" @click="selectMeal(meal)">{{ meal.value }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                    <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 2;">
+                                        <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
+                                            {{ selectedDietary || 'Dietary Preferences'}}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li v-for="dietary in dietaries" :key="dietary.value">
+                                                <a class="dropdown-item" @click="selectDietary(dietary)">{{ dietary.value }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                </div>
-                    <div v-if="recipes.length > 0">
-                        </p>
-                        <div class="row">
-                            <div class="col-9">
-                                <h2>Recipe</h2>
-                            </div>
-                            <div class="col-3">
-                                <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">
-                                    Sort by: &nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ selectedSort || 'None' }}
-                                        </button>
 
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Calories (Low to High)')">Calories (Low to High)</a></li>
-                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Fat (Low to High)')">Fat (Low to High)</a></li>
-                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Calcium (High to Low)')">Calcium (High to Low)</a></li>
-                                        <li><a class="dropdown-item" href="#" @click="setSelectedSort('Protein (High to Low)')">Protein (High to Low)</a></li>
-                                    </ul>
+                        <div v-if="ingredient.trim() === ''">
+                               {{ recipes = "" }}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h2 class="animate__animated animate__fadeInUp">Recommended Recipes for Inventory Ingredients</h2>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">
+                                            Sort by: &nbsp;&nbsp;&nbsp;
+                                                <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {{ selectedInventorySort || 'None' }}
+                                                </button>
+
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <li><a class="dropdown-item" href="#" @click="setSelectedInventorySort('Calories (Low to High)')">Calories (Low to High)</a></li>
+                                                    <li><a class="dropdown-item" href="#" @click="setSelectedInventorySort('Fat (Low to High)')">Fat (Low to High)</a></li>
+                                                    <li><a class="dropdown-item" href="#" @click="setSelectedInventorySort('Calcium (High to Low)')">Calcium (High to Low)</a></li>
+                                                    <li><a class="dropdown-item" href="#" @click="setSelectedInventorySort('Protein (High to Low)')">Protein (High to Low)</a></li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div v-if="displayed == true">
+                                    <div class="recipe-cards-container animate__animated animate__fadeIn">
+                                        <div v-for="(recipe, index) in recommendedRecipes" :key="index" class="recipe-card">
+                                            <img :src="recipe.recipe.image" alt="Recipe Image">
+                                            <h2>{{ recipe.recipe.label }}</h2>
+                                            <h5>Ingredients:</h5>
+                                            <ul>
+                                                <li v-if="!recipeStates[index]" v-for="(ingredient, index) in recipe.recipe.ingredientLines.slice(0,5)" :key="`ingredient-${index}`" >
+                                                    {{ ingredient }}
+                                                </li>
+                                                <li v-else v-for="(ingredient, index) in recipe.recipe.ingredientLines" :key="`ingredient-full-${i}`">
+                                                    {{ ingredient }}
+                                                </li>
+                                            </ul>
+                                            <button v-if="recipe.recipe.ingredientLines.length > 5" class="btn btn-link" @click="toggleIngredientsVisibility(index)">
+                                                {{ recipeStates[index] ? 'View Less' : 'View More' }}
+                                            </button>
+                                            </p>
+                                            <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
+                                            </p>
+                                            <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
+                                            </p>
+                                            <h5>Nutrients:</h5>
+                                            <ul>
+                                                <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>
+                                                <li>{{ `Fat: ${Math.round(recipe.recipe.totalNutrients.FAT.quantity)} ${recipe.recipe.totalNutrients.FAT.unit}` }}</li>
+                                                <li>{{ `Protein: ${Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)} ${recipe.recipe.totalNutrients.PROCNT.unit}` }}</li>
+                                            </ul>
+                                            <a :href="recipe.recipe.url" target="_blank">View Full Recipe Page</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                            <div v-if="recipes.length > 0">
+                                </p>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h2>Recipe</h2>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">
+                                            Sort by: &nbsp;&nbsp;&nbsp;
+                                                <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {{ selectedSearchSort || 'None' }}
+                                                </button>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#" @click="setSelectedSearchSort('Calories (Low to High)')">Calories (Low to High)</a></li>
+                                                <li><a class="dropdown-item" href="#" @click="setSelectedSearchSort('Fat (Low to High)')">Fat (Low to High)</a></li>
+                                                <li><a class="dropdown-item" href="#" @click="setSelectedSearchSort('Calcium (High to Low)')">Calcium (High to Low)</a></li>
+                                                <li><a class="dropdown-item" href="#" @click="setSelectedSearchSort('Protein (High to Low)')">Protein (High to Low)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recipe-cards-container animate__animated animate__fadeIn">
+                                    <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
+                                        <img :src="recipe.recipe.image" alt="Recipe Image">
+                                        <h2>{{ recipe.recipe.label }}</h2>
+                                        <h5>Ingredients:</h5>
+                                        <ul>
+                                            <li v-if="!recipeStates[index]" v-for="(ingredient, index) in recipe.recipe.ingredientLines.slice(0,5)" :key="`ingredient-${index}`" >
+                                                {{ ingredient }}
+                                            </li>
+                                            <li v-else v-for="(ingredient, index) in recipe.recipe.ingredientLines" :key="`ingredient-full-${i}`">
+                                                {{ ingredient }}
+                                            </li>
+                                        </ul>
+                                        <button  v-if="recipe.recipe.ingredientLines.length > 5"  class="btn btn-link" @click="toggleIngredientsVisibility(index)">
+                                            {{ recipeStates[index] ? 'View Less' : 'View More' }}
+                                        </button>
+                                        </p>
+                                        <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
+                                        </p>
+                                        <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
+                                        </p>
+                                        <h5>Nutrients:</h5>
+                                        <ul>
+                                            <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>
+                                            <li>{{ `Fat: ${Math.round(recipe.recipe.totalNutrients.FAT.quantity)} ${recipe.recipe.totalNutrients.FAT.unit}` }}</li>
+                                            <li>{{ `Protein: ${Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)} ${recipe.recipe.totalNutrients.PROCNT.unit}` }}</li>
+                                        </ul>
+                                        <a :href="recipe.recipe.url" target="_blank">View Full Recipe Page</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="recipe-cards-container animate__animated animate__fadeIn">
-                            <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
-                                <img :src="recipe.recipe.image" alt="Recipe Image">
-                                <h2>{{ recipe.recipe.label }}</h2>
-                                <h5>Ingredients:</h5>
-                                <ul>
-                                    <li v-if="!recipeStates[index]" v-for="(ingredient, index) in recipe.recipe.ingredientLines.slice(0,5)" :key="`ingredient-${index}`" >
-                                        {{ ingredient }}
-                                    </li>
-                                    <li v-else v-for="(ingredient, index) in recipe.recipe.ingredientLines" :key="`ingredient-full-${i}`">
-                                        {{ ingredient }}
-                                    </li>
-                                </ul>
-                                <button class="btn btn-link" @click="toggleIngredientsVisibility(index)">
-                                    {{ recipeStates[index] ? 'View Less' : 'View More' }}
-                                </button>
-                                </p>
-                                <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
-                                </p>
-                                <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
-                                </p>
-                                <h5>Nutrients:</h5>
-                                <ul>
-                                    <li>{{ `Calcium: ${Math.round(recipe.recipe.totalNutrients.CA.quantity)} ${recipe.recipe.totalNutrients.CA.unit}` }}</li>
-                                    <li>{{ `Fat: ${Math.round(recipe.recipe.totalNutrients.FAT.quantity)} ${recipe.recipe.totalNutrients.FAT.unit}` }}</li>
-                                    <li>{{ `Protein: ${Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)} ${recipe.recipe.totalNutrients.PROCNT.unit}` }}</li>
-                                </ul>
-                                <a :href="recipe.recipe.url" target="_blank">View Full Recipe Page</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </main>
+        </div>
+    </main>
     <!-- Footer-->
     <?php
         require_once './common/footer.php';
