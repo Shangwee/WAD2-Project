@@ -35,6 +35,55 @@
             <h1 class="text-light animate__animated animate__fadeIn">Welcome to FoodWise</h1>
             <p class="text-light animate__animated animate__fadeInUp">Your solution to reducing food waste and making eco-friendly choices.</p>
         </div>
+        <!-- Get Started Section -->
+        <?php 
+        if (empty($_SESSION)) {
+            echo "
+            <section id='get-started' class='py-5 text-center'>
+            <div class='container'>
+                <h2 class='animate__animated animate__fadeIn'>Get Started Today</h2>
+                <p class='animate__animated animate__fadeInUp'>Join us in the mission to reduce food waste and make a positive impact on the environment.</p>
+                <a class='btn btn-primary animate__animated animate__fadeInUp' href='views/register.php'>Sign Up Now</a>
+            </div>
+            </section>
+            ";
+        } else {
+            // recommandation section
+            echo "
+            <!-- User Statistics Section -->
+            <section id='user-stats' class='py-5 distinct-section'>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Foods About to Expire</h5>
+                                    <p class='card-text'>{{Expire}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Foods with Low Quantity</h5>
+                                    <p class='card-text'>{{LowQuantity}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Total Inventory Items</h5>
+                                    <p class='card-text'>{{TotalInventory}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            ";
+        }
+        ?>
         <!-- Features Section -->
         <section class="bg-light">
         <div class="container py-5 ">
@@ -88,56 +137,7 @@
             </div>
         </div>
         </section>         
-        <!-- Get Started Section -->
-        <?php 
-        if (empty($_SESSION)) {
-            echo "
-            <section id='get-started' class='py-5 text-center'>
-            <div class='container'>
-                <h2 class='animate__animated animate__fadeIn'>Get Started Today</h2>
-                <p class='animate__animated animate__fadeInUp'>Join us in the mission to reduce food waste and make a positive impact on the environment.</p>
-                <a class='btn btn-primary animate__animated animate__fadeInUp' href='views/register.php'>Sign Up Now</a>
-            </div>
-            </section>
-            ";
-        } else {
-            // recommandation section
-            echo "
-            <!-- User Statistics Section -->
-            <section id='user-stats' class='py-5 distinct-section'>
-                <div class='container'>
-                    <h2 class='animate__animated animate__fadeIn'>Alerts <span class='material-icons'>error</span></h2>
-                    <div class='row'>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Foods About to Expire</h5>
-                                    <p class='card-text'>{{Expire}} items</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Foods with Low Quantity</h5>
-                                    <p class='card-text'>{{LowQuantity}} items</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Total Inventory Items</h5>
-                                    <p class='card-text'>{{TotalInventory}} items</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            ";
-        }
-        ?>
+
         <!-- Testimonials Section -->
         <section id="testimonials" class="bg-light py-5">
             <div class="container">
