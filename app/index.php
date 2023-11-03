@@ -20,20 +20,24 @@
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-    <div id="main">
+    <div id="home">
         <!-- Navbar -->
         <?php
             session_start();
             require_once './views/common/navbar.php';
+            if (!empty($_SESSION)) {
+                $user = $_SESSION['login'];
+                echo "<input type='hidden' id='userId' value = {$user} >";
+            }
         ?>
         <!-- Hero Section -->
         <div class="jumbotron text-center py-5" style="background-image: url('./images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
             <h1 class="text-light animate__animated animate__fadeIn">Welcome to FoodWise</h1>
             <p class="text-light animate__animated animate__fadeInUp">Your solution to reducing food waste and making eco-friendly choices.</p>
         </div>
-
         <!-- Features Section -->
-        <div class="container my-5">
+        <section class="bg-light">
+        <div class="container py-5 ">
             <h2 class="animate__animated animate__fadeIn">Features</h2>
             <div class="row">
                 <div class="col-md-4">
@@ -83,7 +87,7 @@
                 </div>
             </div>
         </div>
-
+        </section>         
         <!-- Get Started Section -->
         <?php 
         if (empty($_SESSION)) {
@@ -95,7 +99,42 @@
                 <a class='btn btn-primary animate__animated animate__fadeInUp' href='views/register.php'>Sign Up Now</a>
             </div>
             </section>
-            </div>
+            ";
+        } else {
+            // recommandation section
+            echo "
+            <!-- User Statistics Section -->
+            <section id='user-stats' class='py-5 distinct-section'>
+                <div class='container'>
+                    <h2 class='animate__animated animate__fadeIn'>Alerts <span class='material-icons'>error</span></h2>
+                    <div class='row'>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Foods About to Expire</h5>
+                                    <p class='card-text'>{{Expire}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Foods with Low Quantity</h5>
+                                    <p class='card-text'>{{LowQuantity}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <div class='card text-center animate__animated animate__fadeInUp'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Total Inventory Items</h5>
+                                    <p class='card-text'>{{TotalInventory}} items</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             ";
         }
         ?>
@@ -125,13 +164,12 @@
         </section>
         <!-- Footer -->
         <?php
-            require_once './views/common/footer.php';
+        require_once './views/common/footer.php';
         ?>
     </div>
     <script src="./js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 </body>
 </html>

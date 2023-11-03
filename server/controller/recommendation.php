@@ -86,7 +86,8 @@ if(isset($_GET) && !empty($_SESSION)){
     $finalResult = array_merge($finalResult, $inventoryResult);
     // remove duplicates in final result array and make the index start from 0
     $finalResult = array_values(array_unique($finalResult, SORT_REGULAR));
-    $myJSON = json_encode($finalResult);
+    // encode top 7 items to json
+    $myJSON = json_encode(array_slice($finalResult, 0, 7, true));
     echo $myJSON;
 }   
 

@@ -111,7 +111,12 @@ const app = Vue.createApp({
         // remove last '&' character
         url = url.slice(0, -1);
         // redirect to shopping list page with ingredients as parameters
-        window.location.href = url;
+        let confirm = window.confirm("Add ingredients to shopping list?");
+        if (confirm){
+          window.location.href = url;
+        } else {
+          return;
+        }
     },
 
     getIngredientsFromDatabase() {
@@ -179,6 +184,7 @@ const app = Vue.createApp({
           console.log(response);
           if(response.data.hits.length > 0){
             this.recipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
+            this.updateSearchHistory;
           }
           else{
             window.alert('No recipes found for the search. Please try a different ingredient.');
@@ -274,17 +280,45 @@ const app = Vue.createApp({
       }
     },
 
-    updateSearchHistory(){
-      axios
-      .post("../../server/controller/updateSearchHistory.php", {id:$_SESSION['login'], search:this.ingredient, cuisine: this.selectedOption})
-      .then(response =>{
-        console.log(response.data);
-        app.updateSearchHistory();
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    }
-  },
+        updateSearchHistory() {
+          // add item to shopping list
+          let searchName = this.ingredient;
+          let userId = parseInt(document.getElementById("userId").value);
+          if (searchName != "") {
+            let item = searchName.trim();
+            // if cusine is null set string no cuisine
+            let cuisine = '';
+            if (this.selectedCuisine == null) {
+              cuisine = "no cuisine";
+            } else {
+              cuisine = this.selectedCuisine;
+            }
+            // if mealtype is null set string no mealtype
+            let mealtype = '';
+            if (this.selectedMeal == null) {
+              mealtype = "no mealtype";
+            } else {  
+              mealtype = this.selectedMeal;
+            }
+            let PHPurl =
+              "../../server/controller/updateSearchHistory.php";
+            let params = {
+              search: item,
+              cuisine: cuisine,
+              mealtype: mealtype,
+              userId: userId,
+            };
+            // make get request to php
+            axios.get(PHPurl, { params: params }).then((response) => {
+              console.log(response);
+            })
+            .catch(err=>{
+              console.log(err.message);
+            });
+          } else {
+            alert("Please fill out search field");
+          }
+        }
+      },
 });
 const vm = app.mount("#RecipeMain");

@@ -36,6 +36,7 @@
                         <div class="row">
                             <div class="col-9">
                                 <div class="mb-3 animate__animated animate__fadeInUp">
+                                    <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
                                     <input type="text" v-model="ingredient" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter ingredient">
                                 </div>
                             </div>
@@ -95,7 +96,7 @@
                                {{ recipes = "" }}
                                 <div class="row">
                                     <div class="col-9">
-                                        <h2 class="animate__animated animate__fadeInUp">Recommended Recipes for Inventory Ingredients</h2>
+                                        <h2 class="animate__animated animate__fadeInUp">Recommended Recipes</h2>
                                     </div>
                                     <div class="col-3">
                                         <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">

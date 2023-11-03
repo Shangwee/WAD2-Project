@@ -1,17 +1,20 @@
 <?php
+require_once("../model/SearchHistory.php");
+require_once ("../DAO/SearchHistoryDAO.php");
+$status = false;
+$result = [];
 
-session_start();
-require_once "../DAO/SearchHistoryDAO.php";
+if (isset($_GET['search']) && isset($_GET['cuisine'])&&isset($_GET['mealtype']) && isset($_GET["userId"]))
+{
+    $search = $_GET['search'];
+    $cuisine = $_GET['cuisine'];
+    $meal = $_GET['mealtype'];
+    $userid = $_GET["userId"];
+    var_dump($search);
+    var_dump($userid);
 
-$data = json_decode(file_get_contents("php://input"));
-
-$uid = $data->uid;
-$search = $data->search;
-$cuisine = $data->cuisine;
-
-$shDAO = new SearchHistoryDAO();
-if($search !=''){
-    $shDAO->updateSearchHistory($uid,$search,$cuisine);
+    $shDAO = new SearchHistoryDAO();
+    $shDAO->updateSearchHistory($userid,$search,$cuisine,$meal);
 }
 
 ?>
