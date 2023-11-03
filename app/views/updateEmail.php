@@ -24,6 +24,10 @@
         <div id="main">
             <?php
                 session_start();
+                if(!isset($_SESSION['login'])){
+                    header ('location:login.php');
+                    exit;
+                }
                 require_once './common/navbar.php';
                 require_once '../../server/DAO/AccountDAO.php';
                 $accdao = new AccountDAO();
@@ -46,47 +50,39 @@
 
             <?php
                 require_once "../../server/db/ConnectionManager.php";
-                $un='';
+                $newemail='';
+                $eerr='';
                 $email='';
-                $unerr='';
-                $pwerr='';
-                $cfmpwerr='';
-                $title='';
-                $subtitle='';
+                $title='Update Email';
+                $subtitle='Enter your new email';
                 $emailerr='';
-                $display='none';
+                // $display='none';
 
 
-                if (isset($_GET['username'])){
-                    $un = $_GET['username'];
-                }
-
-                if (isset($_GET['email'])){
-                    $email = $_GET['email'];
-                }
-
-                if (isset($_GET['unerr'])){
-                    $unerr=$_GET['unerr'];
-                }
-
-                if (isset($_GET['emailerr'])){
-                    $emailerr=$_GET['emailerr'];
-                }
-
-                if (isset($_GET['success'])){
-                    $display='block';
-                    $title='Email updated successfully';
-                    $subtitle="Return to<a href='Profile.php'>Profile</a>";
+                if (isset($_GET['e'])){
+                    $email = $_GET['e'];
                 }
 
                 if (isset($_POST['submit'])){
-                    $un = $_POST['username'];
                     $email = $_POST['email'];
-
-                    $user = $accdao ->getAccByEmail($_SESSION['login'],$email);
-                    if ($user == null){
-                        $user ->setEmail($email);
+                    $newemail = $_POST['newemail'];
+                    if(empty($newemail)){
+                        $emailerr ='Field must be filled';
                     }
+                    else{
+                    $user = $accdao -> getAccByEmail($newemail);
+                    if ($user == null){
+                        $accdao->updateEmail($_SESSION['login'],$newemail);
+                        $display='block';
+                        $title='Email updated successfully';
+                        $subtitle="Return to<a href='Profile.php'>Profile</a>";
+                        $newemail='';
+                        $email='';
+                    }
+                    else{
+                        $emailerr='Email taken';
+                    }
+                }
                 }
             ?>
 
@@ -97,14 +93,14 @@
                 <h2 class='row justify-content-center text-center' id='title' style='display:<?=$display?>;'><?=$title?>
                         <p class='row justify-content-center text-center m-3' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
                 </h2>
-                <form method='post' action='processregister.php' class='form-group'>
+                <form method='post' class='form-group'>
                     <div class='col-4 mx-auto'>
                         <div class='row justify-content-center mb-3'>
-                            <div class='fw-bold animate__animated animate__fadeInUp'>Username: <input type='text' name='username' class='form-control' value='<?=$un?>'></div>
+                            <div class='fw-bold animate__animated animate__fadeInUp'>Current Email: <input type='email' name='email' class='form-control' value='<?=$email?>'></div>
                         </div>
-                        <p style='color:red;'><?=$unerr?></p>
+                        <p style='color:red;'><?=$eerr?></p>
                         <div class='row justify-content-center mb-3'>
-                            <div class='fw-bold animate__animated animate__fadeInUp'>Email: <input class='form-control' type='email' name='email' value='<?=$email?>'></div>
+                            <div class='fw-bold animate__animated animate__fadeInUp'>New Email: <input class='form-control' type='email' name='newemail' value='<?=$newemail?>'></div>
                         </div>
                         <p style='color:red;'><?=$emailerr?></p>
                         <div class='row mb-3'>

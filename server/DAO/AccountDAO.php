@@ -12,7 +12,7 @@ Class AccountDAO{
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $results = [];
         while($row=$stmt->fetch()){
-            $results[] = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email']);
+            $results[] = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email'],$row['dateCreated']);
         }
         $stmt=null;
         $pdo=null;
@@ -29,7 +29,7 @@ Class AccountDAO{
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $results = null;
         while($row=$stmt->fetch()){
-            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email']);
+            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email'],$row['dateCreated']);
         }
         $stmt=null;
         $pdo=null;
@@ -46,7 +46,7 @@ Class AccountDAO{
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $results = null;
         while($row=$stmt->fetch()){
-            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email']);
+            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email'],$row['dateCreated']);
         }
         $stmt=null;
         $pdo=null;
@@ -63,7 +63,7 @@ Class AccountDAO{
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $results = null;
         while($row=$stmt->fetch()){
-            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email']);
+            $results = new Account($row['userid'],$row['username'],$row['hashedpw'],$row['email'],$row['dateCreated']);
         }
         $stmt=null;
         $pdo=null;
@@ -90,7 +90,7 @@ Class AccountDAO{
         $pdo = $connmgr->getConnection();
         $sql='update account set username=:un where userid=:uid';
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $un, PDO::PARAM_STR);
+        $stmt->bindParam(':un', $un, PDO::PARAM_STR);
         $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
         $status=$stmt->execute();
         
@@ -118,7 +118,7 @@ Class AccountDAO{
     public function createAcc($un,$hashed,$email){
         $connmgr = new ConnectionManager();
         $pdo = $connmgr->getConnection();
-        $sql='insert into account(username,hashedpw,email) values (:un,:hashed,:email)';
+        $sql='insert into account(username,hashedpw,email,dateCreated) values (:un,:hashed,:email,current_date())';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hashed', $hashed, PDO::PARAM_STR);
         $stmt->bindParam(':un', $un, PDO::PARAM_STR);

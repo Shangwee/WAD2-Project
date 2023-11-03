@@ -5,12 +5,14 @@ Class Account{
     private $username;
     private $hashed;
     private $email;
+    private $date;
 
-    public function __construct($uid,$un,$h,$e){
+    public function __construct($uid,$un,$h,$e,$d){
         $this -> userid=$uid;
         $this->username=$un;
         $this->hashed=$h;
         $this->email=$e;
+        $this->date=$d;
     }
 
     /**
@@ -79,6 +81,14 @@ Class Account{
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Get the value of date
+     */ 
+    public function getDate()
+    {
+        return $this->date;
     }
 }
 ?>
