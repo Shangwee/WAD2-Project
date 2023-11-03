@@ -28,11 +28,16 @@
     require_once './common/navbar.php';
     require_once "./common/protect.php";
     require_once "../../server/DAO/AccountDAO.php";
+    if (!empty($_SESSION)) {
+        $user = $_SESSION['login'];
+        echo "<input type='hidden' id='userId' value = {$user} >";
+    }
 
     $accdao = new AccountDAO();
     $userobj = $accdao->getAccByUid($_SESSION['login']);
     $un = $userobj->getUsername();
     $email = $userobj->getEmail();
+    $date = $userobj->getDate();
 
     ?>
     <!-- Header-->
@@ -50,38 +55,62 @@
 
     <!-- profile content -->
     <div class="container my-5">
-        <div class="card mt-2 animate__animated animate__fadeInUp col-5 mx-auto">
+        <div class='row' >
+            <div class="card mt-2 animate__animated animate__fadeInUp col-4 col-sm-3">
+                <div class="card-body">
+                    <h1 class="card-title text-center my-5">Hi, {{username}}!</h1>
+                        <div class="card-text">
+                            <div class='row' >
+                                
+                                    <div class='col col-sm fw-bold'>Username:</div>
+                                    <div class='col col-sm'>{{ username }}</div>
+                                    <div class='col col-sm'><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
+                            </div>
+                            <div class='row' >
+                                <div class='col col-sm fw-bold'>Email:</div>
+                                <div class='col col-sm'>{{email}}</div>
+                                <div class='col col-sm'><a v-bind:href='updateemail' class='btn btn-light'>Update</a></div>
+                            </div>
+                            <div class='row' >
+                                <div class='col col-sm fw-bold'>Date Joined:</div>
+                                <div class='col col-sm'>{{date}}</div>
+                                <div class='col col-sm'></div>
+                           
+                            </div>
+                            
+                        </table>
+                    </div>
+            </div>
+        </div>
+        <div class="card mt-2 animate__animated animate__fadeInUp col-8 col-s" style='max-height:500px;overflow-y: auto;'>
             <div class="card-body">
-                <h1 class="card-title text-center my-5">Hi, <?=$un?>!</h1>
+                <h1 class="card-title text-center my-5">Search History</h1>
                     <div class="card-text">
-                        <table class='table mx-3 table-borderless' >
-                            <tr >
-                                <td>Username:</td>
-                                <td><?=$un?></td>
-                                <td><a href='updateUsername.php?un=<?=$un?>' class='btn btn-light'>Update</a></td>
-                            </tr>
-                            <tr >
-                                <td>Email:</td>
-                                <td><?=$email?></td>
-                                <td><a href='updateEmail.php' class='btn btn-light'>Update</button></td>
-                            </tr>
+                        <table class='table'>
                             <tr>
-                                <td>Date Joined:</td>
-                                <td><?=$email?></td>
-                                <td></td>
+                                <th>S/N</th>
+                                <th>Search</th>
+                                <th>Cuisine</th>
+                                <th>Meal Type</th>
+                                <th>Dietary Preference</th>
+                                <th>Timestamp</th>
+                            </tr>
+                            <tr v-for='(sh,idx) in searchHist'>
+                                <td>{{idx+1}}</td>
+                                <td> {{sh.search}}</td>
+                                <td>{{sh.cuisine}}</td>
+                                <td>{{sh.meal}}</td>
+                                <td>{{sh.diet}}</td>
+                                <td>{{sh.time}}</td>
                             </tr>
                             
                         </table>
                     </div>
             </div>
         </div>
+</div>
     </div>
 
-    <script>
-        // function updateUsername(){
-        //     <?=$accdao?>->
-        // }
-    </script>
 
     <!-- Footer -->
     <?php

@@ -38,7 +38,7 @@
                 
             <!-- Features section-->
             <?php
-
+                session_start();
                 require_once "../../server/DAO/AccountDAO.php";
                 $accdao = new AccountDAO();
                 $errors = [];

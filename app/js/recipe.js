@@ -284,22 +284,29 @@ const app = Vue.createApp({
         // if cusine is null set string no cuisine
         let cuisine = "";
         if (this.selectedCuisine == null) {
-          cuisine = "no cuisine";
+          cuisine = "-";
         } else {
           cuisine = this.selectedCuisine;
         }
         // if mealtype is null set string no mealtype
         let mealtype = "";
         if (this.selectedMeal == null) {
-          mealtype = "no mealtype";
+          mealtype = "-";
         } else {
           mealtype = this.selectedMeal;
+        }
+        let diettype = "";
+        if (this.selectedMeal == null) {
+          diettype = "-";
+        } else {
+          diettype = this.selectedDietary;
         }
         let PHPurl = "../../server/controller/updateSearchHistory.php";
         let params = {
           search: item,
           cuisine: cuisine,
           mealtype: mealtype,
+          diet:diettype,
           userId: userId,
         };
         // make get request to php
