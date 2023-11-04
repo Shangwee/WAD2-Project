@@ -119,7 +119,7 @@ const app = Vue.createApp({
         return;
       }
       // remove item from list
-      this.sList.splice(this.sList.indexOf(itemID), 1);
+      window.location.reload();
     },
 
     clearList() {
