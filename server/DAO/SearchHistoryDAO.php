@@ -24,7 +24,7 @@ Class SearchHistoryDAO{
     public function updateSearchHistory($uid,$search,$cuisine,$meal,$diet){
         $connmgr = new ConnectionManager();
         $pdo = $connmgr->getConnection();
-        $sql='insert into SearchHistory(userid,search,cuisine,meal,diettimeCreated) values (:uid,:search,:cuisine,:meal,:diet,CURRENT_TIMESTAMP)';
+        $sql='insert into SearchHistory(userid,search,cuisine,meal,diet,timeCreated) values (:uid,:search,:cuisine,:meal,:diet,CURRENT_TIMESTAMP)';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
         $stmt->bindParam(':search', $search, PDO::PARAM_STR);
