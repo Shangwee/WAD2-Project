@@ -63,8 +63,8 @@
                                 <div v-else class="animate__animated animate__fadeIn">
                                 <span class="badge bg-info rounded-pill ms-2">{{item.category}}</span>
                                     <span class="badge bg-primary rounded-pill ms-2">Qty: {{item.quantity}}</span>
-                                    <!-- check if item.name in inventory list -->
-                                    <span v-if="inventory.includes(item.name)" class="badge bg-danger rounded-pill ms-2">Already added in inventory</span>
+                                    <!-- check if item.name in inventory list remove upper casing-->
+                                    <span v-if="inventory.includes(item.name.toLowerCase())" class="badge bg-success rounded-pill ms-2">Exist in Inventory</span>
                                 </div>
                             </div>
                             <div>
