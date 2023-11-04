@@ -12,6 +12,8 @@ const app = Vue.createApp({
         logout: "../../server/controller/Logout.php",
         register: "./register.php",
       },
+      // inventory list
+      inventory: [],
       // shopping list
       sList: [],
       // autocomplete
@@ -53,6 +55,7 @@ const app = Vue.createApp({
     this.addIngredientFromRecipe();
     this.displaylist();
     this.displayRecommendation();
+    this.checkItemsFromIventory();
   },
   computed: {
     // check if all the items are checked
@@ -368,6 +371,26 @@ const app = Vue.createApp({
         }
         setTimeout(() => window.location.href = './ShoppingList.php', 1000)
       }
+    },
+
+    checkItemsFromIventory() {
+      //  check items from inventory
+      let PHPurl = "../../server/controller/shoppingList/CheckItemsFromInventory.php";
+      let userId = parseInt(document.getElementById("userId").value);
+      let params = {
+        userId: userId,
+      };
+      // make get request to php
+      axios.get(PHPurl, { params: params }).then((response) => {
+        $response = response.data;
+        for (let i = 0; i < $response.length; i++) {
+            let item = $response[i];
+            let name = item.item;
+            let quantity = item.quantity;
+            // add into inventory
+            this.inventory.push(name);
+        }
+      });
     },
 
     filterShoppingList() {

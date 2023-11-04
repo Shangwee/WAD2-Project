@@ -26,8 +26,8 @@ category varchar(45) not null,
 constraint historicalinvpk primary key (userid, serial)
 );
 
-DROP TABLE IF EXISTS Account;
-CREATE TABLE Account (
+DROP TABLE IF EXISTS account;
+CREATE TABLE account (
     userid int auto_increment primary key,
     username varchar(50) not null,
     hashedpw varchar(255) not null,
@@ -44,7 +44,7 @@ CREATE TABLE SearchHistory (
     diet varchar(255) not null,
     timeCreated DATETIME NOT NULL,
     primary key (userid, timeCreated),
-    foreign key (userid) REFERENCES Account(userid)
+    foreign key (userid) REFERENCES account(userid)
 );
 
 
@@ -56,8 +56,8 @@ CREATE TABLE shoppinglistitem (
     quantity int not null,
 	checkStatus boolean not null default false,
     userid int not null,
-    -- FK FROM Account userid
-    FOREIGN KEY (userid) REFERENCES Account(userid)
+    -- FK FROM account userid
+    FOREIGN KEY (userid) REFERENCES account(userid)
 );
 
 DROP TABLE IF EXISTS postShoppinglistitem;
@@ -67,14 +67,14 @@ CREATE TABLE postShoppinglistitem (
     category varchar(255) not null,
     quantity int not null,
     userid int not null,
-    -- FK FROM Account userid
-    FOREIGN KEY (userid) REFERENCES Account(userid)
+    -- FK FROM account userid
+    FOREIGN KEY (userid) REFERENCES account(userid)
 );
 
 
 -- add user accounts
-INSERT INTO Account (username, hashedpw,email,dateCreated) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','admin@gmail.com',current_date());
-INSERT INTO Account (username, hashedpw,email,dateCreated) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','user@gmail.com',current_date());
+INSERT INTO account (username, hashedpw,email,dateCreated) VALUES ('admin', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','admin@gmail.com',current_date());
+INSERT INTO account (username, hashedpw,email,dateCreated) VALUES ('user', '$2y$10$spHJVK.ocDd0UHvrwHiZGOXu3ktdCzsaUNJAaIf9NqeztGFfzF5ni','user@gmail.com',current_date());
 
 -- add shopping list items
 INSERT INTO shoppinglistitem (item, category, quantity, checkStatus, userid) VALUES ('Milk', 'Dairy and Protein', 1, true, 1);
