@@ -18,7 +18,11 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+    <style>
+        .card{
+            border-radius:25px;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,63 +60,77 @@
         </header>
 
         <!-- profile content -->
-        <div class="container my-5">
-            <div class='row'>
-                <div class="card mt-2 animate__animated animate__fadeInUp col-4 col-sm-3">
-                    <div class="card-body">
-                        <h1 class="card-title text-center my-5">Hi, {{username}}!</h1>
-                        <div class="card-text">
-                            <div class='row'>
+        <div class="container-fluid my-4">
+            <div class='row justify-content-center'>
+                <div class='col-md-4'>
+                    <div class="card mt-2 animate__animated animate__fadeInUp" style='overflow-x: auto;'>
+                        <div class="card-body my-5">
+                            <h1 class="card-title text-center mb-5">Hi, {{username}}!</h1>
+                            <div class="card-text">
+                                <div class='row'>
 
-                                <div class='col col-sm fw-bold'>Username:</div>
-                                <div class='col col-sm'>{{ username }}</div>
-                                <div class='col col-sm'><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
-                            </div>
-                            <div class='row'>
-                                <div class='col col-sm fw-bold'>Email:</div>
-                                <div class='col col-sm'>{{email}}</div>
-                                <div class='col col-sm'><a v-bind:href='updateemail' class='btn btn-light'>Update</a></div>
-                            </div>
-                            <div class='row'>
-                                <div class='col col-sm fw-bold'>Date Joined:</div>
-                                <div class='col col-sm'>{{date}}</div>
-                                <div class='col col-sm'></div>
+                                    <div class='col-md-4 text-start  fw-bold'>Username:</div>
+                                    <div class='col-md-5 text-start '>{{ username }}</div>
+                                    <div class='col-md-3 text-start '><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
+                        
+                                    <div class='w-100'></div>
+                                    <div class='col-md-4  fw-bold'>Email:</div>
+                                    <div class='col-md-5 '>{{email}}</div>
+                                    <div class='col-md-3 '><a v-bind:href='updateemail' class='btn btn-light'>Update</a></div>
+                        
+                                    <div class='w-100'></div>
+                                    <div class='col-md-4 fw-bold'>Date Joined:</div>
+                                    <div class='col-md-5'>{{date}}</div>
+                                    <div class='col-md-3'></div>
+
+                                </div>
 
                             </div>
-
-                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="card mt-2 animate__animated animate__fadeInUp col-8 col-s" style='max-height:500px;overflow-y: auto;'>
-                    <div class="card-body">
-                        <h1 class="card-title text-center my-5">Search History</h1>
-                        <div class="card-text">
-                            <table class='table'>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Search</th>
-                                    <th>Cuisine</th>
-                                    <th>Meal Type</th>
-                                    <th>Dietary Preference</th>
-                                    <th>Timestamp</th>
-                                </tr>
-                                <tr v-for='(sh,idx) in searchHist'>
-                                    <td>{{idx+1}}</td>
-                                    <td> {{sh.search}}</td>
-                                    <td>{{sh.cuisine}}</td>
-                                    <td>{{sh.meal}}</td>
-                                    <td>{{sh.diet}}</td>
-                                    <td>{{sh.time}}</td>
-                                </tr>
+                <div class='col-md-7'>
+                    <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;'>
+                        <div class="card-body">
+                            <h1 class="card-title text-center mt-5 mb-3">Search History</h1>
+                            <!-- <div class="dropdown animate__animated animate__fadeInUp"> -->
+                          
+                            <button type="button" class="btn btn-white dropdown-toggle float-end" data-bs-toggle="dropdown">Sort By Time</button>
+                            <ul class="dropdown-menu dropdown animate__animated ">
+                                            <li>
+                                                <a class="dropdown-item" @click="sortdesc()">Lastest to Oldest</a>
+                                                <a class='dropdown-item' @click="sortaesc()">Oldest to Latest</a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                            </table>
+                            <div class="card-text">
+                                <table class='table'>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Search</th>
+                                        <th>Cuisine</th>
+                                        <th>Meal Type</th>
+                                        <th>Dietary Preference</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                    <tr v-for='(sh,idx) in searchHist'>
+                                        <td>{{idx+1}}</td>
+                                        <td> {{sh.search}}</td>
+                                        <td>{{sh.cuisine}}</td>
+                                        <td>{{sh.meal}}</td>
+                                        <td>{{sh.diet}}</td>
+                                        <td>{{sh.time}}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
 
         <!-- Footer -->
         <?php

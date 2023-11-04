@@ -21,6 +21,44 @@ Class SearchHistoryDAO{
     
     }
 
+    public function getSearchHistoryByUidDesc($uid){
+        $connmgr = new ConnectionManager();
+        $pdo = $connmgr->getConnection();
+        $sql="select * from SearchHistory where userid=:uid order by timeCreated desc";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
+        // $stmt->bindParam(':search', $s, PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $results = [];
+        while($row=$stmt->fetch()){
+            $results[] = new SearchHistory($row['userid'],$row['search'],$row['cuisine'],$row['meal'],$row['diet'],$row['timeCreated']);
+        }
+        $stmt=null;
+        $pdo=null;
+        return $results;
+    
+    }
+
+    public function getSearchHistoryByUidAesc($uid){
+        $connmgr = new ConnectionManager();
+        $pdo = $connmgr->getConnection();
+        $sql="select * from SearchHistory where userid=:uid order by timeCreated asc";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
+        // $stmt->bindParam(':search',$s, PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $results = [];
+        while($row=$stmt->fetch()){
+            $results[] = new SearchHistory($row['userid'],$row['search'],$row['cuisine'],$row['meal'],$row['diet'],$row['timeCreated']);
+        }
+        $stmt=null;
+        $pdo=null;
+        return $results;
+    
+    }
+
     public function updateSearchHistory($uid,$search,$cuisine,$meal,$diet){
         $connmgr = new ConnectionManager();
         $pdo = $connmgr->getConnection();

@@ -114,11 +114,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             
                                 <div v-if="displayed == true">
                                     <div class="recipe-cards-container animate__animated animate__fadeIn">
-                                        <div v-for="(recipe, index) in recommendedRecipes" :key="index" class="recipe-card">
-                                            <img :src="recipe.recipe.image" alt="Recipe Image">
+                                        <div v-for="(recipe, index) in recommendedRecipes" :key="index" class="card recipe-card ">
+                                            <img :src="recipe.recipe.image" class="card-img-top" alt="Recipe Image">
                                             <h2>{{ recipe.recipe.label }}</h2>
                                             <h5>Ingredients:</h5>
                                             <ul>
