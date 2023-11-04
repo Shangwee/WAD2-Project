@@ -386,9 +386,9 @@ const app = Vue.createApp({
         for (let i = 0; i < $response.length; i++) {
             let item = $response[i];
             let name = item.item;
-            let quantity = item.quantity;
+            let lowerCaseName = name.toLowerCase();
             // add into inventory
-            this.inventory.push(name);
+            this.inventory.push(lowerCaseName);
         }
       });
     },
