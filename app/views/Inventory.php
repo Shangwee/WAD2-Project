@@ -100,6 +100,7 @@
     </style>
 </head>
 <body>
+
     <main>
         <div id="main">
         <!-- navbar -->
@@ -162,11 +163,6 @@
 
                     <label for="category"><b>Category</b></label>
                     <input type="text" placeholder="Enter Category" v-model="category" required>
-
-                    <label for="scan"><b>Scan barcode</b></label>
-                    <input name="scan" type="file" accept="image/*" id="file-input" onchange="processImg(e)"
-                        capture="environment" style="margin-bottom:10px;" />
-                    <br />
 
                     <button type="button" class="btn" @click="submit()">Add</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>

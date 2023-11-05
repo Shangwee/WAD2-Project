@@ -77,11 +77,6 @@ function addToInv(item, qty, expiry, category) {
     
 }
 
-function processImg(e) { sendToAPI(e.target.files) }
-
-function sendToApi(file) {
-
-}
 function renderForm(){
 const inv = Vue.createApp({
     data() {
@@ -134,4 +129,3 @@ console.log(response.data)
         })
 
 }
-  

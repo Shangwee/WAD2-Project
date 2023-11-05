@@ -259,28 +259,6 @@ class accessdao
         $stmt->bindParam(":serial", $serial, PDO::PARAM_INT);
         $success = $stmt->execute();
     }
-// public function update($uid, $serial, $item, $currentqty, $initialqty, $expiry, $category){
-//     $conn = new ConnectionManager;
-//     $pdo = $conn->getConnection();
-//     $sql = "update activeinv set item = :item, qty = :qty, sexpiry = :expiry, category = :category where uid = :uid and serial = :serial)";
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
-//     $stmt->bindParam(":serial", $serial, PDO::PARAM_STR);
-//     $stmt->bindParam(":item", $item, PDO::PARAM_STR);
-//     $stmt->bindParam(":currentqty", $currentqty, PDO::PARAM_INT);
-//     $stmt->bindParam(":initialqty", $intialqty, PDO::PARAM_INT);
-//     $stmt->bindParam(":expiry", $expiry, PDO::PARAM_STR);
-//     $stmt->bindParam(":category", $category, PDO::PARAM_STR);
-//     $success = $stmt->execute();
-//     if ($success){
-//         return $success;
-//     }
-//     else{
-//     $errors = $stmt->errorInfo();
-//     $stmt = null;
-//     return $errors;
-// }
-// }
 }
 class tabledisplaydao {
     public function getAll($uid)
