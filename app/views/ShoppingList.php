@@ -10,14 +10,15 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/ShoppingList.css" />
-        <link rel="stylesheet" href="../css/shared.css" />   
+        
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/ShoppingList.css" />
+        <link rel="stylesheet" href="../css/shared.css" />   
 </head>
 </head>
 <body>
@@ -28,9 +29,17 @@
         require_once "./common/protect.php";
         require_once './common/navbar.php';
     ?>
-    <div class="jumbotron text-center py-5" style="background-image: url('../images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
-        <h1 class="text-light animate__animated animate__fadeIn">Shopping List</h1>
-    </div>
+    <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Shopping List</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
@@ -38,16 +47,16 @@
                 <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
             </div>
             <div class="col-md-6 text-end animate__animated animate__fadeInUp">
-                <button class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
-                <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#filterModal">Filter</button>
-                <button class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#sortModal">Sort</button>
+                <button class="btn text-white mx-1" style='background-color:#0c1559' data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
+                <button class="btn text-white mx-1"style='background-color:#455c82' data-bs-toggle="modal" data-bs-target="#filterModal">Filter</button>
+                <button class="btn text-white mx-1" style='background-color:#687c9f' data-bs-toggle="modal" data-bs-target="#sortModal">Sort</button>
             </div>
         </div>
 
         <div class="row mt-4">
             <div class="col-md-12">
             <p id="filterStatus" v-if="isFilter"><em>Filter Applied</em></p>
-                <h2 v-if="sList.length == 0" class="text-center my-5 animate__animated animate__fadeInUp"> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon> List is empty...</h2>
+                <h2 v-if="sList.length == 0" class="text-center my-5 animate__animated animate__fadeInUp"> <iconify-icon icon="noto-v1:sad-but-relieved-face" width="35" height="35"></iconify-icon>&nbsp; List is empty...</h2>
                 <div v-else id="MainList">    
                     <ul class="list-group animate__animated animate__fadeIn">
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in sList">
@@ -87,7 +96,7 @@
 
         <div class="row my-4">
             <div class="col-md-12">
-                <h2 class="h2 animate__animated animate__fadeInUp">Recommendations</h2>
+                <h2 class="h2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Recommendations</h2>
                 <ul class="list-group animate__animated animate__fadeInUp">
                     <li class="list-group-item d-flex justify-content-between align-items-center"  v-for="(item, index) in recommendation">
                         <div>

@@ -77,6 +77,7 @@ const app = Vue.createApp({
       selectedInventorySort: "",
 
       displayed: false,
+      recrecipes:'',
     };
   },
 
@@ -155,6 +156,7 @@ const app = Vue.createApp({
           if (response.data.hits.length > 0) {
             this.recommendedRecipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
             this.displayed = true;
+            
           } else {
             window.alert(
               "No recipes found for the search. Please try a different ingredient."
@@ -183,6 +185,8 @@ const app = Vue.createApp({
         })
         .then((response) => {
           console.log(response);
+          this.recrecipes="Recommended Recipes";
+          console.log(this.recrecipes);
           this.updateSearchHistory();
           if (response.data.hits.length > 0) {
             this.recipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response

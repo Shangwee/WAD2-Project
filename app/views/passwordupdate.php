@@ -9,13 +9,14 @@
         <!-- Js scripts -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/shared.css" />   
+        
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/shared.css" />   
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -24,12 +25,12 @@
                 require_once 'common/navbar.php';
             ?>
             <!-- Header-->
-            <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+            <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
                 <div class="container px-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-6">
                             <div class="text-center my-5">
-                                <h1 class="fw-bolder text-white mb-2 animate__animated animate__fadeInUp">Password update</h1>
+                                <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Update Password</h1>
                             </div>
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                         <p style='color:red' id='cfmpwerr'><?=$cfmpwerr?></p>
                        
                         <div class='row mb-3 animate__animated animate__fadeInUp' id='submitbtn'>
-                            <div class='col'><input class='form-control bg-primary text-white' type='submit' name='<?=$btnname?>' value='<?=$btnvalue?>'></div>
+                            <div class='col'><input class='form-control text-white' style='background-color:#0c1559'type='submit' name='<?=$btnname?>' value='<?=$btnvalue?>'></div>
                         </div>
                     </form>
                 </div>

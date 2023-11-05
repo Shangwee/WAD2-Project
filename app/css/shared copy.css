@@ -1,0 +1,30 @@
+nav {
+    background-color: #f5fbff;
+    position: fixed;
+    top: 0px; /* Adjust the top position as needed */
+    right: 0px; /* Adjust the right position as needed */
+    height: 80px;
+    font-size:20px;
+
+}
+
+body {
+  min-height: 100vh;
+  background-color:#f5fbff;
+  
+}
+
+footer{
+  position: sticky;
+  top: 100%;
+  bottom:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+/* .card{
+  border-radius:20px;
+  box-shadow: 3px 3px 5px #888888;
+} */

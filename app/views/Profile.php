@@ -10,18 +10,20 @@
     <!-- Js scripts -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/shared.css" />
+    
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
     <style>
         .card{
             border-radius:25px;
         }
+        
     </style>
 </head>
 
@@ -47,12 +49,12 @@
 
         ?>
         <!-- Header-->
-        <header class="bg-image py-5" style="background-image: url('../images/home/food.jpg'); box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+        <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
             <div class="container px-5">
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-6">
                         <div class="text-center my-5">
-                            <h1 class="fw-bolder text-white mb-2 animate__animated animate__fadeInUp">Profile</h1>
+                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Profile</h1>
                         </div>
                     </div>
                 </div>
@@ -65,7 +67,7 @@
                 <div class='col-md-4'>
                     <div class="card mt-2 animate__animated animate__fadeInUp" style='overflow-x: auto;'>
                         <div class="card-body my-5">
-                            <h1 class="card-title text-center mb-5">Hi, {{username}}!</h1>
+                            <h1 class="card-title text-center mb-5" style='font-family: Georgia,serif;'>Hi, {{username}}!</h1>
                             <div class="card-text">
                                 <div class='row'>
 
@@ -92,7 +94,7 @@
                 <div class='col-md-7'>
                     <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;'>
                         <div class="card-body">
-                            <h1 class="card-title text-center mt-5 mb-3">Search History</h1>
+                            <h1 class="card-title text-center mt-5 mb-3" style='font-family: Georgia,serif;'>Search History</h1>
                             <!-- <div class="dropdown animate__animated animate__fadeInUp"> -->
                           
                             <button type="button" class="btn btn-white dropdown-toggle float-end" data-bs-toggle="dropdown">Sort By Time</button>
@@ -105,7 +107,7 @@
                                     </div>
 
                             <div class="card-text">
-                                <table class='table'>
+                                <table class='table mx-3'>
                                     <tr>
                                         <th>S/N</th>
                                         <th>Search</th>

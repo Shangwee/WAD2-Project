@@ -10,15 +10,16 @@
     <!-- Js scripts -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/recipe.css" />
-    <link rel="stylesheet" href="../css/shared.css" />
+    
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/recipe.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
     <script src="../js/inventory.js"></script>
     <!-- Datatables-->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -147,9 +148,21 @@
             }
 
         </script>
+        <!-- header -->
+        <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Inventory</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
             <div class="form-popup" id="myForm">
                 <form action="/action_page.php" class="form-container">
-                    <h1>Add to Inventory</h1>
 
                     <label for="Item"><b>Item</b></label>
                     <input type="text" placeholder="Enter Item Name" v-model="item" required>
@@ -174,10 +187,10 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="row my-3">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
-                    <h1>Inventory</h1>
+                    <h3>Filter</h3>
                     <div class="row justify-content-between mb-2">
                         <div class="col-sm-9" style = "width:225px;">
                             <select class="form-select float-start" onchange="changeMode()" id = "modeselect">

@@ -9,24 +9,80 @@
         <!-- Js scripts -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="./css/index.css" />
-        <link rel="stylesheet" href="./css/shared.css" />   
+        
         <!-- Bootstrap icons-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./css/index.css" />
+        <link rel="stylesheet" href="./css/shared copy.css" />   
         <style>
+            /* body {
+                width:100%;
+                height:1000px;
+                background-color:#f5fbff;
+            } */
             .card{
-                /* border-radius:20px;
-                box-shadow: 3px 3px 5px #888888; */
+                border-radius:20px;
+                box-shadow: 3px 3px 5px #888888;
             }
+            .main{
+                /* position:relative;
+                top:-110px;
+                left:330px; */
+                /* margin-top:200px; */
+                
+                font-size:95px;
+                font-family: Georgia,serif;
+
+            }
+            .subtitle{
+                font-size:0.4em;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height:900px;/* Ensure the container takes the full viewport height*/
+            }
+            
+
+            img{
+                /* position:relative;
+                left: -650px;
+                top:150px; */
+            
+            }
+            .middle{
+                position:relative;
+                top:70px;
+                padding:0px;
+                margin:0px;
+                text-align:center;
+            }
+            .box{
+                position:relative;
+                /* left:110px; */
+                /* height:100px; */
+                width:370px;
+                background-color:white;
+                padding:20px;
+                margin-top:5px;
+                margin-bottom:5px;
+                margin-left:10px;
+                border:1px solid black;
+                border-radius:20px;
+            }
+         
         </style>
 </head>
 <body>
     <div id="home">
+        
+        
         <!-- Navbar -->
         <?php
             session_start();
@@ -36,144 +92,130 @@
                 echo "<input type='hidden' id='userId' value = {$user} >";
             }
         ?>
-        <!-- Hero Section -->
-        <div class="jumbotron text-center py-5" style="background-image: url('./images/home/food.jpg');background-size: cover;box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
-            <h1 class="text-light animate__animated animate__fadeIn">Welcome to FoodWise</h1>
-            <p class="text-light animate__animated animate__fadeInUp">Your solution to reducing food waste and making eco-friendly choices.</p>
-        </div>
-        <!-- Get Started Section -->
-        <?php 
-        if (empty($_SESSION)) {
-            echo "
-            <section id='get-started' class='py-5 text-center'>
-            <div class='container'>
-                <h2 class='animate__animated animate__fadeIn'>Get Started Today</h2>
-                <p class='animate__animated animate__fadeInUp'>Join us in the mission to reduce food waste and make a positive impact on the environment.</p>
-                <a class='btn btn-primary animate__animated animate__fadeInUp' href='views/register.php'>Sign Up Now</a>
-            </div>
-            </section>
-            ";
-        } else {
-            // recommandation section
-            echo "
-            <!-- User Statistics Section -->
-            <section id='user-stats' class='py-5 distinct-section'>
-                <div class='container'>
-                    <div class='row'>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Foods About to Expire</h5>
-                                    <p class='card-text'>{{Expire}} items</p>
+        <div class='container-fluid '>
+            <!-- <div class='row' > -->
+                <?php
+                    if (empty($_SESSION['login'])){
+                        echo "<div class='row middle w-100 justify-content-center mb-2 animate__animated animate__fadeInUp'>
+                                <div class='col text-center'>
+                                    <img src='images/home/Subject.png' height=300 >
+                                    <div class='main'>
+                                        Taste, Not Waste
+                                        <div class='subtitle'>Your one-stop solution to reducing food wastage</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Foods with Low Quantity</h5>
-                                    <p class='card-text'>{{LowQuantity}} items</p>
+                             </div>";
+                    }else{
+                        echo "
+                            <div class='row middle w-100 justify-content-center mb-2 animate__animated animate__fadeInUp'><div class='col-auto'>
+                                <img src='images/home/Subject.png' height=300 style='position:relative;top:70px;'>
                                 </div>
-                            </div>
-                        </div>
-                        <div class='col-md-4 mb-4'>
-                            <div class='card text-center animate__animated animate__fadeInUp'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>Total Inventory Items</h5>
-                                    <p class='card-text'>{{TotalInventory}} items</p>
+                                <div class='col-6 text-start '>
+                                    <div class='main' style='display:inline-block;position:relative;top:95px;'>
+                                        Taste, Not Waste
+                                        <div class='subtitle'>Your one-stop solution to reducing food wastage</div>
+                                    </div>
                                 </div>
+                                <div class='col-2 text-center'>
+                                    <div class='row'>
+                                        <div class='box'>
+                                            <h4>Expired Items</h4>
+                                            <h1>{{Expire}}</h1>
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='box'>
+                                            <h4>Items with Low Quantity</h4>
+                                            <h1>{{LowQuantity}}</h1>
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='box'>
+                                            <h4>Total items in Inventory</h4>
+                                            <h1>{{TotalInventory}}</h1>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>";
+                    }
+                ?>
+        <!-- </div> -->
+            <!-- </div> -->
+        
+        
+        <!-- <div class='container'>  -->
+            
+            
+           <div class='row justify-content-center mt-5 animate__animated animate__fadeInUp' style='position:relative;top:50px;'>
+                <div class='col-4 '>
+                    <div class='card text-center mx-4'>
+                        <div class='card-body'>
+                            <div class='card-text'>
+                                <h4>Unsure of what to cook with your leftovers?</h4>
+                                    <?php
+                                        if (empty($_SESSION)) {
+                                            echo " <a href='views/register.php'>
+                                            <button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Search Recipes on FoodWise ▷</h4></button>
+                                            </a>";
+                                        } else {
+                                            echo "<a v-bind:href='links.recipe'><button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Search Recipes on FoodWise ▷</h4></button></a>";
+                                        }
+                                    ?>
+                               
                             </div>
-                        </div>
-                    </div>
+                         </div>
+                     </div>
                 </div>
-            </section>
-            ";
-        }
-        ?>
-        <!-- Features Section -->
-        <section class="bg-light">
-        <div class="container py-5 ">
-            <h2 class="animate__animated animate__fadeIn">Features</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mt-2 animate__animated animate__fadeInUp">
-                        <div class="card-body">
-                            <h5 class="card-title">Search Recipes <span class="material-icons">receipt_long</span></h5>
-                            <p class="card-text">Find delicious recipes based on the ingredients you have.</p>
-                            <?php
-                                if (empty($_SESSION)) {
-                                    echo "<a href='views/login.php' class='btn btn-primary'>Learn More</a>";
-                                } else { 
-                                    echo "<a v-bind:href='links.recipe' class='btn btn-primary'>Learn More</a>";
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mt-2 animate__animated animate__fadeInUp">
-                        <div class="card-body">
-                            <h5 class="card-title">Generate Shopping List <span class="material-icons">shopping_bag</span></h5>
-                            <p class="card-text">Create a shopping list to ensure that you only buy the necessities.</p>
-                            <?php
-                                if (empty($_SESSION)) {
-                                    echo "<a href='views/login.php' class='btn btn-primary'>Learn More</a>";
-                                } else {
-                                    echo "<a v-bind:href='links.lists' class='btn btn-primary'>Learn More</a>";
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mt-2 animate__animated animate__fadeInUp">
-                        <div class="card-body">
-                            <h5 class="card-title">Track Food Inventory <span class="material-icons">inventory_2</span></h5>
-                            <p class="card-text">Keep tabs on what's in your kitchen to prevent overbuying.</p>
-                            <?php
-                                if (empty($_SESSION)) {
-                                    echo "<a href='views/login.php' class='btn btn-primary'>Learn More</a>";
-                                } else {
-                                    echo "<a v-bind:href='links.inventory' class='btn btn-primary'>Learn More</a>";
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </section>         
+                <div class='col-4'>
+                    <div class='card text-center mx-4'>
+                        <div class='card-body'>
+                            <div class='card-text'>
+                                <h4>Always buying more than what you need?</h4>
+                                    <?php
+                                        if (empty($_SESSION)) {
+                                            echo " 
+                                            <a href='views/register.php'><button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Manage your Shopping List with FoodWise ▷</h4></button></a>
+                                            ";
+                                        } else {
+                                            echo "<a v-bind:href='links.lists'><button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Manage your Shopping List with FoodWise ▷</h4></button></a>";
+                                        }
+                                    ?>
+                                
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="bg-light py-5">
-            <div class="container">
-                <h2 class="animate__animated animate__fadeIn">What Our Users Say</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card mb-4 animate__animated animate__fadeInLeft">
-                            <div class="card-body">
-                                <p>"This app has made meal planning so much easier and helped us reduce food waste in our household."</p>
-                                <p class="text-right">- <span class="material-icons">face_5</span>John D.</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card mb-4 animate__animated animate__fadeInRight">
-                            <div class="card-body">
-                                <p>"I love the shopping list feature. It's so convenient and eco-friendly!"</p>
-                                <p class="text-right">- <span class="material-icons">face_3</span> Sarah K.</p>
+                         </div>
+                     </div>
+                </div>
+                <div class='col-4'>
+                        <div class='card text-center mx-4'>
+                            <div class='card-body'>
+                                <div class='card-text'>
+                                    <h4>Never know what's left in your kitchen?</h4>
+                                        <?php
+                                            if (empty($_SESSION)) {
+                                                echo " 
+                                                <a href='views/register.php'><button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Track your inventory with FoodWise ▷</h4></button></a>
+                                                ";
+                                            } else {
+                                                echo "<a v-bind:href='links.inventory'><button class='btn w-100' style='font-style:italic;'><h4 class='fw-light'>Track your inventory with FoodWise ▷</h4></button</a>";
+                                            }
+                                        ?>
+                                      
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Footer -->
+        </div>
+        </div>
+        
+        <!-- Footer-->
         <?php
         require_once './views/common/footer.php';
         ?>
     </div>
-    <script src="./js/home.js"></script>
+    <script src="js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
