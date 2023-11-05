@@ -10,14 +10,6 @@ function openForm() {
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
-function sendToAPI(file) {
-    axios
-        .post("https://www.brocade.io/api/items/009800895250")
-        .then(response => {
-            console.log(response.data)
-        })
-
-}
 function removeFromInv(serial){
     if (document.getElementById("modeselect").value === "current"){
         if (confirm("Remove the item from inventory and mark it as consumed?")){
@@ -77,11 +69,6 @@ function addToInv(item, qty, expiry, category) {
     
 }
 
-function processImg(e) { sendToAPI(e.target.files) }
-
-function sendToApi(file) {
-
-}
 function renderForm(){
 const inv = Vue.createApp({
     data() {
@@ -134,4 +121,3 @@ console.log(response.data)
         })
 
 }
-  
