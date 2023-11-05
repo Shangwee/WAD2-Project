@@ -12,6 +12,7 @@ create table activeinv(
     expiry date not null,
     category varchar(45) not null,
     constraint activeinvpk primary key (userid, serial)  
+    foreign key (userid) REFERENCES account(userid)
 );
 
 drop table if exists historicalinv;
@@ -24,6 +25,7 @@ expiry date not null,
 status varchar(8) not null,
 category varchar(45) not null,
 constraint historicalinvpk primary key (userid, serial)
+foreign key (userid) REFERENCES account(userid)
 );
 
 DROP TABLE IF EXISTS account;
