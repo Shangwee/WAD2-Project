@@ -66,7 +66,6 @@ function addToInv(item, qty, expiry, category) {
             console.log(response.data)
             $('#myTable').DataTable().ajax.reload()
             invTable.ajax.reload(null, false)
-            return response.data
         })
     }
 
