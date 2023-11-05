@@ -6,7 +6,7 @@ $invDAO = new tabledisplaydao;
 if(isset($_GET) && !empty($_SESSION)){
     $userId = $_SESSION["login"];
     // get all food from inventoy by user
-    $inventory = $invDAO->getAll($userId);
+    $inventory = $invDAO->getExpiring($userId);
     $inventoryResult = [];
     for ($i = 0; $i < count($inventory); $i++){
         $name = $inventory[$i][1];
