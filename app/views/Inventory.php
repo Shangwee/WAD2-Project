@@ -209,7 +209,7 @@
                             </div>
                     </div>
 
-                    <table class="table" id="myTable" class="display-compact order-column table">
+                    <table class="table" id="myTable" class="display-compact order-column table" style="width:100%;">
                     </table>
                     <div class="col-sm-1">
                     </div>

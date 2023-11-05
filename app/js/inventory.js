@@ -21,8 +21,11 @@ function removeFromInv(serial){
                 "serial": serial
             }
         })
-        $('#myTable').DataTable().ajax.reload()
-        invTable.ajax.reload(null, false)}
+        .then(response=>{
+            $('#myTable').DataTable().ajax.reload()
+            invTable.ajax.reload(null, false)
+        })
+        }
         else{
             return
         }
@@ -37,8 +40,11 @@ else{
             "serial": serial
         }
     })
-    $('#myTable').DataTable().ajax.reload()
-    invTable.ajax.reload(null, false)}
+    .then(response=>{
+        $('#myTable').DataTable().ajax.reload()
+        invTable.ajax.reload(null, false)
+    })
+    }
     else{
         return
     }
@@ -58,15 +64,12 @@ function addToInv(item, qty, expiry, category) {
         })
         .then(response=>{
             console.log(response.data)
+            $('#myTable').DataTable().ajax.reload()
+            invTable.ajax.reload(null, false)
             return response.data
         })
-        $('#myTable').DataTable().ajax.reload(null, false)
-        invTable.ajax.reload(null, false)
     }
-    else{
-        return
-    }
-    
+
 }
 
 function renderForm(){
@@ -96,8 +99,6 @@ const inv = Vue.createApp({
             this.qty = ""
             this.expiry = ""
             this.category = ""
-            $('#myTable').DataTable().ajax.reload(null, false)
-            invTable.ajax.reload(null, false)
         }
     }
 }).mount("#main")}
