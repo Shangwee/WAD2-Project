@@ -30,9 +30,9 @@ const app = Vue.createApp({
       };
       
       axios.get(PHPurl, {params:para}).then((response) => {
-        this.Expire = str(response.data.totelExpiring);
-        this.LowQuantity = str(response.data.LowQuantity);
-        this.TotalInventory = str(response.data.totalInventory);
+        this.Expire = response.data.totelExpiring;
+        this.LowQuantity = response.data.LowQuantity;
+        this.TotalInventory = response.data.totalInventory;
       });
       console.log(this.Expire);
     }

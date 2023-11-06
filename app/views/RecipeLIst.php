@@ -146,7 +146,7 @@
                                                 {{ recipeStates[index] ? 'View Less' : 'View More' }}
                                             </button>
                                             </p>
-                                            <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
+                                            <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredients)">Add to Shopping List</button>
                                             </p>
                                             <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
                                             </p>
@@ -201,7 +201,7 @@
                                             {{ recipeStates[index] ? 'View Less' : 'View More' }}
                                         </button>
                                         </p>
-                                        <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredientLines)">Add to Shopping List</button>
+                                        <button class="btn btn-primary" @click="getIngrdients(recipe.recipe.ingredients)">Add to Shopping List</button>
                                         </p>
                                         <h5>Calories:</h5> &nbsp; {{ Math.round(recipe.recipe.calories) }} {{ recipe.recipe.totalNutrients.ENERC_KCAL.unit }}
                                         </p>

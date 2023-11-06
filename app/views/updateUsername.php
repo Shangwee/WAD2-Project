@@ -57,7 +57,7 @@
                 $title='Update Username';
                 $subtitle='Enter your new username';
                 $newunerr='';
-                // $display='none';
+                $display='none';
 
 
                 if (isset($_GET['un'])){

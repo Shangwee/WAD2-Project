@@ -70,7 +70,6 @@
                             <h1 class="card-title text-center mb-5" style='font-family: Georgia,serif;'>Hi, {{username}}!</h1>
                             <div class="card-text">
                                 <div class='row'>
-
                                     <div class='col-md-4 text-start  fw-bold'>Username:</div>
                                     <div class='col-md-5 text-start '>{{ username }}</div>
                                     <div class='col-md-3 text-start '><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
@@ -84,9 +83,7 @@
                                     <div class='col-md-4 fw-bold'>Date Joined:</div>
                                     <div class='col-md-5'>{{date}}</div>
                                     <div class='col-md-3'></div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
