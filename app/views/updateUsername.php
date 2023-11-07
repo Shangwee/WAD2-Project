@@ -91,7 +91,7 @@
                         <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block'><?=$subtitle?></p>
                 </h2>
                 <form method='post' class='form-group'>
-                    <div class='col-4 mx-auto'>
+                    <div class='col-6 col-lg-5 col-xl-4 col-md-6 col-sm-8 mx-auto'>
                         <div class='row justify-content-center mb-3'>
                             <div class='fw-bold animate__animated animate__fadeInUp'>Username: <input type='text' name='username' class='form-control' value='<?=$un?>'></div>
                         </div>

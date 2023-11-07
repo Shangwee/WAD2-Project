@@ -26,7 +26,7 @@
         }
 
         .main {
-            font-size: 95px;
+            font-size: 85px;
             font-family: Georgia, serif;
 
         }
@@ -74,7 +74,7 @@
         <div class='container-fluid'>
             <!-- <div class='row' > -->
             <div class='row middle w-100 justify-content-center mb-2 animate__animated animate__fadeInUp'>
-                <div class='col-md-6 text-center'>
+                <div class='col-xl-6 text-center'>
                     <img src='images/home/Subject.png' height=300>
                     <div class='main'>
                         <i>Taste, Not Waste</i>
@@ -83,21 +83,21 @@
                 </div> 
             <?php if (!empty($_SESSION['login'])) {
                 echo "
-                    <div class='col-md-2 text-center'>
-                        <div class='row'>
-                            <div class='box col-xl-12'>
+                    <div class='col-xl-3 mx-5 mt-4 text-center'>
+                        <div class='row justify-content-center'>
+                            <div class='box col-xl-12 col-lg-9'>
                                 <h4>Expired Items</h4>
                                 <h1>{{Expire}}</h1>
                             </div>
                         </div>
-                        <div class='row'>
-                            <div class='box col-xl-12'>
+                        <div class='row justify-content-center'>
+                            <div class='box col-xl-12 col-lg-9'>
                                 <h4>Items with Low Quantity</h4>
                                 <h1>{{LowQuantity}}</h1>
                             </div>
                         </div>
-                        <div class='row'>
-                            <div class='box col-xl-12'>
+                        <div class='row justify-content-center'>
+                            <div class='box col-xl-12 col-lg-9'>
                                 <h4>Total items in Inventory</h4>
                                 <h1>{{TotalInventory}}</h1>
                             </div>
@@ -106,7 +106,7 @@
             }?> 
             </div>
         <div class='row justify-content-center mt-5 animate__animated animate__fadeInUp' style='position:relative;top:120px;'>
-            <div class=' col-md-4 my-2'>
+            <div class=' col-md-4'>
                 <div class='card text-center mx-4'>
                     <div class='card-body'>
                         <div class='card-text'>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <div class='col-md-4 my-2'>
+            <div class='col-md-4 '>
                 <div class='card text-center mx-4'>
                     <div class='card-body'>
                         <div class='card-text'>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class='col-md-4 my-2'>
+            <div class='col-md-4'>
                 <div class='card text-center mx-4'>
                     <div class='card-body'>
                         <div class='card-text'>

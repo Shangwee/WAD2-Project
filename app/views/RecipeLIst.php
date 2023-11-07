@@ -17,7 +17,15 @@
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/recipe.css" />
-    <link rel="stylesheet" href="../css/shared.css" />   
+    <link rel="stylesheet" href="../css/shared.css" />  
+    <style>
+        h2 {
+        font-family: Georgia,serif;
+    }
+    img{
+        margin-bottom: 24px;
+    }
+    </style> 
 </head>
 <body>
     <main>
@@ -42,8 +50,8 @@
                 <!-- align buttom and input -->
                 <div class="mb-2 ">
                     <form>
-                        <div class="row ">
-                            <div class="col-9">
+                        <div class="row mx-auto">
+                            <div class="col-9 p-0" >
                                 <div class="mb-3 animate__animated animate__fadeInUp">
                                     <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
                                     <input type="text" v-model="ingredient" class="form-control" id="RecipeSearchInput" aria-describedby="searchrecpie" placeholder="Enter ingredient">
@@ -56,11 +64,11 @@
                         
                         <div v-if='ingredient.trim() !== ""'> 
                             <div class="row"> 
-                                <div class="dropdown animate__animated animate__fadeInUp col-12 col-sm-6 col-md-4 col-lg-1">
-                                    Filter by:
+                                <div class="dropdown animate__animated animate__fadeInUp col-12 col-sm-2 col-md-2 col-lg-2">
+                                    <b>Filter by:</b>
                                 </div>
                                                     
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                                     <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 4;">
                                         <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ selectedCuisine || 'Cuisine Type'}}
@@ -72,7 +80,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                                     <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 3;">
                                         <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
                                             {{ selectedMeal || 'Meal Type'}}
@@ -85,7 +93,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                                     <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 2;">
                                         <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
                                             {{ selectedDietary || 'Dietary Preferences'}}
@@ -103,7 +111,7 @@
 
                         <div v-if="ingredient.trim() === ''" >
                                {{ recipes = "" }}
-                                <div class="row">
+                                <div class="row mx-auto">
                                     <div class="col-9" >
                                         <h2 class="animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Recommended Recipes</h2>
                                     </div>
@@ -161,11 +169,11 @@
 
                             <div v-if="recipes.length > 0">
                                 </p>
-                                <div class="row">
+                                <div class="row mx-auto">
                                     <div class="col-9">
                                         <h2>Recipe</h2>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3 text-end">
                                         <div class="dropdown animate__animated animate__fadeInUp" style="position: relative; z-index: 1;">
                                             Sort by: &nbsp;&nbsp;&nbsp;
                                                 <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -183,7 +191,7 @@
                                 </div>
                                 <div class="recipe-cards-container animate__animated animate__fadeIn">
                                     <div v-for="(recipe, index) in recipes" :key="index" class="recipe-card">
-                                        <img :src="recipe.recipe.image" alt="Recipe Image">
+                                        <img :src="recipe.recipe.image" class='card-img-top' alt="Recipe Image">
                                         <h2>{{ recipe.recipe.label }}</h2>
                                         <h5>Ingredients:</h5>
                                         <ul>

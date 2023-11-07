@@ -19,6 +19,7 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../css/index.css" />
         <link rel="stylesheet" href="../css/shared.css" />   
+        
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -64,7 +65,7 @@
                     <h2>Login</h2>
                 </div>  -->
                 <form action='processlogin.php' method='post' class='form group'>
-                    <div class='col-4 mx-auto'>
+                    <div class='col-6 col-lg-5 col-xl-4 col-md-6 col-sm-8 mx-auto'>
                         <div class='row justify-content-center mb-3 animate__animated animate__fadeInUp'>
                             <div class='fw-bold'>Username: <input class='form-control' type='text' name='username' value='<?=$un?>'></div>
                         </div>
@@ -77,7 +78,7 @@
 
                             <div class='col-auto'><input class='form-control text-white' type='submit' name='submit' value='Login' style='background-color:#0c1559'></div><div class='col-auto'><input class='form-control' type='reset'></div>
                         </div>
-                        <div class='row mb-3 animate__animated animate__fadeInUp'>
+                        <div class='row animate__animated animate__fadeInUp'>
                             <div class=''></div><div class='col-auto'><a href='register.php'>Create account</a></div><div class='col-auto'><a href='passwordupdate.php'>Forgot Password</a></div>
                         </div>
                     </div>

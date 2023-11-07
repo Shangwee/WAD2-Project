@@ -24,7 +24,15 @@
                 border-radius:20px;
                 box-shadow: 3px 3px 5px #888888;
             }
+        .box {
+                --mask: 
+                conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/20.00px 51% repeat-x,
+                conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/20.00px 51% repeat-x;
+            -webkit-mask: var(--mask);
+                    mask: var(--mask);
         
+                        
+            }
     </style>
 </head>
 
@@ -89,7 +97,8 @@
                     </div>
                 </div>
                 <div class='col-lg-7'>
-                    <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;'>
+                    <div class='box'>
+                    <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;border:none;'>
                         <div class="card-body">
                             <h1 class="card-title text-center mt-5 mb-3" style='font-family: Georgia,serif;'>Search History</h1>
                             <!-- <div class="dropdown animate__animated animate__fadeInUp"> -->
@@ -128,6 +137,7 @@
                     </div>
                 </div>
             </div>
+    </div>
         </div>
 
 

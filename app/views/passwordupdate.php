@@ -116,12 +116,12 @@
             ?>
 
 
-            <div class='container justify-content-center my-5'>
+            <div class='container justify-content-center'>
                 <h2 class='row justify-content-center text-center animate__animated animate__fadeInUp' id='title' ><?=$title?>
-                        <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
+                        <p class='row justify-content-center text-center mt-1 mb-4 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
                 </h2>
 
-                <div class='col-4 mx-auto justify-content-center'>
+                <div class='col-6 col-lg-5 col-xl-4 col-md-6 col-sm-8 mx-auto justify-content-center'>
                     <form  method='post' class='form group'>
                         <div class='row justify-content-center mb-3 animate__animated animate__fadeInUp' id='username'>
                             <div class='fw-bold'>Username: <input class='form-control' type='text' name='username' value='<?=$un?>' <?=$readonly?>></div>
@@ -133,7 +133,7 @@
                          <?=$cfmpwtext?>
                         <p style='color:red' id='cfmpwerr'><?=$cfmpwerr?></p>
                        
-                        <div class='row mb-3 animate__animated animate__fadeInUp' id='submitbtn'>
+                        <div class='row animate__animated animate__fadeInUp' id='submitbtn'>
                             <div class='col'><input class='form-control text-white' style='background-color:#0c1559'type='submit' name='<?=$btnname?>' value='<?=$btnvalue?>'></div>
                         </div>
                     </form>

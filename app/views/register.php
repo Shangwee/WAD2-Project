@@ -84,15 +84,15 @@
                 }
             ?>
 
-            <div class='container justify-content-center my-5'>
+            <div class='container justify-content-center'>
                 <!-- <div class='row'>
                     <h2>Login</h2>
                 </div>  -->
                 <h2 class='row justify-content-center text-center' id='title' style='display:<?=$display?>;'><?=$title?>
-                        <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
+                        <p class='row justify-content-center text-center mt-1 mb-4 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
                 </h2>
                 <form method='post' action='processregister.php' class='form-group'>
-                    <div class='col-4 mx-auto'>
+                    <div class='col-6 col-lg-5 col-xl-4 col-md-6 col-sm-8 mx-auto'>
                         <div class='row justify-content-center mb-3'>
                             <div class='fw-bold animate__animated animate__fadeInUp'>Username: <input type='text' name='username' class='form-control' value='<?=$un?>'></div>
                         </div>
@@ -109,10 +109,10 @@
                             <div class='fw-bold animate__animated animate__fadeInUp'>Confirm Password: <input type='password' name='cfmpassword' class='form-control'></div>
                         </div>
                         <p style='color:red;'><?=$cfmpwerr?></p>
-                        <div class='row mb-3'>
+                        <div class='row mb-4'>
                             <div class='col animate__animated animate__fadeInUp'><input class='form-control text-white' style='background-color:#0c1559' type='submit' name='submit' value='Sign up'></div>
                         </div>
-                        <div class='row mb-3'>
+                        <div class='row'>
                             <p>Have an account? <a href='login.php'>Login here</a></p>
                     </div>
                 </form>

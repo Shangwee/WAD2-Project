@@ -7,6 +7,7 @@
 .recipe-card {
     margin: 10px; /* Add margin between cards */
     border: 1px solid #ccc;
+    border-radius:20px;
     padding: 10px;
     background-color: #f9f9f9;
     box-sizing: border-box;
@@ -14,8 +15,10 @@
 }
 
 .recipe-card img{
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    border-radius:10px;
+    
 }
 
 @media (max-width: 768px) {
@@ -36,6 +39,12 @@
         overflow-y: auto;
     }
 }
+
+h2 {
+        font-family: Georgia,serif;
+    }
+
+
 
 .dropdown-menu{
     max-height: 200px; /* Adjust this value to set the fixed height */
