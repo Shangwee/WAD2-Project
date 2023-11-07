@@ -2,6 +2,15 @@ DROP DATABASE IF EXISTS wad2project;
 CREATE DATABASE wad2project;
 USE  wad2project;
 
+DROP TABLE IF EXISTS account;
+CREATE TABLE account (
+    userid int auto_increment primary key,
+    username varchar(50) not null,
+    hashedpw varchar(255) not null,
+    email varchar(255) not null,
+    dateCreated date not null
+);
+
 
 drop table if exists activeinv;
 create table activeinv(
@@ -11,7 +20,7 @@ create table activeinv(
     qty varchar(45) not null,
     expiry date not null,
     category varchar(45) not null,
-    constraint activeinvpk primary key (userid, serial)  
+    constraint activeinvpk primary key (userid, serial), 
     foreign key (userid) REFERENCES account(userid)
 );
 
@@ -24,18 +33,10 @@ qty varchar(3) not null,
 expiry date not null,
 status varchar(8) not null,
 category varchar(45) not null,
-constraint historicalinvpk primary key (userid, serial)
+constraint historicalinvpk primary key (userid, serial),
 foreign key (userid) REFERENCES account(userid)
 );
 
-DROP TABLE IF EXISTS account;
-CREATE TABLE account (
-    userid int auto_increment primary key,
-    username varchar(50) not null,
-    hashedpw varchar(255) not null,
-    email varchar(255) not null,
-    dateCreated date not null
-);
 
 DROP TABLE IF EXISTS SearchHistory;
 CREATE TABLE SearchHistory (

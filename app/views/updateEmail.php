@@ -53,7 +53,7 @@
                 $title='Update Email';
                 $subtitle='Enter your new email';
                 $emailerr='';
-                // $display='none';
+                $display='none';
 
 
                 if (isset($_GET['e'])){
