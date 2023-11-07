@@ -21,6 +21,6 @@ A web application that helps users reduce their food waste
 
 ### Passwords
 
-|Email           |Password|
+|Username           |Password|
 |:-----------------:|:-------------------|
 |admin              |P@ssw0rd            |
