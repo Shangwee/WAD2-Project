@@ -1,7 +1,7 @@
 <?php 
 // require_once __DIR__."\..\..\..\server\model\Account.php";
 if (empty($_SESSION)) {
-    echo"<nav class='navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xs' >
+    echo"<nav class='navbar navbar-expand-lg navbar-expand-md' >
         <div class='container px-5' id='foodwise'>
             <a class='navbar-brand animate__animated animate__fadeIn fw-bold text-white' href='/WAD2-Project/app/index.php' style='font-family: Georgia,serif;font-size:30px;font-style:italic;text-shadow: 2px 2px black;'>FoodWise</a>
             <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span class='navbar-toggler-icon'></span></button>
@@ -14,7 +14,7 @@ if (empty($_SESSION)) {
         </div>
     </nav>";
 } else if ($_SESSION["login"]) {
-    echo"<nav class='navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xs'>
+    echo"<nav class='navbar navbar-expand-lg navbar-expand-md'>
         <div class='container px-5' id='foodwise'>
             <a class='navbar-brand animate__animated animate__fadeIn fw-bold text-white' href='/WAD2-Project/app/index.php' style='font-family: Georgia,serif;font-size:30px;font-style:italic;text-shadow: 2px 2px black;'>FoodWise</a>
             <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span class='navbar-toggler-icon'></span></button>
