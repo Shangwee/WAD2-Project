@@ -70,7 +70,7 @@
         <div class="container-fluid my-4">
             <div class='row justify-content-center'>
                 <div class='col-lg-4'>
-                    <div class="card mt-2 animate__animated animate__fadeInUp" id='details' style='overflow-x: auto;'>
+                    <div class="card mt-2 mb-4 animate__animated animate__fadeInUp" id='details' style='overflow-x: auto;'>
                         <div class="card-body my-3">
                             <h1 class="card-title text-center mb-5" style='font-family: Georgia,serif;'>Hi, {{username}}!</h1>
                             <div class="card-text">
@@ -100,7 +100,7 @@
                     <div class='box'>
                     <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;border:none;'>
                         <div class="card-body">
-                            <h1 class="card-title text-center mt-5 mb-3" style='font-family: Georgia,serif;'>Search History</h1>
+                            <h1 class="card-title text-center mt-4" style='font-family: Georgia,serif;'>Search History</h1>
                             <!-- <div class="dropdown animate__animated animate__fadeInUp"> -->
                           
                             <button type="button" class="btn btn-white dropdown-toggle float-end" data-bs-toggle="dropdown">Sort By Time</button>

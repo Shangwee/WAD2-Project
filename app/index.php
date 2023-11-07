@@ -85,19 +85,19 @@
                 echo "
                     <div class='col-xl-3 mx-5 mt-4 text-center'>
                         <div class='row justify-content-center'>
-                            <div class='box col-xl-12 col-lg-9'>
+                            <div class='box col-xl-12 col-lg-9 col-md-9 col-sm-10'>
                                 <h4>Expired Items</h4>
                                 <h1>{{Expire}}</h1>
                             </div>
                         </div>
                         <div class='row justify-content-center'>
-                            <div class='box col-xl-12 col-lg-9'>
+                            <div class='box col-xl-12 col-lg-9 col-md-9 col-sm-10'>
                                 <h4>Items with Low Quantity</h4>
                                 <h1>{{LowQuantity}}</h1>
                             </div>
                         </div>
                         <div class='row justify-content-center'>
-                            <div class='box col-xl-12 col-lg-9'>
+                            <div class='box col-xl-12 col-lg-9 col-md-9 col-sm-10'>
                                 <h4>Total items in Inventory</h4>
                                 <h1>{{TotalInventory}}</h1>
                             </div>
@@ -106,8 +106,8 @@
             }?> 
             </div>
         <div class='row justify-content-center mt-5 animate__animated animate__fadeInUp' style='position:relative;top:120px;'>
-            <div class=' col-md-4'>
-                <div class='card text-center mx-4'>
+            <div class='col-lg-4 col-md-10 col-sm-10'>
+                <div class='card text-center mx-3 mb-2'>
                     <div class='card-body'>
                         <div class='card-text'>
                             <h4>Unsure of what to cook with your leftovers?</h4>
@@ -125,8 +125,8 @@
                     </div>
                 </div>
             </div>
-            <div class='col-md-4 '>
-                <div class='card text-center mx-4'>
+            <div class='col-lg-4 col-md-10 col-sm-10'>
+                <div class='card text-center mx-3 mb-2'>
                     <div class='card-body'>
                         <div class='card-text'>
                             <h4>Always buying more than what you need?</h4>
@@ -143,8 +143,8 @@
                     </div>
                 </div>
             </div>
-            <div class='col-md-4'>
-                <div class='card text-center mx-4'>
+            <div class='col-lg-4 col-md-10 col-sm-10'>
+                <div class='card text-center mx-3 mb-2'>
                     <div class='card-body'>
                         <div class='card-text'>
                             <h4>Never know what's left in your kitchen?</h4>
