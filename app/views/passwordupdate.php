@@ -24,15 +24,11 @@
             <?php
                 require_once 'common/navbar.php';
             ?>
-            <!-- Header-->
-            <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-                <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="text-center my-5">
-                                <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Update Password</h1>
-                            </div>
-                        </div>
+             <!-- header -->
+            <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+                <div>
+                    <img src='../images/header_pwupdate.png' height=330>
+                    <div class='container px-5'>
                     </div>
                 </div>
             </header>
@@ -108,7 +104,7 @@
                     if(!empty($pw) && !empty($cfmpw ) && $pw==$cfmpw){
                         $accdao->updatePassword($un,password_hash($pw,PASSWORD_DEFAULT));
                         $title='Password successfully updated';
-                        $subtitle="<a href='login.php'>Go to login page</a>";
+                        $subtitle="<i>Return to <a href='login.php?username=$un'>login</a></i>";
                         $un='';
                         $pwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='newpw'>Password: <input class='form-control' type='password' name='newpw' value=''></div></div>";
                         $cfmpwtext="<div class='row justify-content-center mb-3'><div class='fw-bold' id='cfmpw'>Confirm Password: <input type='password' name='cfmpw' class='form-control' value=''></div></div>";
@@ -122,7 +118,7 @@
 
             <div class='container justify-content-center my-5'>
                 <h2 class='row justify-content-center text-center animate__animated animate__fadeInUp' id='title' ><?=$title?>
-                        <p class='row justify-content-center text-center mt-3' style='font-size:0.8em;display:inline-block;' ><?=$subtitle?></p>
+                        <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
                 </h2>
 
                 <div class='col-4 mx-auto justify-content-center'>

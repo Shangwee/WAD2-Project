@@ -20,9 +20,10 @@
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/shared.css" />
     <style>
-        .card{
-            border-radius:25px;
-        }
+        #details {
+                border-radius:20px;
+                box-shadow: 3px 3px 5px #888888;
+            }
         
     </style>
 </head>
@@ -46,17 +47,13 @@
         $un = $userobj->getUsername();
         $email = $userobj->getEmail();
         $date = $userobj->getDate();
-
         ?>
-        <!-- Header-->
-        <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-            <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="text-center my-5">
-                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Profile</h1>
-                        </div>
-                    </div>
+
+        <!-- header -->
+        <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+            <div>
+                <img src='../images/header_profile.png' height=330>
+                <div class='container px-5'>
                 </div>
             </div>
         </header>
@@ -64,26 +61,26 @@
         <!-- profile content -->
         <div class="container-fluid my-4">
             <div class='row justify-content-center'>
-                <div class='col-md-4'>
-                    <div class="card mt-2 animate__animated animate__fadeInUp" style='overflow-x: auto;'>
-                        <div class="card-body my-5">
+                <div class='col-lg-4'>
+                    <div class="card mt-2 animate__animated animate__fadeInUp" id='details' style='overflow-x: auto;'>
+                        <div class="card-body my-3">
                             <h1 class="card-title text-center mb-5" style='font-family: Georgia,serif;'>Hi, {{username}}!</h1>
                             <div class="card-text">
                                 <div class='row'>
 
-                                    <div class='col-md-4 text-start  fw-bold'>Username:</div>
-                                    <div class='col-md-5 text-start '>{{ username }}</div>
-                                    <div class='col-md-3 text-start '><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
+                                    <div class='col-sm-4 my-2 text-start  fw-bold'>Username:</div>
+                                    <div class='col-sm-5 my-2 text-start '>{{ username }}</div>
+                                    <div class='col-sm-3 my-2 text-start '><a v-bind:href='updateun' class='btn btn-light'>Update</a></div>
                         
                                     <div class='w-100'></div>
-                                    <div class='col-md-4  fw-bold'>Email:</div>
-                                    <div class='col-md-5 '>{{email}}</div>
-                                    <div class='col-md-3 '><a v-bind:href='updateemail' class='btn btn-light'>Update</a></div>
+                                    <div class='col-sm-4  my-2 fw-bold'>Email:</div>
+                                    <div class='col-sm-5 my-2'>{{email}}</div>
+                                    <div class='col-sm-3 my-2'><a v-bind:href='updateemail' class='btn btn-light'>Update</a></div>
                         
                                     <div class='w-100'></div>
-                                    <div class='col-md-4 fw-bold'>Date Joined:</div>
-                                    <div class='col-md-5'>{{date}}</div>
-                                    <div class='col-md-3'></div>
+                                    <div class='col-sm-4 fw-bold my-2'>Date Joined:</div>
+                                    <div class='col-sm-5 my-2'>{{date}}</div>
+                                    <div class='col-sm-3 my-2'></div>
 
                                 </div>
 
@@ -91,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div class='col-md-7'>
+                <div class='col-lg-7'>
                     <div class="card mt-2 animate__animated animate__fadeInUp " style='max-height:500px;overflow-y: auto;'>
                         <div class="card-body">
                             <h1 class="card-title text-center mt-5 mb-3" style='font-family: Georgia,serif;'>Search History</h1>

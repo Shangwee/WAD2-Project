@@ -18,7 +18,7 @@
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         <!-- Custom CSS -->
         <link rel="stylesheet" href="./css/index.css" />
-        <link rel="stylesheet" href="./css/shared copy.css" />   
+        <link rel="stylesheet" href="./css/shared.css" />   
         <style>
             /* body {
                 width:100%;
@@ -46,7 +46,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height:900px;/* Ensure the container takes the full viewport height*/
+                /* height:900px;Ensure the container takes the full viewport height */
             }
             
 
@@ -76,6 +76,11 @@
                 border:1px solid black;
                 border-radius:20px;
             }
+            #foodwise{
+  position:aboslute;
+  top:20px;
+
+}
          
         </style>
 </head>
@@ -86,13 +91,13 @@
         <!-- Navbar -->
         <?php
             session_start();
-            require_once './views/common/navbar.php';
+            require_once 'views/common/navbar.php';
             if (!empty($_SESSION)) {
                 $user = $_SESSION['login'];
                 echo "<input type='hidden' id='userId' value = {$user} >";
             }
         ?>
-        <div class='container-fluid '>
+        <div class='container-fluid'>
             <!-- <div class='row' > -->
                 <?php
                     if (empty($_SESSION['login'])){
@@ -100,7 +105,7 @@
                                 <div class='col text-center'>
                                     <img src='images/home/Subject.png' height=300 >
                                     <div class='main'>
-                                        Taste, Not Waste
+                                        <i>Taste, Not Waste</i>
                                         <div class='subtitle'>Your one-stop solution to reducing food wastage</div>
                                     </div>
                                 </div>
@@ -146,8 +151,8 @@
         <!-- <div class='container'>  -->
             
             
-           <div class='row justify-content-center mt-5 animate__animated animate__fadeInUp' style='position:relative;top:50px;'>
-                <div class='col-4 '>
+           <div class='row justify-content-center mt-5 animate__animated animate__fadeInUp' style='position:relative;top:120px;'>
+                <div class='col col-l col-md col-s col-xs m-2'>
                     <div class='card text-center mx-4'>
                         <div class='card-body'>
                             <div class='card-text'>
@@ -163,10 +168,10 @@
                                     ?>
                                
                             </div>
-                         </div>
-                     </div>
+                        </div>
+                    </div>
                 </div>
-                <div class='col-4'>
+                <div class='col col-l col-md col-s col-xs m-2'>
                     <div class='card text-center mx-4'>
                         <div class='card-body'>
                             <div class='card-text'>
@@ -186,7 +191,7 @@
                          </div>
                      </div>
                 </div>
-                <div class='col-4'>
+                <div class='col col-l col-md col-s col-xs m-2'>
                         <div class='card text-center mx-4'>
                             <div class='card-body'>
                                 <div class='card-text'>
@@ -212,7 +217,7 @@
         
         <!-- Footer-->
         <?php
-        require_once './views/common/footer.php';
+        require_once 'views/common/footer.php';
         ?>
     </div>
     <script src="js/home.js"></script>

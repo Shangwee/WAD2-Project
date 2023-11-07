@@ -26,7 +26,7 @@ if (isset($_POST['submit'])){
         $errors[] = 'Enter a valid email';
     }
     elseif($accdao->getAccByEmail($email) !== null){
-        $unerr='Email taken';
+        $emailerr='Email taken';
         $errors[]='Email taken';
     }
 

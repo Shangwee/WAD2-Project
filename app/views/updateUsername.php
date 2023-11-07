@@ -34,15 +34,11 @@
                 $accdao = new AccountDAO();
              
             ?>
-            <!-- Header-->
-            <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-                <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="text-center my-5">
-                                <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Update Username</h1>
-                            </div>
-                        </div>
+            <!-- header -->
+            <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+                <div>
+                    <img src='../images/header_usernameupdate.png' height=330>
+                    <div class='container px-5'>
                     </div>
                 </div>
             </header>
@@ -92,7 +88,7 @@
                     <h2>Login</h2>
                 </div>  -->
                 <h2 class='row justify-content-center text-center' id='title' style='display:<?=$display?>;'><?=$title?>
-                        <p class='row justify-content-center text-center m-3' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
+                        <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block'><?=$subtitle?></p>
                 </h2>
                 <form method='post' class='form-group'>
                     <div class='col-4 mx-auto'>

@@ -30,15 +30,11 @@
                     header("Location: ../index.php");
                 }
             ?>
-             <!-- Header-->
-            <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-                <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="text-center my-5">
-                                <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Sign up</h1>
-                            </div>
-                        </div>
+             <!-- header -->
+            <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+                <div>
+                    <img src='../images/header_register.png' height=330>
+                    <div class='container px-5'>
                     </div>
                 </div>
             </header>
@@ -84,7 +80,7 @@
                 if (isset($_GET['success'])){
                     $display='block';
                     $title='Registration Successful';
-                    $subtitle="Return to<a href='login.php?username=$un'>login</a>";
+                    $subtitle="<i>Return to <a href='login.php?username=$un'>login</a></i>";
                 }
             ?>
 
@@ -93,7 +89,7 @@
                     <h2>Login</h2>
                 </div>  -->
                 <h2 class='row justify-content-center text-center' id='title' style='display:<?=$display?>;'><?=$title?>
-                        <p class='row justify-content-center text-center m-3' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
+                        <p class='row justify-content-center text-center my-3 fw-light' style='font-size:0.8em;display:inline-block' ><?=$subtitle?></p>
                 </h2>
                 <form method='post' action='processregister.php' class='form-group'>
                     <div class='col-4 mx-auto'>
@@ -114,7 +110,7 @@
                         </div>
                         <p style='color:red;'><?=$cfmpwerr?></p>
                         <div class='row mb-3'>
-                            <div class='col animate__animated animate__fadeInUp'><input class='form-control bg-primary text-white' type='submit' name='submit' value='Sign up'></div>
+                            <div class='col animate__animated animate__fadeInUp'><input class='form-control text-white' style='background-color:#0c1559' type='submit' name='submit' value='Sign up'></div>
                         </div>
                         <div class='row mb-3'>
                             <p>Have an account? <a href='login.php'>Login here</a></p>

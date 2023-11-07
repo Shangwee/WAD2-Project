@@ -31,15 +31,11 @@
                     header("Location: ../index.php");
                 }
             ?>
-            <!-- Header-->
-            <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-                <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="text-center my-5">
-                                <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Login</h1>
-                            </div>
-                        </div>
+             <!-- header -->
+            <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+                <div>
+                    <img src='../images/header_login.png' height=330>
+                    <div class='container px-5'>
                     </div>
                 </div>
             </header>
@@ -63,7 +59,7 @@
                 }
             ?>
 
-            <div class='container justify-content-center my-5'>
+            <div class='container justify-content-center'>
                 <!-- <div class='row'>
                     <h2>Login</h2>
                 </div>  -->

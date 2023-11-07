@@ -29,18 +29,15 @@
         require_once "./common/protect.php";
         require_once './common/navbar.php';
     ?>
-    <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-            <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="text-center my-5">
-                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Shopping List</h1>
-                        </div>
-                    </div>
+    <!-- header -->
+    <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+            <div>
+                <img src='../images/header_shoppinglist.png' height=330>
+                <div class='container px-5'>
                 </div>
             </div>
         </header>
-    <div class="container mt-5">
+    <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <!-- hidden input of user session ID-->

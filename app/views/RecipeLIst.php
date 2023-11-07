@@ -28,24 +28,21 @@
             require_once './common/navbar.php';
             require_once "./common/protect.php";
         ?>
-        <header class="bg-image py-5" style="background-image: url('../images/header1.png'); ">
-            <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="text-center my-5">
-                            <h1 class="fw-bolder  mb-2 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'>Recipe Search</h1>
-                        </div>
+            <!-- header -->
+            <header class='bg-image pb-2 justify-content-center text-center' style='overflow:hidden;' >
+                <div>
+                    <img src='../images/header_recipes.png' height=330>
+                    <div class='container px-5'>
                     </div>
                 </div>
-            </div>
-        </header>
-            <div class="container">
+            </header>
+            <div class="container mx-auto">
                 </p>
                 <h1 class="fw-bolder mb-4 animate__animated animate__fadeInUp" style='font-family: Georgia,serif;'></h1>
                 <!-- align buttom and input -->
-                <div class="mb-2">
+                <div class="mb-2 ">
                     <form>
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-9">
                                 <div class="mb-3 animate__animated animate__fadeInUp">
                                     <input type="hidden" id="userId" value="<?php echo $_SESSION['login']; ?>">
