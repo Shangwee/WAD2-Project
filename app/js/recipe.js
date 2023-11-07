@@ -158,10 +158,10 @@ const app = Vue.createApp({
             this.displayed = true;
             
           } else {
-            window.alert(
-              "No recipes found for the search. Please try a different ingredient."
-            );
-            this.ingredient = "";
+            // window.alert(
+            //   "The inventory is empty."
+            // );
+            // this.ingredient = "";
           }
         })
         .catch((error) => {
@@ -192,7 +192,7 @@ const app = Vue.createApp({
             this.recipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
           } else {
             window.alert(
-              "No recipes found for the search. Please try a different ingredient."
+              "No recipes found for search ingredients. Please try a different ingredient."
             );
             this.ingredient = "";
           }
