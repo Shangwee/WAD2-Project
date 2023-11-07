@@ -98,18 +98,6 @@
         .open-button:hover {
             opacity: 1;
         }
-        .card{
-            border:none;
-        }
-        /* receipt looking box */
-        .box {
-                --mask: 
-                conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/20.00px 51% repeat-x,
-                conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/20.00px 51% repeat-x;
-            -webkit-mask: var(--mask);
-                    mask: var(--mask);
-        }
-        
     </style>
 </head>
 <body>
@@ -218,13 +206,11 @@
                                 <button class = "open-button float-end" onclick = "openForm()">Add To Inventory</button>
                             </div>
                     </div>
-                    <div class='box'>
-                        <div class='card p-5'>
-                        <table class="table" id="myTable" class="display-compact order-column table" style="width:100%;">
-                        </table>
-                        <div class="col-sm-1"></div>
+
+                    <table class="table" id="myTable" class="display-compact order-column table" style="width:100%;">
+                    </table>
+                    <div class="col-sm-1">
                     </div>
-        </div>
                 </div>
             </div>
         </div>

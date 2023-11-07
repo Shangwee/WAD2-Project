@@ -52,7 +52,6 @@ const app = Vue.createApp({
   },
   mounted() {
     // get list from database
-    this.addIngredientFromRecipe();
     this.displaylist();
     this.displayRecommendation();
     this.checkItemsFromIventory();
@@ -321,56 +320,6 @@ const app = Vue.createApp({
     addRecommandedItem(item) {
       this.inputitem = item.name;
       this.selectedCategory = item.category;
-    },
-
-    addIngredientFromRecipe() {
-      // if there is no ingredient in url, exit function
-      if (window.location.search == "") {
-          return;
-      } else {
-        let url = "https://api.edamam.com/api/food-database/v2/parser";
-        const appID = "ebe9a73f";
-        const appKey = "d07cd861a3539204a41d150e9170389b";
-        const urlParams = new URLSearchParams(window.location.search);
-        const ingredients = urlParams.getAll("ingredients[]");
-        for (let i = 0; i < ingredients.length; i++) {
-          let ingredient = ingredients[i];
-          para = {
-            ingr: ingredient,
-            app_id: appID,
-            app_key: appKey,
-          };
-          // make request to api
-          let name = "";
-          let category = "";
-          let quantity = 1;
-          let userId = parseInt(document.getElementById("userId").value);
-          axios.get(url, { params: para }).then((response) => {
-            let datas = response.data.parsed[0];
-            name = datas.food.label;
-            category = "others";
-            // check if qunatity is null
-            if (datas.quantity != null) {
-              // round up to the nearest integer
-              quantity = Math.ceil(datas.quantity);
-            }
-            let PHPurl =
-              "../../server/controller/shoppingList/InsertShoppingItem.php";
-            let params = {
-              name: name,
-              category: category,
-              quantity: quantity,
-              checkStatus: false,
-              userId: userId,
-            };
-            // make get request to php
-            axios.get(PHPurl, { params: params }).then((response) => {
-              console.log(response);
-            });
-          });
-        }
-        setTimeout(() => window.location.href = './ShoppingList.php', 1000)
-      }
     },
 
     checkItemsFromIventory() {

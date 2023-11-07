@@ -102,22 +102,29 @@ const app = Vue.createApp({
     },
 
     getIngrdients(item) {
-      let url = this.links.lists + "?";
+      let url = "../../server/controller/shoppingList/InsertFromRecipe.php";
+      let ingredients = [];
       for (var i = 0; i < item.length; i++) {
-        // redirect to shopping list page with ingredients as parameters
-        // encode each ingredient to avoid errors
-        let ingredient = encodeURIComponent(item[i]);
-        url += "ingredients[]=" + ingredient + "&";
+        let name = item[i]['food'];
+        // round up quantity to nearest integer
+        let quantity = Math.ceil(item[i]['quantity']);
+        ingredients.push({name:name,quantity:quantity});
       }
-      // remove last '&' character
-      url = url.slice(0, -1);
-      // redirect to shopping list page with ingredients as parameters
-      let confirm = window.confirm("Add ingredients to shopping list?");
-      if (confirm) {
-        window.location.href = url;
-      } else {
-        return;
-      }
+      let userId = parseInt(document.getElementById("userId").value);
+      let params = {
+        userId: userId,
+        ingredients: ingredients,
+      };
+      axios
+        .get(url, { params: params })
+        .then((response) => {
+          console.log(response);
+          alert("Ingredients added to shopping list");
+          window.location.href = "./ShoppingList.php";
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
 
     getIngredientsFromDatabase() {
