@@ -86,7 +86,7 @@
                     <div class='col-xl-3 mx-5 mt-4 text-center'>
                         <div class='row justify-content-center'>
                             <div class='box col-xl-12 col-lg-9 col-md-9 col-sm-10'>
-                                <h4>Expired Items</h4>
+                                <h4>Expiring Items</h4>
                                 <h1>{{Expire}}</h1>
                             </div>
                         </div>

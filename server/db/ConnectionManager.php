@@ -22,7 +22,7 @@ class ConnectionManager {
     $servername = 'localhost';
     $dbname = 'wad2project';
     $username = 'root';
-    $password = 'root'; // change this depending on mac or windows
+    $password = ''; // change this depending on mac or windows
     $port = 3306;
     $url  = "mysql:host=$servername;dbname=$dbname;port=$port";
 

@@ -110,5 +110,6 @@ INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 1
 INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 2, 'Salmon', 1, '2023-12-31', 'Dairy and Protein');
 INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 3, 'Potato', 13, '2023-11-30', 'Produce');
 INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 4, 'Carrot', 1, '2023-11-30', 'Produce');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-11-30', 'Produce');
-INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-11-30', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 5, 'Onion', 1, '2023-11-09', 'Produce');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 8, 'Chicken', 1, '2023-11-10', 'Dairy and Protein');
+INSERT INTO activeinv (userid, serial, item, qty, expiry, category) VALUES (1, 9, "Mushroom", 1, '2023-11-10', 'Produce');
