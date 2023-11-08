@@ -110,6 +110,7 @@
                     </form>
 
                         <div v-if="ingredient.trim() === ''" >
+                            <div v-if="recommendedRecipes.length != 0">
                                {{ recipes = "" }}
                                 <div class="row mx-auto">
                                     <div class="col-9" >
@@ -131,6 +132,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 
                             
                                 <div v-if="displayed == true">

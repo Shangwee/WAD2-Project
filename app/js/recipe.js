@@ -163,12 +163,8 @@ const app = Vue.createApp({
           if (response.data.hits.length > 0) {
             this.recommendedRecipes = response.data.hits.slice(0, 18); // the recipes are in the 'hits' property of the API response
             this.displayed = true;
-            
-          } else {
-            // window.alert(
-            //   "The inventory is empty."
-            // );
-            // this.ingredient = "";
+          } 
+          else {
           }
         })
         .catch((error) => {
