@@ -12,9 +12,9 @@ const app = Vue.createApp({
         logout: "../server/controller/Logout.php",
         register: "./views/register.php",
       },
-      Expire:0,
-      LowQuantity :0,
-      TotalInventory :0,
+      Expire:"",
+      LowQuantity :"",
+      TotalInventory :"",
     };
   },
   mounted() {
@@ -30,9 +30,9 @@ const app = Vue.createApp({
       };
       
       axios.get(PHPurl, {params:para}).then((response) => {
-        this.Expire = response.data.totelExpiring;
-        this.LowQuantity = response.data.LowQuantity;
-        this.TotalInventory = response.data.totalInventory;
+        this.Expire = str(response.data.totelExpiring);
+        this.LowQuantity = str(response.data.LowQuantity);
+        this.TotalInventory = str(response.data.totalInventory);
       });
       console.log(this.Expire);
     }
